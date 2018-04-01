@@ -584,19 +584,19 @@ test.check_followers(<username>,function(result){
 });*/
 
 
-function select_my_followees(name,callback){
-    var se_my_followees= "select user1 from follow where user2= "+'\''+name+'\'';
-    connection.query(se_my_followees,function (error, results) {
+function select_my_followers(name,callback){
+    var se_my_followers= "select user1 from follow where user2= "+'\''+name+'\'';
+    connection.query(se_my_followers,function (error, results) {
         if (error){
             return console.error(error);
         }
         return callback(Object.keys(results).length,results);
     });
 }
-/*test.select_my_followees(<name_of_user2>,function(result1,result2){
+/*test.select_my_followers(<name_of_user2>,function(result1,result2){
     //print the table includes all user2
     if(result1==0){
-        console.log("no followees");
+        console.log("no followers");
     }
     else{
         console.log(result2[0].user1);
@@ -605,19 +605,19 @@ function select_my_followees(name,callback){
 });*/
 
 
-function select_my_followers(name, callback) {
-    var se_my_followers = "select user2 from follow where user1 ="+'\''+name+'\'';
-    connection.query(se_my_followers,function (error, results) {
+function select_my_followings(name, callback) {
+    var se_my_followings = "select user2 from follow where user1 ="+'\''+name+'\'';
+    connection.query(se_my_followings,function (error, results) {
         if (error){
             return console.error(error);
         }
         return callback(Object.keys(results).length,results);
     });
 }
-/*test.select_my_followers(<name_of_user1>,function(result1,result2){
+/*test.select_my_followings(<name_of_user1>,function(result1,result2){
     //print the table includes all user2
     if(result1==0){
-        console.log("no followers");
+        console.log("no followings");
     }
     else{
         console.log(result2[0].user2);
@@ -746,7 +746,7 @@ module.exports={
     article_like:article_like,
     search:search,
     select_k:select_k,
-    select_my_followees:select_my_followees,
+    select_my_followings:select_my_followings,
     select_my_followers:select_my_followers,
     select_article_comment:select_article_comment,
     count_comment_no:count_comment_no,

@@ -34,57 +34,57 @@
     </div>
 </div>
 
-<script>
-    var frame = document.getElementById('frame');
-    var allArticle = "<%= allArticle%>";
-    var num = "<%= articleNum %>";
+<!--<script>-->
+    <!--var frame = document.getElementById('frame');-->
+    <!--var allArticle = "<>";-->
+    <!--var num = "<>";-->
 
-    if (allArticle){
-        for (var i = 0; i < allArticle.length; i++){
+    <!--if (allArticle){-->
+        <!--for (var i = 0; i < allArticle.length; i++){-->
 
-            var picsrc = '../exhibitionSec/pictures/' + allArticle[i].picturestart;
-            var textsrc = "../exhibitionSec/texts/" + allArticle[i].picturestart;
+            <!--var picsrc = '../exhibitionSec/pictures/' + allArticle[i].picturestart;-->
+            <!--var textsrc = "../exhibitionSec/texts/" + allArticle[i].picturestart;-->
 
-            var arframe = document.createElement('div');
-            arframe.class = "d-flex w-80 justify-content-between";
-            arframe.id = "arframe";
+            <!--var arframe = document.createElement('div');-->
+            <!--arframe.class = "d-flex w-80 justify-content-between";-->
+            <!--arframe.id = "arframe";-->
 
-            var image = document.createElement("img");
-            image.src = picsrc;
-            image.style = 'width:315px;height:270px';
-            arframe.appendChild(image);
+            <!--var image = document.createElement("img");-->
+            <!--image.src = picsrc;-->
+            <!--image.style = 'width:315px;height:270px';-->
+            <!--arframe.appendChild(image);-->
 
-            var arname = document.createElement("h5");
-            arname.class = "mb-1";
-            arname.id = "arname";
-            arname.innerHTML = allArticle[i].articlename;
-            arframe.appendChild(arname);
+            <!--var arname = document.createElement("h5");-->
+            <!--arname.class = "mb-1";-->
+            <!--arname.id = "arname";-->
+            <!--arname.innerHTML = allArticle[i].articlename;-->
+            <!--arframe.appendChild(arname);-->
 
-            var date = document.createElement("small");
-            date.innerHTML = allArticle[i].posttime;
-            arframe.appendChild(date);
+            <!--var date = document.createElement("small");-->
+            <!--date.innerHTML = allArticle[i].posttime;-->
+            <!--arframe.appendChild(date);-->
 
-            var text = document.createElement("iframe");
-            text.src = textsrc;
-            text.style = 'border: none; display: none';
-            arframe.appendChild(text);
+            <!--var text = document.createElement("iframe");-->
+            <!--text.src = textsrc;-->
+            <!--text.style = 'border: none; display: none';-->
+            <!--arframe.appendChild(text);-->
 
-            var author = document.createElement("p");
-            author.class = "mb-1";
-            author.style = "text-align:right";
-            author.innerHTML = allArticle[i].authorname;
-            arframe.appendChild(author);
+            <!--var author = document.createElement("p");-->
+            <!--author.class = "mb-1";-->
+            <!--author.style = "text-align:right";-->
+            <!--author.innerHTML = allArticle[i].authorname;-->
+            <!--arframe.appendChild(author);-->
 
-            frame.appendChild(arframe);
-        }
-    }else {
-        var author = document.createElement("p");
-        author.class = "mb-1";
-        author.style = "text-align:right";
-        author.innerHTML = "No articles now... Come back later!";
-        frame.appendChild(author);
-    }
-</script>
+            <!--frame.appendChild(arframe);-->
+        <!--}-->
+    <!--}else {-->
+        <!--var author = document.createElement("p");-->
+        <!--author.class = "mb-1";-->
+        <!--author.style = "text-align:right";-->
+        <!--author.innerHTML = "No articles now... Come back later!";-->
+        <!--frame.appendChild(author);-->
+    <!--}-->
+<!--</script>-->
 
 </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
