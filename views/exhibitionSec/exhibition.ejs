@@ -39,13 +39,11 @@
     var allArticle = "<%= allArticle%>";
     var num = "<%= articleNum %>";
 
-    alert(num);
     if (allArticle){
         for (var i = 0; i < allArticle.length; i++){
 
             var picsrc = '../exhibitionSec/pictures/' + allArticle[i].picturestart;
             var textsrc = "../exhibitionSec/texts/" + allArticle[i].picturestart;
-            alert(picsrc);
 
             var arframe = document.createElement('div');
             arframe.class = "d-flex w-80 justify-content-between";
