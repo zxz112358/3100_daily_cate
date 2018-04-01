@@ -24,6 +24,13 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 
     test.select_client_comment(req.user.username,function(result1,result2){
         if(result1===0){
+            res.render('personalSec/mycomment', {
+                title: 'Profile',
+                name: 'Daily Cate',
+                user: req.user,
+                imgpath: '../profileimgs/' + req.user.username,
+                commentno:result1
+            });
             console.log("you do not have any comment");
         }
         else{
