@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= name%>-<%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+</head>
+
+<% include ../header.ejs %>
+
+<body background="../images/background7.jpg">
+<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
+
+        <form method="post" id = "inputForm" enctype="multipart/form-data"class="mx-auto w-75">
+            <label id = "titlelabel">Title:</label>
+            <br><input id = "title" type="text" name = "title">
+            <br><label id = "formchild1">Paragraph:</label>
+            <br><textarea id = "formchild2" type="text" name = "text" class="mx-auto w-75"></textarea>
+            <br><label id = "formchild3" >Picture:</label>
+            <input id = "formchild4" type="file" name = "picture" class="mx-auto w-75">
+
+            <br><button id = "end_input_btn" type="submit" class="btn">End input</button>
+        </form>
+
+        <br><button id = "next_btn" class="btn btn-primary">Next</button>
+            <script>
+                document.getElementById("next_btn").addEventListener("click", nextPara);
+                function nextPara() {
+                    console.log('here');
+
+                    var form = document.getElementById("inputForm");
+                    var submit = document.getElementById("end_input_btn");
+
+                    var newpara = document.createElement("textarea");
+                    newpara.name = 'text';
+                    form.insertBefore(document.createElement("br"), submit);
+                    form.insertBefore(newpara, submit);
+
+                    var newpic = document.createElement("input");
+                    newpic.type = 'file';
+                    newpic.name = 'picture';
+                    form.insertBefore(document.createElement("br"), submit);
+                    form.insertBefore(newpic, submit);
+                    form.insertBefore(document.createElement("br"), submit);
+                }
+            </script>
+
+<% include ../cprt.ejs %>
+</body>
+</html>

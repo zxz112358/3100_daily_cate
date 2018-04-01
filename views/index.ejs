@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title><%= name%> - <%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+  </head>
+
+
+<body background="../images/background2.jpg">
+  <div class="card mx-auto bg-white text-light">
+
+      <img class="card-img" src="../images/hp.jpg" alt="Card image">
+      <div class="card-img-overlay">
+          <% include header.ejs %>
+          <% if (!user) { %>
+          <p class="card-title font-weight-bold text-center text-warning"><br /><br /><br /><br /><br /><font size="10"><%= title %></font></p>
+          <p class="card-text text-center text-warning font-weight-bold"><font size="5">Create, enhance, and share your cooking skills here!</font></p>
+              <p class="card-text text-center text-warning font-weight-bold"><font size="5">Please sign in!</font></p>
+              <center><button type="submit" class="btn btn-warning" onclick="window.location.href='./personalSec/signin'">Sign In</button></center>
+              <p class="card-text text-center text-warning font-weight-bold"><font size="5">Haven't got an account?</font></p>
+              <center><button type="submit" class="btn btn-warning" onclick="window.location.href='./personalSec/signup'">Sign Up</button></center>
+          <% } else{ %>
+              <p class="card-title font-weight-bold text-center text-warning"><br /><br /><br /><br /><br /><br /><br /><br /><font size="15"><%= title %></font></p>
+              <p class="card-text text-center text-warning font-weight-bold"><font size="5">Create, enhance, and share your cooking skills here!</font></p>
+          <% } %>
+      </div>
+  </div>
+
+
+</body>
+  <% include ./cprt.ejs %>
+</html>

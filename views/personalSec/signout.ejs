@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= name%>-<%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+</head>
+
+<% include ../header.ejs %>
+
+<body background="../images/background7.jpg">
+<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
+
+<% if (message){ %>
+<div class="bg-success container text-white w-75" style="font-size: 1.5em"><%= message%></div>
+<% } %>
+
+<p>Sign out page here</p>
+
+<% include ../cprt.ejs %>
+</body>
+
+</html>
