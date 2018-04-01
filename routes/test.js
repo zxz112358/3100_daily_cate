@@ -276,7 +276,7 @@ function delete_comment(coID){
 
 
 //select a particular article given articleID
-function select_article(arID){
+function select_article(arID,callback){
     var sel_article="select articlename,authorname,parastart,parano,picturestart,pictureno from articles where articleID="+arID;
     connection.query(sel_article, function(error, results) {
         if (error) {
