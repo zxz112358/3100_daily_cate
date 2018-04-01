@@ -48,6 +48,34 @@ function count_article_no(callback){
     });
 
 }
+function count_help_no(callback){
+    var count_help="select count(helpID) as count from help";
+    connection.query(count_help, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row.count);
+
+        });
+    });
+
+}
+function count_ingredient_no(callback){
+    var count_ingredient="select count(ingredientID) as count from ingredient";
+    connection.query(count_ingredient, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row.count);
+
+        });
+    });
+
+}
 function count_paragraph_no(callback){
     var count_paragraph="select count(*) as count from paragraphs";
     connection.query(count_paragraph, function(error, results) {
@@ -124,9 +152,97 @@ function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,pa
     //return T or F
 }
 
+//insert new help records into database
+function insert_help(helpID,helpname,auname,tag,posttime,picNo,picstart,paraNo,parastart){
+    //pictures for this article will be stored before and pass the startID and picture numbers
+    for(var i=0;i<picNo;i++){
+        var index=picstart+i;
+        var in_picture = "insert into pictures values ("+index+")";
+        connection.query(in_picture, function(error, results) {
+            if (error) {
+                return console.error(error);
+            }
+            //console.log(results);
+        });
+    }
+    //paragraphs for this article will be stored before and pass the startID and paragraph numbers
+    for(var i=0;i<paraNo;i++){
+        var index=parastart+i;
+        var in_paragraph = "insert into paragraphs values ("+index+")";
+        connection.query(in_paragraph, function(error, results) {
+            if (error) {
+                return console.error(error);
+            }
+            console.log(results);
+        });
+    }
+    //insert new article to the database
+    var in_help = "insert into help values ("+helpID+","+'\''+helpname+'\''+","+'\''+auname+'\''+","+'\''+tag+'\''+","+'\''+posttime+'\''+","+picNo+","+picstart+","+paraNo+","+parastart+")";
+    connection.query(in_help, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        console.log(results);
+    });
+    //return T or F
+}
+
+//insert new ingredient records into database
+function insert_ingredient(ingredientID,ingredientname,auname,tag,posttime,picNo,picstart,paraNo,parastart){
+    //pictures for this article will be stored before and pass the startID and picture numbers
+    for(var i=0;i<picNo;i++){
+        var index=picstart+i;
+        var in_picture = "insert into pictures values ("+index+")";
+        connection.query(in_picture, function(error, results) {
+            if (error) {
+                return console.error(error);
+            }
+            //console.log(results);
+        });
+    }
+    //paragraphs for this article will be stored before and pass the startID and paragraph numbers
+    for(var i=0;i<paraNo;i++){
+        var index=parastart+i;
+        var in_paragraph = "insert into paragraphs values ("+index+")";
+        connection.query(in_paragraph, function(error, results) {
+            if (error) {
+                return console.error(error);
+            }
+            console.log(results);
+        });
+    }
+    //insert new article to the database
+    var in_gredient = "insert into ingredient values ("+ingredientID+","+'\''+ingredientname+'\''+","+'\''+auname+'\''+","+'\''+tag+'\''+","+'\''+posttime+'\''+","+picNo+","+picstart+","+paraNo+","+parastart+")";
+    connection.query(in_help, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        console.log(results);
+    });
+    //return T or F
+}
 //delete an article with the given articleID
 function delete_article(arID){
     var de_article="delete from articles where articleID="+arID;
+    connection.query(de_article, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        console.log(results);
+    });
+}
+function delete_help(helpID){
+    var de_help="delete from help where helpID="+helpID;
+    connection.query(de_help, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        console.log(results);
+    });
+}
+
+function delete_ingredient(ingredientID){
+    var de_article="delete from ingredient where ingredientID="+ingredientID;
     connection.query(de_article, function(error, results) {
         if (error) {
             return console.error(error);
@@ -166,7 +282,10 @@ function select_article(arID){
         if (error) {
             return console.error(error);
         }
-        console.log(results);
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+        });
     });
 
     //return all the picture and paragraph files stored before for this article
@@ -174,7 +293,35 @@ function select_article(arID){
     //how to get the variables parastart, parano,picstart,picno
     //return all pictures, paragrahs and comments of this article
 }
+//select a particular help given articleID
+function select_help(helpID,callback){
+    var sel_help="select helpname,authorname,posttime,parastart,parano,picturestart,pictureno from help where helpID="+helpID;
+    connection.query(sel_help, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+        });
+    });
 
+}
+
+//select a particular ingredient given articleID
+function select_ingredient(ingredientID,callback){
+    var sel_ingredient="select ingredientname,authorname,posttime,parastart,parano,picturestart,pictureno from ingredient where ingredientID="+ingredientID;
+    connection.query(sel_ingredient, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+        });
+    });
+
+}
 function select_article_comment(arID,callback){
     var sel_article_comment="select * from comments where articleID="+arID;
     connection.query(sel_article_comment, function(error, results) {
@@ -227,6 +374,34 @@ function select_client_article(name,callback){
         });*/
     });
 }
+function select_client_help(name,callback){
+    var sel_client_help="select * from help where authorname="+'\''+name+'\'';
+    connection.query(sel_client_help, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(Object.keys(results).length,results);
+        /*Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+
+        });*/
+    });
+}
+function select_client_ingredient(name,callback){
+    var sel_client_ingredient="select * from ingredient where authorname="+'\''+name+'\'';
+    connection.query(sel_client_ingredient, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(Object.keys(results).length,results);
+        /*Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+
+        });*/
+    });
+}
 
 function select_client_comment(name,callback){
     var sel_client_comment="select c.commentID, c.authorname as commentname, c.content, c.articleID,a.articlename, a.authorname,a.tag,a.posttime,a.pictureno,a.picturestart,a.parano,a.parastart   from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";    connection.query(sel_client_comment, function(error, results) {
@@ -239,10 +414,18 @@ function select_client_comment(name,callback){
 }
 /*test.select_client_article('1',function(result1,result2){
     if(result1==0){
-        console.log("you do not have any article");
+        console.log("you do not have article");
     }
     else{
+        var string=[];
+        for(var i=0;i<result1;i++){
+            string.push(result2[i].picturestart+result2[i].pictureno-1);
+        }
+        for(var i=0,i<result1,i++){
+            string[i]=string[i]
+        }
         console.log(result2);
+        console.log(string);
     }
 });*/
 /*test.select_client_comment(<username>,function(result1,result2){
@@ -255,17 +438,97 @@ function select_client_comment(name,callback){
 });*/
 
 //select a list of article names based on the given tag for user to choose
-function select_article_list(tag){
-    var sel_article_list="select articlename,authorname from articles where tag="+'\''+tag+'\'';
+function select_article_list(tag,callback){
+    var sel_article_list="select * from articles where tag="+'\''+tag+'\'';
     connection.query(sel_article_list, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        console.log(results);
+        return callback(Object.keys(results).length,results);
     });
     //return the list of articles with articlenames and authornames
 
 }
+/*test.select_article_list(<tag_name>,function(result1,result2){
+    if(result1==0){
+        console.log("no results found.");
+    }
+    else{
+        console.log(result2);
+    }
+
+});*/
+
+
+function select_all_article(callback){
+    var sel_all_article="select * from articles";
+    connection.query(sel_all_article, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(Object.keys(results).length,results);
+    });
+    //return the list of articles with articlenames and authornames
+
+}
+
+function select_all_help(callback){
+    var sel_all_help="select * from help";
+    connection.query(sel_all_help, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(Object.keys(results).length,results);
+    });
+    //return the list of articles with articlenames and authornames
+
+}
+
+function select_all_ingredient(callback){
+    var sel_all_ingredient="select * from ingredient";
+    connection.query(sel_all_ingredient, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(Object.keys(results).length,results);
+    });
+    //return the list of articles with articlenames and authornames
+
+}
+
+function select_help_list(tag){
+    var sel_help_list="select helpname,authorname from help where tag="+'\''+tag+'\'';
+    connection.query(sel_help_list, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(Object.keys(results).length,results);
+    });
+    //return the list of articles with articlenames and authornames
+
+}
+
+function select_ingredient_list(tag){
+    var sel_ingredient_list="select ingredientname,authorname from ingredient where tag="+'\''+tag+'\'';
+    connection.query(sel_ingredient_list, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(Object.keys(results).length,results);
+    });
+    //return the list of articles with articlenames and authornames
+
+}
+
+/*test.select_all_article(function(result1,result2){
+    if(result1==0){
+        console.log("no results found.");
+    }
+    else{
+        console.log(result2);
+    }
+
+});*/
 
 function select_user(name,callback){
     var sel_username="select username,email,password,description from client where username="+'\''+name+'\'';
@@ -383,6 +646,22 @@ function article_like(articleid,callback) {
     });
 }
 
+function select_article_like(username,callback) {
+    var se_article_like = "select * from followarticle where user ="+'\''+username+'\'';
+    connection.query(se_article_like, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        /*if (Object.keys(results).length === 0) {
+            return callback(null);
+        }*/
+        Object.keys(results).forEach(function (key) {
+            var row = results[key];
+            return callback(row.article);
+
+        });
+    });
+}
 
 
 
@@ -442,13 +721,23 @@ module.exports={
     insert_client:insert_client,
     update_client:update_client,
     insert_article:insert_article,
+    insert_help:insert_help,
+    insert_ingredient:insert_ingredient,
     delete_article:delete_article,
+    delete_help:delete_help,
+    delete_ingredient:delete_ingredient,
     insert_comment:insert_comment,
     delete_comment:delete_comment,
     select_article:select_article,
+    select_help:select_help,
+    select_ingredient:select_ingredient,
+    select_help_list:select_help_list,
+    select_ingredient_list:select_ingredient_list,
     select_article_list:select_article_list,
     select_user: select_user,
     select_client_article:select_client_article,
+    select_client_help:select_client_help,
+    select_client_ingredient:select_client_ingredient,
     select_client_comment:select_client_comment,
     follow:follow,
     like_article:like_article,
@@ -462,9 +751,14 @@ module.exports={
     select_article_comment:select_article_comment,
     count_comment_no:count_comment_no,
     count_article_no:count_article_no,
+    count_help_no:count_help_no,
+    count_ingredient_no:count_ingredient_no,
     count_paragraph_no:count_paragraph_no,
-    count_picture_no:count_picture_no
-
+    count_picture_no:count_picture_no,
+    select_article_like:select_article_like,
+    select_all_article:select_all_article,
+    select_all_help:select_all_help,
+    select_all_ingredient:select_all_ingredient
 };
 
 
@@ -473,8 +767,7 @@ module.exports={
 
 
 
-/*
-// a new readfile.js later -> get the content of .txt files
+/*// a new readfile.js later -> get the content of .txt files
 var fs=require("fs");
 var test=require('./test');
 var connection=test.connection;
@@ -497,9 +790,9 @@ function select_paragraphs(arID,callback){
 }
 select_paragraphs(<articleID>,function(result){
     console.log(result);
-});
-connection.end();
-*/
+});*/
+//connection.end();
+
 
 /*
 //put all comments of an article into an array -> result2 -> result2[i] -> result2[i].content

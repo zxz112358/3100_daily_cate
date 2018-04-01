@@ -31,10 +31,13 @@ router.post('/', upload.any('picture'), function (req,res,next) {
     var text = (typeof (req.body.text) == "string") ? [req.body.text]: req.body.text;
     var picture = req.files;
     var title = req.body.title;
+    var tag = req.body.tag;
 
     console.log('title: ', title);
     console.log('text: ', text);
     console.log('pic: ', picture);
+    console.log('tag: ', tag);
+    console.log((new Date()).toLocaleDateString());
 
     test.count_paragraph_no(function(parastart){
         for (var j = 0; j < text.length; j++) {
@@ -49,8 +52,8 @@ router.post('/', upload.any('picture'), function (req,res,next) {
         //TO DO: tag
         test.count_picture_no(function(picstart){
             test.count_article_no(function(result){
-                console.log('arti: ', result + 1, 'title: ', title, 'username: ', req.user.username, 'picnum: ', picture.length, 'picstart: ', picstart+1, 'textnum: ', text.length, 'parastart: ', parastart + 1)
-                test.insert_article(result + 1, title, req.user.username, 'vegetables','2018-04-01', picture.length, picstart + 1, text.length, parastart + 1);
+                console.log('arti: ', result + 1, 'title: ', title, 'username: ', req.user.username, 'tag:', tag, 'picnum: ', picture.length, 'picstart: ', picstart+1, 'textnum: ', text.length, 'parastart: ', parastart + 1)
+                test.insert_article(result + 1, title, req.user.username, tag,(new Date()).toLocaleDateString(), picture.length, picstart + 1, text.length, parastart + 1);
 
                 res.send('Successfully Posted!');
             });
