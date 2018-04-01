@@ -8,10 +8,30 @@
 
 <% include ../header.ejs %>
 
-<body background="../images/background7.jpg">
+<body background="../images/background2.jpg">
 <h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
 
         <form method="post" id = "inputForm" enctype="multipart/form-data"class="mx-auto w-75">
+
+            <div class="input-group">
+                    <div class="input-group-text">
+                        <input type="radio" name="tag" id="t1" value="main">
+                        <label for="t1">Main Dishes</label>
+                    </div>
+                    <div class="input-group-text">
+                        <input type="radio" name="tag" id="t2" value="dish">
+                        <label for="t1">Dishes</label>
+                    </div>
+                    <div class="input-group-text">
+                        <input type="radio" name="tag" id="t3" value="soup">
+                        <label for="t1">Soups</label>
+                    </div>
+                    <div class="input-group-text">
+                        <input type="radio" name="tag" id="t4" value="dessert">
+                        <label for="t1">Desserts</label>
+                    </div>
+            </div>
+
             <label id = "titlelabel">Title:</label>
             <br><input id = "title" type="text" name = "title">
             <br><label id = "formchild1">Paragraph:</label>
@@ -26,8 +46,6 @@
             <script>
                 document.getElementById("next_btn").addEventListener("click", nextPara);
                 function nextPara() {
-                    console.log('here');
-
                     var form = document.getElementById("inputForm");
                     var submit = document.getElementById("end_input_btn");
 
@@ -45,6 +63,6 @@
                 }
             </script>
 
-<% include ../cprt.ejs %>
+
 </body>
 </html>
