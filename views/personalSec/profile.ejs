@@ -18,21 +18,21 @@
 
 <% include ../header.ejs %>
 
-<body background="../images/background7.jpg">
+<body background="../images/background2.jpg">
 
 <!--<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>-->
 <!--<div class="w-75 font-weight-light mx-auto">Username: <%= user.username%></div>-->
 <!--<div class="w-75 font-weight-light mx-auto">Description: <%= user.description%></div>-->
 <!--<div class="w-75 font-weight-light mx-auto">Profile Image</div>-->
 
-<div class="container-fluid" style="padding: 10px; text-align:center; background-image:url('../images/posttop.jpg');background-size:100% 100%;">
+<div class="container-fluid" style="padding: 10px; text-align:center; background-image:url('../images/personalhomepage.jpg');background-size:100% 100%;">
     <img class="img-thumbnail img-circle" style="width: 140px;margin: 0 auto"  src=<%= imgpath %>>
     <p>
-    <h5 class="text-center" style="font-size:250%;font-weight:600;color:#884400"><%= user.username%><br><small><%= user.description%></small></h5>
+    <h5 class="text-center" style="font-size:250%;font-weight:600;color:#FFA500"><%= user.username%><br><small><%= user.description%></small></h5>
     </p>
     <p>
-        <button class="btn btn-small" type="button" style="background-color:#FFA500">New post</button>
-        <button class="btn btn-small" type="button" style="background-color:#FFA500">Modify info</button>
+        <button class="btn btn-small" type="button">New post</button>
+        <button class="btn btn-small" type="button">Modify info</button>
     </p>
 </div>
 <div class="container-fluid" style="padding: 10px">
@@ -50,18 +50,14 @@
         <div class="col-10">
             <div class="container-fluid" style="padding:10px">
                 <div class="list-group mx-auto w-75">
-                    <% if(articleno==0){%>
-                        <div style="text-align:left">
-                            <p style="font-size:25px;color:#884400">You currently have no post:( Click the button below to post your first article!</p>
-                            <button class="btn btn-small" type="button" style="margin-left:31%;background-color:#FFA500">New post</button>
-                        </div>
-                    <% } %>
+
                     <% for (var i = 0; i < articleno; i++) { %>
                     <a href="../ingredientSec/post1" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
                         <div class="d-flex w-80 justify-content-between">
-                            <img src="../images/pic.jpg" style="width:315px;height:270px">
+                            <img src=<%=coverpic[i]%> style="width:315px;height:270px">
                             <h5 class="mb-1"><%=result[i].articlename%></h5>
                             <small><%=result[i].posttime%></small>
+                            <p><%=text[i]%></p>
 
                         </div>
                         <p class="mb-1" style="text-align:right"><%=result[i].authorname%></p>
