@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
                 }
 
                         res.render('ingredientSec/ingredient', {
-                            title: 'Ingredientn',
+                            title: 'Ingredient',
                             name:'Daily Cate',
                             user: req.user,
                             allArticle: all,
