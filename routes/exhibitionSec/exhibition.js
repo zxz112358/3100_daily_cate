@@ -25,9 +25,6 @@ router.get('/', function(req, res, next) {
                 var data=fs.readFileSync(textpath[i]);
                 text.push(data.toString());
             }
-            console.log(result2);
-            console.log(result1);
-            console.log(result2[0].articlename);
             res.render('exhibitionSec/exhibition', {
                 title: 'Exhibition',
                 name:'Daily Cate',
