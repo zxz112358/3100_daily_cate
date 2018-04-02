@@ -51,9 +51,9 @@ router.post('/', upload.any('picture'), function (req,res,next) {
 
         //TO DO: tag
         test.count_picture_no(function(picstart){
-            test.count_article_no(function(result){
+            test.count_article_no('article',function(result){
                 console.log('arti: ', result + 1, 'title: ', title, 'username: ', req.user.username, 'tag:', tag, 'picnum: ', picture.length, 'picstart: ', picstart+1, 'textnum: ', text.length, 'parastart: ', parastart + 1)
-                test.insert_article(result + 1, title, req.user.username, tag,(new Date()).toLocaleDateString(), picture.length, picstart + 1, text.length, parastart + 1);
+                test.insert_article(result + 1, title, req.user.username, tag,(new Date()).toLocaleDateString(), picture.length, picstart + 1, text.length, parastart + 1,'article');
 
                 res.redirect('./exhibition');
             });
