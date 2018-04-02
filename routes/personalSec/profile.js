@@ -57,6 +57,21 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 
 });
 
+router.post('/', function (req, res, next) {
+    var result = String(req.body.result).match(/[^\d]+|\d+/g);
+    console.log('result: ', result);
+
+    new Promise(
+        function (resolve, reject) {
+            test.select_all_client_article(req.user.username,function(num, articleList){
+                resolve(encodeURIComponent(articleList[result[0]].articleID));
+            });
+        }
+    ).then(function (value) {
+        res.redirect('../exhibitionSec/articlePost?articleId=' + value);
+    });
+});
+
 /* Check user's authentication, if not logged in, redirect user to log in page */
 function authenticationMiddleware () {
     return function (req, res, next){
