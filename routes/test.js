@@ -647,7 +647,7 @@ function article_like(articleid,callback) {
 }
 
 function select_article_like(username,callback) {
-    var se_article_like = "select * from followarticle where user ="+'\''+username+'\'';
+    var se_article_like = "select * from followarticle f, articles a where f.user ="+'\''+username+'\''+" and f.article=a.articleid";
     connection.query(se_article_like, function(error, results) {
         if (error) {
             return console.error(error);
@@ -655,15 +655,19 @@ function select_article_like(username,callback) {
         /*if (Object.keys(results).length === 0) {
             return callback(null);
         }*/
-        Object.keys(results).forEach(function (key) {
-            var row = results[key];
-            return callback(row.article);
-
-        });
+        return callback(Object.keys(results).length,results);
     });
 }
+/*test.select_article_like('1',function(result1,result2){
+    //print the table includes all user2
+    if(result1==0){
+        console.log("no like articles");
+    }
+    else{
+        console.log(result2);
+    }
 
-
+});*/
 
 function search(name,callback){
     var an="select articlename, authorname from articles where authorname like "+'\''+"%"+name+"%"+'\''+"or articlename like"+'\''+"%"+name+"%"+'\'';
