@@ -21,70 +21,48 @@
     </ul>
 
     <div class="tab-content">
+        <!--display contents under 'all' tab-->
         <div class="tab-pane active" id="all">
-                    <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
-                    </a>
+            <% if (allArticle){
+               for (var i = 0; i < allArticle.length; i++) {%>
+                <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+                    <div class="d-flex w-80 justify-content-between">
+                        <img src="<%= '../exhibitionSec/pictures/' + allArticle[i].picturestart %>" style="width:315px;height:270px">
+                        <h5 class="mb-1"><%=allArticle[i].articlename%></h5>
+                        <small><%=allArticle[i].posttime%></small>
+                        <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" style="border: none"></iframe>
+                        <!--<p><%=text[i]%></p>-->
+                    </div>
+                    <p class="mb-1" style="text-align:right"><%=allArticle[i].authorname%></p>
+                </a>
+            <%  }
+            } else { %>
+                No articles yet... Come back later!
+            <% } %>
         </div>
+        <!--display contents under 'main dish' tab-->
         <div class="tab-pane" id="main">
-            Main Dish Recipes
+            <% if (allArticle){
+               for (var i = 0; i < allArticle.length; i++) {%>
+                <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+                    <div class="d-flex w-80 justify-content-between">
+                        <img src="<%= '../exhibitionSec/pictures/' + allArticle[i].picturestart %>" style="width:315px;height:270px">
+                        <h5 class="mb-1"><%=allArticle[i].articlename%></h5>
+                        <small><%=allArticle[i].posttime%></small>
+                        <p><%=text[i]%></p>
+                    </div>
+                    <p class="mb-1" style="text-align:right"><%=allArticle[i].authorname%></p>
+                </a>
+            <% }
+            }else{ %>
+                No articles yet... Come back later!
+            <% }%>
         </div>
         <div class="tab-pane" id="dish">Dish Recipes</div>
         <div class="tab-pane" id="soup">Soup Recipes</div>
         <div class="tab-pane" id="dessert">Dessert Recipes</div>
     </div>
 </div>
-
-<!--<script>-->
-    <!--var frame = document.getElementById('frame');-->
-    <!--var allArticle = "<>";-->
-    <!--var num = "<>";-->
-
-    <!--if (allArticle){-->
-        <!--for (var i = 0; i < allArticle.length; i++){-->
-
-            <!--var picsrc = '../exhibitionSec/pictures/' + allArticle[i].picturestart;-->
-            <!--var textsrc = "../exhibitionSec/texts/" + allArticle[i].picturestart;-->
-
-            <!--var arframe = document.createElement('div');-->
-            <!--arframe.class = "d-flex w-80 justify-content-between";-->
-            <!--arframe.id = "arframe";-->
-
-            <!--var image = document.createElement("img");-->
-            <!--image.src = picsrc;-->
-            <!--image.style = 'width:315px;height:270px';-->
-            <!--arframe.appendChild(image);-->
-
-            <!--var arname = document.createElement("h5");-->
-            <!--arname.class = "mb-1";-->
-            <!--arname.id = "arname";-->
-            <!--arname.innerHTML = allArticle[i].articlename;-->
-            <!--arframe.appendChild(arname);-->
-
-            <!--var date = document.createElement("small");-->
-            <!--date.innerHTML = allArticle[i].posttime;-->
-            <!--arframe.appendChild(date);-->
-
-            <!--var text = document.createElement("iframe");-->
-            <!--text.src = textsrc;-->
-            <!--text.style = 'border: none; display: none';-->
-            <!--arframe.appendChild(text);-->
-
-            <!--var author = document.createElement("p");-->
-            <!--author.class = "mb-1";-->
-            <!--author.style = "text-align:right";-->
-            <!--author.innerHTML = allArticle[i].authorname;-->
-            <!--arframe.appendChild(author);-->
-
-            <!--frame.appendChild(arframe);-->
-        <!--}-->
-    <!--}else {-->
-        <!--var author = document.createElement("p");-->
-        <!--author.class = "mb-1";-->
-        <!--author.style = "text-align:right";-->
-        <!--author.innerHTML = "No articles now... Come back later!";-->
-        <!--frame.appendChild(author);-->
-    <!--}-->
-<!--</script>-->
 
 </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
