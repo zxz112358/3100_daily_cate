@@ -35,24 +35,28 @@
                     </div>
                     <p class="mb-1" style="text-align:right"><%=allArticle[i].authorname%></p>
                 </a>
-            <% }
+            <%  }
             } else { %>
                 No articles yet... Come back later!
             <% } %>
         </div>
         <!--display contents under 'main dish' tab-->
         <div class="tab-pane" id="main">
-            <% for (var i = 0; i < allArticle.length; i++) {%>
-            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
-                <div class="d-flex w-80 justify-content-between">
-                    <img src="<%= '../exhibitionSec/pictures/' + allArticle[i].picturestart %>" style="width:315px;height:270px">
-                    <h5 class="mb-1"><%=allArticle[i].articlename%></h5>
-                    <small><%=allArticle[i].posttime%></small>
-                    <p><%=text[i]%></p>
-                </div>
-                <p class="mb-1" style="text-align:right"><%=allArticle[i].authorname%></p>
-            </a>
-            <% } %>
+            <% if (allArticle){
+               for (var i = 0; i < allArticle.length; i++) {%>
+                <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+                    <div class="d-flex w-80 justify-content-between">
+                        <img src="<%= '../exhibitionSec/pictures/' + allArticle[i].picturestart %>" style="width:315px;height:270px">
+                        <h5 class="mb-1"><%=allArticle[i].articlename%></h5>
+                        <small><%=allArticle[i].posttime%></small>
+                        <p><%=text[i]%></p>
+                    </div>
+                    <p class="mb-1" style="text-align:right"><%=allArticle[i].authorname%></p>
+                </a>
+            <% }
+            }else{ %>
+                No articles yet... Come back later!
+            <% }%>
         </div>
         <div class="tab-pane" id="dish">Dish Recipes</div>
         <div class="tab-pane" id="soup">Soup Recipes</div>
