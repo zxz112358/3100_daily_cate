@@ -40,13 +40,6 @@ router.post('/', upload.single('profileimg'), function (req,res,next) {
     req.checkBody('password', 'Password field is required').notEmpty();
     req.checkBody('password2', 'Password does not match').equals(req.body.password);
 
-    //Handle profile img
-    if (req.file){
-        var profileimg = req.body.name;
-    } else {
-        var profileimg = 'default';
-    }
-
     //Check errors
     var errors = req.validationErrors();
 
