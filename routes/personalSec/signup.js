@@ -35,6 +35,7 @@ router.post('/', upload.single('profileimg'), function (req,res,next) {
 
     //Form validator
     req.checkBody('name', 'User name field is required').notEmpty();
+    req.checkBody('name', 'User name already exists').usernameNotExists(name, email,password, description);
     req.checkBody('email', 'Email field is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('password', 'Password field is required').notEmpty();

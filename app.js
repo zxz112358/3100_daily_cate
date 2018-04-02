@@ -11,7 +11,7 @@ var storage = multer.diskStorage({
     filename: function (req, file, cb) {
         var extArray = file.mimetype.split("/");
         var extension = extArray[extArray.length - 1];
-        cb(null, req.body.name);// + '.' + extension);
+        cb(null, req.body.name);
     }
 });
 var upload = multer({ storage: storage });
@@ -100,8 +100,7 @@ app.use(passport.session());
 app.use(function (req, res, next) {
     res.locals.isAuthenticated = req.isAuthenticated();
     next();
-})
-
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'routes')));
@@ -124,8 +123,14 @@ app.use(expressValidator({
             msg: msg,
             value: value
         };
+    },
+    customValidators: {
+        usernameNotExists: function afunction(username, email, password, description) {
+            //if the username exists, return false; if not, return true
+            return true;
+        }
     }
-}))
+}));
 
 app.use(function(req, res, next){
     res.locals.messages = require('express-messages');
