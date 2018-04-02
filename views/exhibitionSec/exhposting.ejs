@@ -40,30 +40,32 @@
                 </div>
 
                 <label id = "titlelabel">Title:</label>
-                <br><input id = "title" type="text" name = "title">
+                <br><input id = "title" type="text" name = "title" required>
                 <br><label id = "formchild1">Paragraph:</label>
-                <br><textarea id = "formchild2" type="text" name = "text" class="mx-auto w-75"></textarea>
+                <br><textarea id = "formchild2" type="text" name = "text" class="mx-auto w-75" required ></textarea>
                 <br><label id = "formchild3" >Picture:</label>
-                <input id = "formchild4" type="file" name = "picture" class="mx-auto w-75">
+                <input id = "formchild4" type="file" name = "picture" class="mx-auto w-75" required >
 
                 <br><button id = "end_input_btn" type="submit" class="btn">End input</button>
             </form>
 
             <br><button id = "next_btn" class="btn btn-primary">Next</button>
             <script>
-                document.getElementById("next_btn").addEventListener("click", nextPara);
-                function nextPara() {
+                document.getElementById("next_btn").addEventListener("click", nextPara_arti);
+                function nextPara_arti() {
                     var form = document.getElementById("inputForm");
                     var submit = document.getElementById("end_input_btn");
 
                     var newpara = document.createElement("textarea");
                     newpara.name = 'text';
+                    newpara.required = true;
                     form.insertBefore(document.createElement("br"), submit);
                     form.insertBefore(newpara, submit);
 
                     var newpic = document.createElement("input");
                     newpic.type = 'file';
                     newpic.name = 'picture';
+                    newpic.required = true;
                     form.insertBefore(document.createElement("br"), submit);
                     form.insertBefore(newpic, submit);
                     form.insertBefore(document.createElement("br"), submit);
@@ -97,31 +99,32 @@
                 </div>
 
                 <label id = "titlelabel">Title:</label>
-                <br><input id = "title" type="text" name = "title">
+                <br><input id = "title" type="text" name = "title" required>
                 <br><label id = "formchild1">Paragraph:</label>
-                <br><textarea id = "formchild2" type="text" name = "text" class="mx-auto w-75"></textarea>
+                <br><textarea id = "formchild2" type="text" name = "text" class="mx-auto w-75" required></textarea>
                 <br><label id = "formchild3" >Picture:</label>
-                <input id = "formchild4" type="file" name = "picture" class="mx-auto w-75">
+                <input id = "formchild4" type="file" name = "picture" class="mx-auto w-75" required>
 
                 <br><button id = "end_input_btn_help" type="submit" class="btn">End input</button>
             </form>
 
             <br><button id = "next_btn_help" class="btn btn-primary">Next</button>
             <script>
-                document.getElementById("next_btn_help").addEventListener("click", nextPara);
-                function nextPara() {
-                    alert('hi');
+                document.getElementById("next_btn_help").addEventListener("click", nextPara_help);
+                function nextPara_help() {
                     var form = document.getElementById("helpForm");
                     var submit = document.getElementById("end_input_btn_help");
 
                     var newpara = document.createElement("textarea");
                     newpara.name = 'text';
+                    newpara.required = true;
                     form.insertBefore(document.createElement("br"), submit);
                     form.insertBefore(newpara, submit);
 
                     var newpic = document.createElement("input");
                     newpic.type = 'file';
                     newpic.name = 'picture';
+                    newpic.required = true;
                     form.insertBefore(document.createElement("br"), submit);
                     form.insertBefore(newpic, submit);
                     form.insertBefore(document.createElement("br"), submit);
@@ -132,9 +135,6 @@
 
 
 </div>
-
-
-
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
