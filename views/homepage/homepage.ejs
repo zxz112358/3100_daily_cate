@@ -93,10 +93,25 @@
     <div class="container-fluid">
         <div class="row" style="margin-top:20px;">
 
-            <div class="col-xs-8 col-sm-8 col-md-8" style="margin-top: 15px; background-color: #ffdd83; border:10px solid #FFA500">
-                <img src=<%=coverpic[0]%> class="table-responsive img-thumbnail" style="height: 400px; width: 500px">
-                <a href="/ingredientSec/post1" class="card-img-overlay text-right">
-                    <div class="desc">
+            <!--<div class="col-xs-8 col-sm-8 col-md-8 d-flex flex-row" style="margin-top: 15px; background-color: #ffdd83; border:10px solid #FFA500">-->
+            <!--<img src=<%=coverpic[0]%> class="table-responsive img-thumbnail" style="height: 400px; width: 500px">-->
+            <!--<div class="d-flex flex column" style="margin-left:40px;width:600px">-->
+            <!--<a href="/ingredientSec/post1" class="card-img-overlay" style="text-align:center">-->
+            <!--<div class="desc">-->
+            <!--<h1 style="margin-top:140px;color:#884400"><%=articles[0].articlename%></h1>-->
+            <!--<h3 style="color:#884400"><%=articles[0].authorname%></h3>-->
+            <!--</div>-->
+            <!--</a>-->
+            <!--</div>-->
+
+            <!--</div>-->
+
+
+
+            <div class="col-xs-8 col-sm-8 col-md-8 d-flex flex-row" style="margin-top: 15px; background-color: #ffdd83; border:10px solid #FFA500">
+                <img href="/ingredientSec/post1"  src=<%=coverpic[0]%> class="table-responsive img-thumbnail" style="height: 400px; width: 500px">
+                <a href="/ingredientSec/post1" class="d-flex flex-column" style="width:40%">
+                    <div class="desc" style="text-align:center">
                         <h1 style="margin-top:140px;color:#884400"><%=articles[0].articlename%></h1>
                         <h3 style="color:#884400"><%=articles[0].authorname%></h3>
                     </div>
