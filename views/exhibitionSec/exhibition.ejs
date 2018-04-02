@@ -50,25 +50,76 @@
         </div>
         <!--display contents under 'main dish' tab-->
         <div class="tab-pane" id="main">
-            <% if (allArticle){
-               for (var i = 0; i < allArticle.length; i++) {%>
+            <% if (main){
+               for (var i = 0; i < main.length; i++) {%>
                 <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
                     <div class="d-flex w-80 justify-content-between">
-                        <img src="<%= '../exhibitionSec/pictures/' + (allArticle[i].picturestart + allArticle[i].pictureno - 1) %>" style="width:315px;height:270px">
-                        <h5 class="mb-1"><%=allArticle[i].articlename%></h5>
-                        <small><%=allArticle[i].posttime%></small>
-                        <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <img src="<%= '../exhibitionSec/pictures/' + (main[i].picturestart + main[i].pictureno - 1) %>" style="width:315px;height:270px">
+                        <h5 class="mb-1"><%=main[i].articlename%></h5>
+                        <small><%=main[i].posttime%></small>
+                        <iframe src="<%= '../exhibitionSec/texts/' + main[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
                     </div>
-                    <p class="mb-1" style="text-align:right"><%=allArticle[i].authorname%></p>
+                    <p class="mb-1" style="text-align:right"><%=main[i].authorname%></p>
                 </a>
             <% }
             }else{ %>
                 No articles yet... Come back later!
             <% }%>
         </div>
-        <div class="tab-pane" id="dish">Dish Recipes</div>
-        <div class="tab-pane" id="soup">Soup Recipes</div>
-        <div class="tab-pane" id="dessert">Dessert Recipes</div>
+        <!--display contents under 'dishes' tab-->
+        <div class="tab-pane" id="dish">
+            <% if (dish){
+            for (var i = 0; i < dish.length; i++) {%>
+            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+                <div class="d-flex w-80 justify-content-between">
+                    <img src="<%= '../exhibitionSec/pictures/' + (dish[i].picturestart + dish[i].pictureno - 1) %>" style="width:315px;height:270px">
+                    <h5 class="mb-1"><%=dish[i].articlename%></h5>
+                    <small><%=dish[i].posttime%></small>
+                    <iframe src="<%= '../exhibitionSec/texts/' + dish[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                </div>
+                <p class="mb-1" style="text-align:right"><%=dish[i].authorname%></p>
+            </a>
+            <% }
+            }else{ %>
+            No articles yet... Come back later!
+            <% }%>
+        </div>
+        <!--display contents under 'soups' tab-->
+        <div class="tab-pane" id="soup">
+            <% if (soup){
+            for (var i = 0; i < soup.length; i++) {%>
+            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+                <div class="d-flex w-80 justify-content-between">
+                    <img src="<%= '../exhibitionSec/pictures/' + (soup[i].picturestart + soup[i].pictureno - 1) %>" style="width:315px;height:270px">
+                    <h5 class="mb-1"><%=soup[i].articlename%></h5>
+                    <small><%=soup[i].posttime%></small>
+                    <iframe src="<%= '../exhibitionSec/texts/' + soup[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                </div>
+                <p class="mb-1" style="text-align:right"><%=soup[i].authorname%></p>
+            </a>
+            <% }
+            }else{ %>
+            No articles yet... Come back later!
+            <% }%>
+        </div>
+        <!--display contents under 'desserts' tab-->
+        <div class="tab-pane" id="dessert">
+            <% if (dessert){
+            for (var i = 0; i < dessert.length; i++) {%>
+            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+                <div class="d-flex w-80 justify-content-between">
+                    <img src="<%= '../exhibitionSec/pictures/' + (dessert[i].picturestart + dessert[i].pictureno - 1) %>" style="width:315px;height:270px">
+                    <h5 class="mb-1"><%=dessert[i].articlename%></h5>
+                    <small><%=dessert[i].posttime%></small>
+                    <iframe src="<%= '../exhibitionSec/texts/' + dessert[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                </div>
+                <p class="mb-1" style="text-align:right"><%=dessert[i].authorname%></p>
+            </a>
+            <% }
+            }else{ %>
+            No articles yet... Come back later!
+            <% }%>
+        </div>
     </div>
 </div>
 
