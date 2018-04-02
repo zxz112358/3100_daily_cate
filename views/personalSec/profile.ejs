@@ -39,7 +39,8 @@
     <div class="row">
         <div class="col-2" style="text-align:right">
             <p>
-                <a href="./profile" class="btn btn-warning active" aria-pressed="true" role="button" style="width:75%">My Posts</a><br>
+                <a href="./profile" class="btn btn-warning active" aria-pressed="true" role="button" style="width:75%">My Articles</a><br>
+                <a href="./myhelp" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Helps</a><br>
                 <a href="./mycomment" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Comments</a><br>
                 <a href="./myfollowing" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Followings</a><br>
                 <a href="./myfollower" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Followers</a><br>
@@ -52,6 +53,7 @@
                 <div class="list-group mx-auto w-75">
 
                     <% for (var i = 0; i < articleno; i++) { %>
+                    <% if(result[i].type=='article') { %>
                     <a href="../ingredientSec/post1" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
                         <div class="d-flex w-80 justify-content-between">
                             <img src=<%=coverpic[i]%> style="width:315px;height:270px">
@@ -62,6 +64,7 @@
                         </div>
                         <p class="mb-1" style="text-align:right"><%=result[i].authorname%></p>
                     </a>
+                    <% } %>
                     <% } %>
                 </div>
             </div>

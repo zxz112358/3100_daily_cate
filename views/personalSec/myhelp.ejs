@@ -6,57 +6,75 @@
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
 </head>
 
+<script>
+    document.addEventListener('error', function(e) {
+        console.log(e);
+    }, true);
+
+    if (e) {
+        imgpath = '../profileimgs/default';
+    }
+</script>
+
 <% include ../header.ejs %>
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
+
+<!--<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>-->
+<!--<div class="w-75 font-weight-light mx-auto">Username: <%= user.username%></div>-->
+<!--<div class="w-75 font-weight-light mx-auto">Description: <%= user.description%></div>-->
+<!--<div class="w-75 font-weight-light mx-auto">Profile Image</div>-->
+
 <div class="container-fluid" style="padding: 10px; text-align:center; background-image:url('../images/posttop.jpg');background-size:100% 100%;">
     <img class="img-thumbnail img-circle" style="width: 140px;margin: 0 auto"  src=<%= imgpath %>>
     <p>
     <h5 class="text-center" style="font-size:250%;font-weight:600;color:#884400"><%= user.username%><br><small><%= user.description%></small></h5>
     </p>
     <p>
-        <button onclick="window.location.href='/exhibitionSec/exhposting'" style="background-color:#FFCC00" class="btn btn-small" type="button">New post</button>
+        <button onclick="window.location.href='/exhibitionSec/exhposting'" class="btn btn-small" style="background-color:#FFCC00" type="button">New post</button>
         <button class="btn btn-small" style="background-color:#FFCC00" type="button">Modify info</button>
     </p>
 </div>
-<div class="container-fluid" style="padding: 10px;min-height:500px">
+<div class="container-fluid" style="padding: 10px; min-height:500px;">
     <div class="row">
         <div class="col-2" style="text-align:right">
             <p>
                 <a href="./profile" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Articles</a><br>
-                <a href="./myehlp" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Helps</a><br>
-                <a href="./mycomment" class="btn btn-warning active" aria-pressed="true" role="button" style="width:75%">My Comments</a><br>
+                <a href="./myhelp" class="btn btn-warning active" aria-pressed="true" role="button" style="width:75%">My Helps</a><br>
+                <a href="./mycomment" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Comments</a><br>
                 <a href="./myfollowing" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Followings</a><br>
                 <a href="./myfollower" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Followers</a><br>
                 <a href="./mylike" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%">My Likes</a>
             </p>
+
         </div>
         <div class="col-10">
             <div class="container-fluid" style="padding:10px">
                 <div class="list-group mx-auto w-75">
-                    <% for (var i = 0; i < commentno; i++) { %>
+
+                    <% for (var i = 0; i < articleno; i++) { %>
+                    <% if(result[i].type=='help') { %>
                     <a href="../ingredientSec/post1" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
                         <div class="d-flex w-80 justify-content-between">
-                            <img src="../images/pic.jpg" style="width:315px;height:270px">
+                            <img src=<%=coverpic[i]%> style="width:315px;height:270px">
                             <h5 class="mb-1"><%=result[i].articlename%></h5>
                             <small><%=result[i].posttime%></small>
-                            <p>My comment: <%=result[i].content%></p>
+                            <p><%=text[i]%></p>
 
                         </div>
                         <p class="mb-1" style="text-align:right"><%=result[i].authorname%></p>
                     </a>
+                    <% } %>
                     <% } %>
                 </div>
             </div>
         </div>
     </div>
 
-
-
-
 </div>
-
 <% include ../cprt.ejs %>
+
+<!--<img src= <%= imgpath %>>-->
 
 </body>
 
