@@ -15,7 +15,7 @@
     <h5 class="text-center" style="font-size:250%;font-weight:600;color:#FFA500"><%= user.username%><br><small><%= user.description%></small></h5>
     </p>
     <p>
-        <button class="btn btn-small" type="button" style="background-color:#FFA500">New post</button>
+        <button onclick="window.location.href='/exhibitionSec/exhposting'" class="btn btn-small" type="button">New post</button>
         <button class="btn btn-small" type="button" Style="background-color:#FFA500">Modify info</button>
     </p>
 </div>
@@ -40,6 +40,7 @@
                             <p style="font-size:200%; color: #884400;font-weight: 600"><%=following[i].user2%></p>
                             <p style="font-size:100%; color:#884400"><%=following[i].description%></p>
                         </a>
+                        <button class="btn btn-warning" aria-pressed="true" type="button">Unfollow</button>
                     </div>
 
                     <% } %>
