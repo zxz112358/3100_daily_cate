@@ -21,25 +21,41 @@ var connection = test.connection;
 
 /* GET user profile page. */
 router.get('/', authenticationMiddleware(), function(req, res) {
-    test.select_article_like(req.user.username, function (arID) {
-        //console.log(arID+"!!!");
-        //Object.keys(arID).forEach(function (key) {
-            //console.log(arID+"!!!");
-            test.select_article(arID, function (results) {
-                res.render('personalSec/mylike', {
-                    title: 'Mylike',
-                    name: 'Daily Cate',
-                    user: req.user,
-                    imgpath: '../profileimgs/' + req.user.username,
-                    arname: results.articlename,
-                    potime: results.posttime,
-                    auname: results.authorname,
-                    lastpic: results.picturestart + results.pictureno - 1
-                });
+    test.select_article_like(req.user.username,function(result1,result2){
+        //print the table includes all user2
+        var string=[];
+        for(var i=0;i<result1;i++){
+            string.push(result2[i].picturestart+result2[i].pictureno-1);
+            string[i]='../exhibitionSec/pictures/'+string[i];
+        }
+
+
+        if(result1===0){
+            res.render('personalSec/mylike', {
+                title: 'Mylike',
+                name: 'Daily Cate',
+                user: req.user,
+                imgpath: '../profileimgs/' + req.user.username,
+                artno:result1
             });
-        });
-    //});
+            console.log("no like articles");
+        }
+        else{
+            res.render('personalSec/mylike', {
+                title: 'Mylike',
+                name: 'Daily Cate',
+                user: req.user,
+                imgpath: '../profileimgs/' + req.user.username,
+                artno:result1,
+                artinfo:result2,
+                coverpic:string
+            });
+            console.log(result2);
+        }
+
+    });
 });
+
 /* Check user's authentication, if not logged in, redirect user to log in page */
 function authenticationMiddleware () {
     return function (req, res, next){
