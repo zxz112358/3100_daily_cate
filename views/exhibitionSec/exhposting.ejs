@@ -70,9 +70,8 @@
                 }
             </script>
         </div>
-
         <div class="tab-pane" id="help">
-            <form method="post" id = "inputForm" enctype="multipart/form-data"class="mx-auto w-75">
+            <form method="post" id = "helpForm" enctype="multipart/form-data"class="mx-auto w-75">
                 <input style="display: none" name = "type" value="help">
                 <div class="input-group">
                     <div class="input-group-text">
@@ -104,15 +103,16 @@
                 <br><label id = "formchild3" >Picture:</label>
                 <input id = "formchild4" type="file" name = "picture" class="mx-auto w-75">
 
-                <br><button id = "end_input_btn" type="submit" class="btn">End input</button>
+                <br><button id = "end_input_btn_help" type="submit" class="btn">End input</button>
             </form>
 
-            <br><button id = "next_btn" class="btn btn-primary">Next</button>
+            <br><button id = "next_btn_help" class="btn btn-primary">Next</button>
             <script>
-                document.getElementById("next_btn").addEventListener("click", nextPara);
+                document.getElementById("next_btn_help").addEventListener("click", nextPara);
                 function nextPara() {
-                    var form = document.getElementById("inputForm");
-                    var submit = document.getElementById("end_input_btn");
+                    alert('hi');
+                    var form = document.getElementById("helpForm");
+                    var submit = document.getElementById("end_input_btn_help");
 
                     var newpara = document.createElement("textarea");
                     newpara.name = 'text';
