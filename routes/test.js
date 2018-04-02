@@ -22,7 +22,8 @@ function insert_client(name,email,pwd,desc){
     });
 }
 
-function update_client(name,email,pwd,desc){
+
+function update_client(name,email,pwd,desc,callback){
     //name.replace(/'/,'\'');
     //email.replace(/'/,'\'');
     //pwd.replace(/'/,'\'');
@@ -30,11 +31,19 @@ function update_client(name,email,pwd,desc){
     var up_client = "update client set email="+'\''+email.replace(/'/,"\\\'")+'\''+",password="+'\''+pwd.replace(/'/,"\\\'")+'\''+",description="+'\''+desc.replace(/'/,"\\\'")+'\''+"where username="+'\''+name.replace(/'/,"\\\'")+'\'';
     connection.query(up_client, function(error, results) {
         if (error) {
-            return console.error(error);
+            return callback(false);
+        }
+        else{
+            return callback(true);
         }
         //console.log(results);
     });
 }
+/*test.update_client('1','11@gmail.com','1','I like eating',function(result){
+    if(result==true){
+        console.log(result);
+    }
+});*/
 function count_article_no(callback){
     var count_article="select count(articleID) as count from articles";
     connection.query(count_article, function(error, results) {
@@ -288,10 +297,7 @@ function select_article(arID,callback){
         if (error) {
             return console.error(error);
         }
-        Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
-        });
+        return callback(results[0]);
     });
 
     //return all the picture and paragraph files stored before for this article
@@ -299,6 +305,9 @@ function select_article(arID,callback){
     //how to get the variables parastart, parano,picstart,picno
     //return all pictures, paragrahs and comments of this article
 }
+/*est.select_article(1,function(result){
+    console.log(result.articlename);
+});*/
 //select a particular help given articleID
 /*function select_help(helpID,callback){
     var sel_help="select helpname,authorname,posttime,parastart,parano,picturestart,pictureno from help where helpID="+helpID;

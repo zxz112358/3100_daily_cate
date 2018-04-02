@@ -7,7 +7,7 @@ var storage = multer.diskStorage({
         cb(null, 'public/profileimgs/');
     },
     filename: function (req, file, cb) {
-        cb(null, req.body.name);
+        cb(null, String(req.body.name));
     }
 });
 var upload = multer({ storage: storage });
@@ -40,6 +40,7 @@ router.post('/', upload.single('profileimg'), function (req,res,next) {
     req.checkBody('email', 'Email is not valid').isEmail();
     req.checkBody('password', 'Password field is required').notEmpty();
     req.checkBody('password2', 'Password does not match').equals(req.body.password);
+
 
     //Check errors
     var errors = req.validationErrors();

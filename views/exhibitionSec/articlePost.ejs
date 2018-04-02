@@ -11,7 +11,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" type="text/css" href="css/demo.css">
     <style type="text/css">
         .main-timeline{
@@ -195,8 +194,8 @@
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
 <div class="container-fluid" style="color:#FFA500;padding-top:10px;text-align:center;height:200px;background-image:url('../../images/posttop.jpg');background-size:100% 100%;">
-    <h1><%= title%></h1>
-    <h2><%= author%></h2>
+    <h1><%= article.articlename%></h1>
+    <h2><%= article.authorname%></h2>
 </div>
 
 
@@ -205,15 +204,14 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="main-timeline" style="padding-top: 250px">
-                    <% for (var i = 0; i < 3; i++) { %>
+                    <% for (var i = 0; i < article.parano; i++) { %>
                     <div class="timeline" style="margin-top:-220px">
                         <div class="timeline-icon"><span class="year"><%= i+1 %></span></div>
                         <div class="timeline-content" style="text-align:center;">
                             <!--<h3 class="title">Web Desginer</h3>-->
-                            <img src="../images/pic.jpg" style="width:315px;height:270px">
+                            <img src="<%= '../exhibitionSec/pictures/' + (article.parastart + i) %>" style="width:315px;height:270px">
                             <p class="description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia mi ultrices, luctus nunc ut, commodo enim. Vivamus sem erat.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec lacinia mi ultrices, luctus nunc ut, commodo enim. Vivamus sem erat.
+                                <iframe src="<%= '../exhibitionSec/texts/' + (article.parastart + i) + '.txt' %>" style="border: none" id="textframe"></iframe>
                             </p>
                         </div>
                     </div>

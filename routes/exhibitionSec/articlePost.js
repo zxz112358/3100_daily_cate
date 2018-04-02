@@ -1,13 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
+var test = require('../test');
+
 /* GET exhibition page. */
 router.get('/', function(req, res, next) {
-    res.render('exhibitionSec/articlePost', {
-        title: 'Post 1',
-        name:'Daily Cate',
-        author:'XXX',
-        user: req.user
+    console.log(decodeURIComponent(req.query.articleId));
+    test.select_article(decodeURIComponent(req.query.articleId), function (article) {
+        res.render('exhibitionSec/articlePost', {
+            title: 'articlePost',
+            name: 'Daily Cate',
+            user: req.user,
+            article: article
+        });
+        console.log(article);
     });
 });
 

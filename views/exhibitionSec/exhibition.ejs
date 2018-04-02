@@ -59,12 +59,14 @@
         <li><a href="#dessert" data-toggle="tab" class="setfont">Desserts</a></li>
     </ul>
 
+    <form method="post" id = 'form'>
+        <input style="display: none" id="result" name="result">
     <div class="tab-content">
         <!--display contents under 'all' tab-->
         <div class="tab-pane active" id="all">
             <% if (allArticle){
                for (var i = 0; i < allArticle.length; i++) {%>
-                <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+                <a href="#" id = '<%= 'all' + i %>' type="submit" onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                     <div class="d-flex w-80 flex-row">
                         <img src="<%= '../exhibitionSec/pictures/' + (allArticle[i].picturestart + allArticle[i].pictureno - 1) %>" style="width:315px;height:270px">
                         <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
@@ -82,20 +84,19 @@
                             </script>
                             <p class="author"><%=allArticle[i].authorname%></p>
                         </div>
-
                     </div>
-
                 </a>
             <%  }
             } else { %>
                 No articles yet... Come back later!
             <% } %>
         </div>
+
         <!--display contents under 'main dish' tab-->
         <div class="tab-pane" id="main">
             <% if (main){
                for (var i = 0; i < main.length; i++) {%>
-                <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+                <a href="#" id = '<%= 'main' + i %>' type="submit" onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                     <div class="d-flex w-80 flex-row">
                         <img src="<%= '../exhibitionSec/pictures/' + (main[i].picturestart + main[i].pictureno - 1) %>" style="width:315px;height:270px">
                         <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
@@ -113,11 +114,12 @@
                 No articles yet... Come back later!
             <% }%>
         </div>
+
         <!--display contents under 'dishes' tab-->
         <div class="tab-pane" id="dish">
             <% if (dish){
             for (var i = 0; i < dish.length; i++) {%>
-            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+            <a href="#" id = '<%= 'dish' + i %>' type="submit" onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                 <div class="d-flex w-80 flex-row">
                     <img src="<%= '../exhibitionSec/pictures/' + (dish[i].picturestart + dish[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
@@ -126,9 +128,7 @@
                         <iframe src="<%= '../exhibitionSec/texts/' + dish[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
                         <p class="author"><%=dish[i].authorname%></p>
                     </div>
-
                 </div>
-
             </a>
             <% }
             }else{ %>
@@ -139,7 +139,7 @@
         <div class="tab-pane" id="soup">
             <% if (soup){
             for (var i = 0; i < soup.length; i++) {%>
-            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+            <a href="#" id = '<%= 'soup' + i %>' type="submit" onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                 <div class="d-flex w-80 flex-row">
                     <img src="<%= '../exhibitionSec/pictures/' + (soup[i].picturestart + soup[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
@@ -148,20 +148,19 @@
                         <iframe src="<%= '../exhibitionSec/texts/' + soup[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
                         <p class="author"><%=soup[i].authorname%></p>
                     </div>
-
                 </div>
-
             </a>
             <% }
             }else{ %>
             No articles yet... Come back later!
             <% }%>
         </div>
+
         <!--display contents under 'desserts' tab-->
         <div class="tab-pane" id="dessert">
             <% if (dessert){
             for (var i = 0; i < dessert.length; i++) {%>
-            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+            <a href="#" id = '<%= 'dessert' + i %>' type="submit" onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                 <div class="d-flex w-80 flex-row">
                     <img src="<%= '../exhibitionSec/pictures/' + (dessert[i].picturestart + dessert[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
@@ -170,9 +169,7 @@
                         <iframe src="<%= '../exhibitionSec/texts/' + dessert[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
                         <p class="author"><%=dessert[i].authorname%></p>
                     </div>
-
                 </div>
-
             </a>
             <% }
             }else{ %>
@@ -180,8 +177,16 @@
             <% }%>
         </div>
     </div>
+    </form>
 </div>
 
+<script>
+    function enterArticle(article) {
+        var result = document.getElementById('result');
+        result.value = article.id;
+        document.getElementById('form').submit();
+    }
+</script>
 
 </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
