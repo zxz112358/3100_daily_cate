@@ -360,8 +360,8 @@ function count_comment_no(arID,callback){
 });
 */
 
-function select_client_article(name,callback){
-    var sel_client_article="select * from articles where authorname="+'\''+name+'\'';
+function select_client_article(name,type,callback){
+    var sel_client_article="select * from articles where authorname="+'\''+name+'\''+"and type =" +'\''+type+'\'';
     connection.query(sel_client_article, function(error, results) {
         if (error) {
             return console.error(error);
@@ -374,18 +374,13 @@ function select_client_article(name,callback){
         });*/
     });
 }
-function select_client_help(name,callback){
+/*function select_client_help(name,callback){
     var sel_client_help="select * from help where authorname="+'\''+name+'\'';
     connection.query(sel_client_help, function(error, results) {
         if (error) {
             return console.error(error);
         }
         return callback(Object.keys(results).length,results);
-        /*Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
-
-        });*/
     });
 }
 function select_client_ingredient(name,callback){
@@ -395,16 +390,12 @@ function select_client_ingredient(name,callback){
             return console.error(error);
         }
         return callback(Object.keys(results).length,results);
-        /*Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
-
-        });*/
     });
-}
+}*/
 
 function select_client_comment(name,callback){
-    var sel_client_comment="select c.commentID, c.authorname as commentname, c.content, c.articleID,a.articlename, a.authorname,a.tag,a.posttime,a.pictureno,a.picturestart,a.parano,a.parastart   from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";    connection.query(sel_client_comment, function(error, results) {
+    var sel_client_comment="select c.commentID, c.authorname as commentname, c.content, c.articleID,a.articlename, a.authorname,a.tag,a.posttime,a.pictureno,a.picturestart,a.parano,a.parastart   from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";
+    connection.query(sel_client_comment, function(error, results) {
         if (error) {
             return console.error(error);
         }
@@ -438,8 +429,8 @@ function select_client_comment(name,callback){
 });*/
 
 //select a list of article names based on the given tag for user to choose
-function select_article_list(tag,callback){
-    var sel_article_list="select * from articles where tag="+'\''+tag+'\'';
+function select_article_list(tag,type,callback){
+    var sel_article_list="select * from articles where tag="+'\''+tag+'\''+"and type = "+ '\''+type+'\'';
     connection.query(sel_article_list, function(error, results) {
         if (error) {
             return console.error(error);
@@ -460,8 +451,8 @@ function select_article_list(tag,callback){
 });*/
 
 
-function select_all_article(callback){
-    var sel_all_article="select * from articles";
+function select_all_article(type,callback){
+    var sel_all_article="select * from articles where type = "+'\''+type+'\'';
     connection.query(sel_all_article, function(error, results) {
         if (error) {
             return console.error(error);
@@ -472,7 +463,7 @@ function select_all_article(callback){
 
 }
 
-function select_all_help(callback){
+/*function select_all_help(callback){
     var sel_all_help="select * from help";
     connection.query(sel_all_help, function(error, results) {
         if (error) {
@@ -494,9 +485,9 @@ function select_all_ingredient(callback){
     });
     //return the list of articles with articlenames and authornames
 
-}
+}*/
 
-function select_help_list(tag){
+/*function select_help_list(tag){
     var sel_help_list="select helpname,authorname from help where tag="+'\''+tag+'\'';
     connection.query(sel_help_list, function(error, results) {
         if (error) {
@@ -518,7 +509,7 @@ function select_ingredient_list(tag){
     });
     //return the list of articles with articlenames and authornames
 
-}
+}*/
 
 /*test.select_all_article(function(result1,result2){
     if(result1==0){
