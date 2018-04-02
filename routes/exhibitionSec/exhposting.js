@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', upload.any('picture'), function (req,res,next) {
-    var text = (typeof (req.body.text) == "string") ? [req.body.text]: req.body.text;
+    var text = (typeof (req.body.text) === "string") ? [req.body.text]: req.body.text;
     var picture = req.files;
     var title = req.body.title;
     var tag = req.body.tag;
@@ -53,7 +53,15 @@ router.post('/', upload.any('picture'), function (req,res,next) {
         test.count_picture_no(function(picstart){
             test.count_article_no('article',function(result){
                 console.log('arti: ', result + 1, 'title: ', title, 'username: ', req.user.username, 'tag:', tag, 'picnum: ', picture.length, 'picstart: ', picstart+1, 'textnum: ', text.length, 'parastart: ', parastart + 1)
+
+
+                test.insert_article(result + 1, title, req.user.username, tag,(new Date()).toLocaleDateString(), picture.length, picstart + 1, text.length, parastart + 1,'type');
+
                 test.insert_article(result + 1, title, req.user.username, tag,(new Date()).toLocaleDateString(), picture.length, picstart + 1, text.length, parastart + 1,'article');
+
+
+                test.insert_article(result + 1, title, req.user.username, tag,(new Date()).toLocaleDateString(), picture.length, picstart + 1, text.length, parastart + 1,'article');
+
 
                 res.redirect('./exhibition');
             });
