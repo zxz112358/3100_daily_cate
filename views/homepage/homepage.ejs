@@ -23,48 +23,53 @@
             position:absolute;
             top:0;
             left:0;
-
+            width:100%;
             padding:1px;
             z-index:5;
         }
         .titlemid{
-            position:absolute;
+            position:relative;
             text-align:center;
-            margin-left:4500%;
-            margin-top: 12000%;
+            /*margin-left:4500%;*/
+            /*margin-top: 12000%;*/
             font-weight:900;
             font-family:"Vladimir Script";
-            font-size: 1000%;
-            width: 70000%;
-            height:300%;
+            /*font-size: 1000%;*/
+            /*width: 70000%;*/
+            /*height:300%;*/
+            padding-top:15%;
+            margin-left:0px;
+            margin-top:0px;
+            font-size:160px;
+            width:100%;
+            z-index:50;
             color:#FFA500;
 
         }
 
         .div-textmid1{
-            position:absolute;
+            position:relative;
             text-align:center;
-            margin-left: 4500%;
-            margin-top:25000%;
+            /*margin-left: 4500%;*/
+            /*margin-top:25000%;*/
             font-weight:bold;
             font-family:"Vladimir Script";
+            font-size:60px;
 
-            font-size:300%;
-            width:70000%;
-            height:200%;
+            /*font-size:300%;*/
+            /*width:70000%;*/
+            /*height:200%;*/
             color:#FFA500;
         }
         .div-textmid2{
-            position:absolute;
+            position:relative;
             text-align:center;
-            margin-left: 4500%;
-            margin-top:30000%;
+
             font-weight:bold;
             font-family:"Vladimir Script";
 
-            font-size:300%;
-            width:70000%;
-            height:200%;
+            font-size:60px;
+
             color:#FFA500;
         }
 
@@ -84,7 +89,7 @@
     </video>
     <div class="overlay">
         <h1 class = "titlemid"><%= title %></h1>
-        <p class="div-textmid1">Welcome to <%= title %></p>
+        <p class="div-textmid1">Welcome to <%= title %>!</p>
         <p class="div-textmid2">Cook and Share!</p>
     </div>
 </div>
