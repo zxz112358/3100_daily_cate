@@ -1,15 +1,76 @@
+
+/* GET helpPost page. */
+
+module.exports = router;
+
+
 var express = require('express');
 var router = express.Router();
 
-/* GET asking page. */
+var test = require('../test');
+var fs=require("fs");
 
+/* GET exhibition page. */
 router.get('/', function(req, res, next) {
-  res.render('askingSec/asking', {
-    title: 'Help',
-    name:'Daily Cate',
-      user: req.user
-  });
+    test.select_all_article('help', function(result1,result2){
+        if(result1===0){
+            var all = undefined;
+        }
+        else{
+            var all = result2;
+        }
+
+        test.select_article_list('main', 'help', function (num, mainlist) {
+            if (num === 0){
+                var main = undefined;
+            } else {
+                var main = mainlist;
+            }
+
+            test.select_article_list('dish', 'help', function (num, dishlist) {
+                if (num === 0){
+                    var dish = undefined;
+                } else {
+                    var dish = dishlist;
+                }
+
+                test.select_article_list('soup', 'help', function (num, souplist) {
+                    if (num === 0) {
+                        var soup = undefined;
+                    } else {
+                        var soup = souplist;
+                    }
+
+                    test.select_article_list('dessert', 'help', function (num, dessertlist) {
+                        if (num === 0) {
+                            var dessert = undefined;
+                        } else {
+                            var dessert = dessertlist;
+                        }
+                        test.select_article_list('ingredient', 'help', function (num, ingredientlist) {
+                            if (num === 0) {
+                                var ingredient = undefined;
+                            } else {
+                                var ingredient = ingredientlist;
+                            }
+                            res.render('askingSec/asking', {
+                                title: 'Help Post',
+                                name:'Daily Cate',
+                                user: req.user,
+                                allArticle: all,
+                                main:main,
+                                dish:dish,
+                                soup:soup,
+                                dessert:dessert,
+                                ingredient:ingredient
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
 });
 
 module.exports = router;
-console.log("this is the asking page!");
+console.log("this is the Asking for help page!");

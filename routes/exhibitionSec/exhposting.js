@@ -59,8 +59,12 @@ router.post('/', upload.any('picture'), function (req,res,next) {
 
                 test.insert_article(result + 1, title, req.user.username, tag,(new Date()).toLocaleDateString(), picture.length, picstart + 1, text.length, parastart + 1,type);
 
-
-                res.redirect('./exhibition');
+                if (type === 'article'){
+                    res.redirect('./exhibition');
+                }
+                else if (type === 'help') {
+                    res.redirect('../askingSec/asking');
+                }
             });
         });
     });
