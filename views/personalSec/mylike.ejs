@@ -8,7 +8,7 @@
 
 <% include ../header.ejs %>
 
-<body background="../images/background7.jpg">
+<body background="../images/background7.jpg" style="background-size:100% 500px">
 <div class="container-fluid" style="padding: 10px; text-align:center; background-image:url('../images/personalhomepage.jpg');background-size:100% 100%;">
     <img class="img-thumbnail img-circle" style="width: 140px;margin: 0 auto"  src=<%= imgpath %>>
     <p>
@@ -33,15 +33,15 @@
         <div class="col-10">
             <div class="container-fluid" style="padding:10px">
                 <div class="list-group mx-auto w-75">
-                    <% for (var i = 0; i < 2; i++) { %>
+                    <% for (var i = 0; i < 3; i++) { %>
                     <a href="../ingredientSec/post1" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
                         <div class="d-flex w-80 justify-content-between">
                             <img src="../images/pic.jpg" style="width:315px;height:270px">
-                            <h5 class="mb-1">title</h5>
-                            <small>time</small>
+                            <h5 class="mb-1"><%=arname%></h5>
+                            <small><%=potime%></small>
 
                         </div>
-                        <p class="mb-1" style="text-align:right">author name</p>
+                        <p class="mb-1" style="text-align:right"><%=auname%></p>
                     </a>
                     <% } %>
                 </div>
