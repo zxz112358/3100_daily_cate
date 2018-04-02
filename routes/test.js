@@ -34,8 +34,8 @@ function update_client(name,email,pwd,desc){
         //console.log(results);
     });
 }
-function count_article_no(callback){
-    var count_article="select count(articleID) as count from articles";
+function count_article_no(type,callback){
+    var count_article="select count(articleID) as count from articles where type = "+'\''+type+'\'';
     connection.query(count_article, function(error, results) {
         if (error) {
             return console.error(error);
@@ -48,7 +48,7 @@ function count_article_no(callback){
     });
 
 }
-function count_help_no(callback){
+/*function count_help_no(callback){
     var count_help="select count(helpID) as count from help";
     connection.query(count_help, function(error, results) {
         if (error) {
@@ -75,7 +75,7 @@ function count_ingredient_no(callback){
         });
     });
 
-}
+}*/
 function count_paragraph_no(callback){
     var count_paragraph="select count(*) as count from paragraphs";
     connection.query(count_paragraph, function(error, results) {
@@ -118,7 +118,7 @@ test.count_picture_no(function(result){
 
 
 //insert new article records into database
-function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,parastart){
+function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,parastart,type){
     //pictures for this article will be stored before and pass the startID and picture numbers
     for(var i=0;i<picNo;i++){
         var index=picstart+i;
@@ -142,7 +142,7 @@ function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,pa
         });
     }
     //insert new article to the database
-    var in_article = "insert into articles values ("+arID+","+'\''+arname+'\''+","+'\''+auname+'\''+","+'\''+tag+'\''+","+'\''+posttime+'\''+","+picNo+","+picstart+","+paraNo+","+parastart+")";
+    var in_article = "insert into articles values ("+arID+","+'\''+arname+'\''+","+'\''+auname+'\''+","+'\''+tag+'\''+","+'\''+posttime+'\''+","+picNo+","+picstart+","+paraNo+","+parastart+","+'\''+type+'\''+")";
     connection.query(in_article, function(error, results) {
         if (error) {
             return console.error(error);
@@ -153,7 +153,7 @@ function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,pa
 }
 
 //insert new help records into database
-function insert_help(helpID,helpname,auname,tag,posttime,picNo,picstart,paraNo,parastart){
+/*function insert_help(helpID,helpname,auname,tag,posttime,picNo,picstart,paraNo,parastart){
     //pictures for this article will be stored before and pass the startID and picture numbers
     for(var i=0;i<picNo;i++){
         var index=picstart+i;
@@ -221,6 +221,7 @@ function insert_ingredient(ingredientID,ingredientname,auname,tag,posttime,picNo
     });
     //return T or F
 }
+*/
 //delete an article with the given articleID
 function delete_article(arID){
     var de_article="delete from articles where articleID="+arID;
@@ -231,7 +232,7 @@ function delete_article(arID){
         console.log(results);
     });
 }
-function delete_help(helpID){
+/*function delete_help(helpID){
     var de_help="delete from help where helpID="+helpID;
     connection.query(de_help, function(error, results) {
         if (error) {
@@ -249,7 +250,7 @@ function delete_ingredient(ingredientID){
         }
         console.log(results);
     });
-}
+}*/
 
 //insert a new comment
 function insert_comment(coID,auname,content,arID){
@@ -294,7 +295,7 @@ function select_article(arID,callback){
     //return all pictures, paragrahs and comments of this article
 }
 //select a particular help given articleID
-function select_help(helpID,callback){
+/*function select_help(helpID,callback){
     var sel_help="select helpname,authorname,posttime,parastart,parano,picturestart,pictureno from help where helpID="+helpID;
     connection.query(sel_help, function(error, results) {
         if (error) {
@@ -321,7 +322,7 @@ function select_ingredient(ingredientID,callback){
         });
     });
 
-}
+}*/
 function select_article_comment(arID,callback){
     var sel_article_comment="select * from comments where articleID="+arID;
     connection.query(sel_article_comment, function(error, results) {
@@ -360,8 +361,8 @@ function count_comment_no(arID,callback){
 });
 */
 
-function select_client_article(name,callback){
-    var sel_client_article="select * from articles where authorname="+'\''+name+'\'';
+function select_client_article(name,type,callback){
+    var sel_client_article="select * from articles where authorname="+'\''+name+'\''+"and type =" +'\''+type+'\'';
     connection.query(sel_client_article, function(error, results) {
         if (error) {
             return console.error(error);
@@ -374,18 +375,13 @@ function select_client_article(name,callback){
         });*/
     });
 }
-function select_client_help(name,callback){
+/*function select_client_help(name,callback){
     var sel_client_help="select * from help where authorname="+'\''+name+'\'';
     connection.query(sel_client_help, function(error, results) {
         if (error) {
             return console.error(error);
         }
         return callback(Object.keys(results).length,results);
-        /*Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
-
-        });*/
     });
 }
 function select_client_ingredient(name,callback){
@@ -395,16 +391,12 @@ function select_client_ingredient(name,callback){
             return console.error(error);
         }
         return callback(Object.keys(results).length,results);
-        /*Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
-
-        });*/
     });
-}
+}*/
 
 function select_client_comment(name,callback){
-    var sel_client_comment="select c.commentID, c.authorname as commentname, c.content, c.articleID,a.articlename, a.authorname,a.tag,a.posttime,a.pictureno,a.picturestart,a.parano,a.parastart   from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";    connection.query(sel_client_comment, function(error, results) {
+    var sel_client_comment="select c.commentID, c.authorname as commentname, c.content, c.articleID,a.articlename, a.authorname,a.tag,a.posttime,a.pictureno,a.picturestart,a.parano,a.parastart   from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";
+    connection.query(sel_client_comment, function(error, results) {
         if (error) {
             return console.error(error);
         }
@@ -438,8 +430,8 @@ function select_client_comment(name,callback){
 });*/
 
 //select a list of article names based on the given tag for user to choose
-function select_article_list(tag,callback){
-    var sel_article_list="select * from articles where tag="+'\''+tag+'\'';
+function select_article_list(tag,type,callback){
+    var sel_article_list="select * from articles where tag="+'\''+tag+'\''+"and type = "+ '\''+type+'\'';
     connection.query(sel_article_list, function(error, results) {
         if (error) {
             return console.error(error);
@@ -460,8 +452,8 @@ function select_article_list(tag,callback){
 });*/
 
 
-function select_all_article(callback){
-    var sel_all_article="select * from articles";
+function select_all_article(type,callback){
+    var sel_all_article="select * from articles where type = "+'\''+type+'\'';
     connection.query(sel_all_article, function(error, results) {
         if (error) {
             return console.error(error);
@@ -472,7 +464,7 @@ function select_all_article(callback){
 
 }
 
-function select_all_help(callback){
+/*function select_all_help(callback){
     var sel_all_help="select * from help";
     connection.query(sel_all_help, function(error, results) {
         if (error) {
@@ -494,9 +486,9 @@ function select_all_ingredient(callback){
     });
     //return the list of articles with articlenames and authornames
 
-}
+}*/
 
-function select_help_list(tag){
+/*function select_help_list(tag){
     var sel_help_list="select helpname,authorname from help where tag="+'\''+tag+'\'';
     connection.query(sel_help_list, function(error, results) {
         if (error) {
@@ -518,7 +510,7 @@ function select_ingredient_list(tag){
     });
     //return the list of articles with articlenames and authornames
 
-}
+}*/
 
 /*test.select_all_article(function(result1,result2){
     if(result1==0){
@@ -725,23 +717,23 @@ module.exports={
     insert_client:insert_client,
     update_client:update_client,
     insert_article:insert_article,
-    insert_help:insert_help,
-    insert_ingredient:insert_ingredient,
+    //insert_help:insert_help,
+    //insert_ingredient:insert_ingredient,
     delete_article:delete_article,
-    delete_help:delete_help,
-    delete_ingredient:delete_ingredient,
+    //delete_help:delete_help,
+    //delete_ingredient:delete_ingredient,
     insert_comment:insert_comment,
     delete_comment:delete_comment,
     select_article:select_article,
-    select_help:select_help,
-    select_ingredient:select_ingredient,
-    select_help_list:select_help_list,
-    select_ingredient_list:select_ingredient_list,
+    //select_help:select_help,
+    //select_ingredient:select_ingredient,
+    //select_help_list:select_help_list,
+    //select_ingredient_list:select_ingredient_list,
     select_article_list:select_article_list,
     select_user: select_user,
     select_client_article:select_client_article,
-    select_client_help:select_client_help,
-    select_client_ingredient:select_client_ingredient,
+    //select_client_help:select_client_help,
+    //select_client_ingredient:select_client_ingredient,
     select_client_comment:select_client_comment,
     follow:follow,
     like_article:like_article,
@@ -755,14 +747,14 @@ module.exports={
     select_article_comment:select_article_comment,
     count_comment_no:count_comment_no,
     count_article_no:count_article_no,
-    count_help_no:count_help_no,
-    count_ingredient_no:count_ingredient_no,
+    //count_help_no:count_help_no,
+    //count_ingredient_no:count_ingredient_no,
     count_paragraph_no:count_paragraph_no,
     count_picture_no:count_picture_no,
     select_article_like:select_article_like,
     select_all_article:select_all_article,
-    select_all_help:select_all_help,
-    select_all_ingredient:select_all_ingredient
+    //select_all_help:select_all_help,
+    //select_all_ingredient:select_all_ingredient
 };
 
 

@@ -21,11 +21,10 @@ var connection = test.connection;
 
 /* GET user profile page. */
 router.get('/', authenticationMiddleware(), function(req, res, next) {
-
     test.select_client_comment(req.user.username,function(result1,result2){
         if(result1===0){
             res.render('personalSec/mycomment', {
-                title: 'Profile',
+                title: 'MyComment',
                 name: 'Daily Cate',
                 user: req.user,
                 imgpath: '../profileimgs/' + req.user.username,
@@ -35,7 +34,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
         }
         else{
             res.render('personalSec/mycomment', {
-                title: 'Profile',
+                title: 'MyComment',
                 name: 'Daily Cate',
                 user: req.user,
                 imgpath: '../profileimgs/' + req.user.username,
