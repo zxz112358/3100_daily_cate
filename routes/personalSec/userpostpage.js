@@ -5,7 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('personalSec/userpostpage', {
         title: 'Home',
-        name:'Daily Cate'
+        name:'Daily Cate',
+        user: req.user
     });
 });
 

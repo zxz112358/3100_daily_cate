@@ -12,6 +12,7 @@ router.get('/', function(req, res, next) {
 
 
         for(var i=0;i<5;i++){
+            console.log(result[i]);
             string1.push(result[i].picturestart+result[i].pictureno-1);
             string1[i]='../exhibitionSec/pictures/'+string1[i];
             k_articles.push(result[i]);
