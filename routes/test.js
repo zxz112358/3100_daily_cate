@@ -707,8 +707,8 @@ function search(name,callback){
 
 
 //select the articleid with kth largest number of likes
-function select_k(k,callback){
-    var se_nok="select distinct article, count(user) as count from followarticle group by article order by count desc";
+function select_k(callback){
+    var se_nok="select distinct f.article, count(user) as count, a.articlename,a.authorname,a.tag,a.posttime,a.picturestart,a.pictureno,a.parastart,a.parano from followarticle f, articles a where a.articleID=f.article group by f.article order by count desc";
     connection.query(se_nok, function(error, results) {
         if (error) {
             return console.error(error);
@@ -716,14 +716,17 @@ function select_k(k,callback){
         if(Object.keys(results).length===0){
             return callback(false);
         }
-        return callback(results[k-1]);
+        return callback(results);
 
     });
 }
-/*test.select_k(<no>,function(result){
-    console.log(result.article);//the articleid
-    console.log(result.count);//no. of likes
-    console.log(result);//the row
+/*test.select_k(function(result){
+    var k_articles=[];
+    //console.log(result);
+    for(var i=0;i<5;i++){
+        k_articles.push(result[i]);
+    }
+    console.log(k_articles);
 });*/
 
 module.exports={
