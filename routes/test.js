@@ -746,6 +746,15 @@ function select_k(callback){
     }
     console.log(k_articles);
 });*/
+function unfollow(user1,user2) {
+    var unfo = "delete from follow where user1="+'\''+user1+'\''+" and user2 ="+'\''+user2+'\'';
+    connection.query(unfo,function (error,results) {
+        if (error){
+            return console.error(error);
+        }
+        console.log(results);
+    });
+}
 
 module.exports={
     connection:connection,
@@ -791,6 +800,7 @@ module.exports={
     select_all_article:select_all_article,
     //select_all_help:select_all_help,
     //select_all_ingredient:select_all_ingredient
+    unfollow:unfollow
 };
 
 

@@ -4,20 +4,59 @@
   <head>
     <title><%= name%>-<%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+      <style>
+          .headtitle{
+              font-family:"Vladimir Script";
+              color:#884400;
+              font-size:50px;
+              font-weight:800;
+              margin-left: 10%;
+          }
+          .setfont{
+              font-family: "Vladimir Script";
+              font-weight:800;
+              font-size:25px;
+              color:#884400;
+          }
+          .arttit{
+              font-family: "Comic Sans MS";
+              font-weight:800;
+              font-size:30px;
+              color:#884400;
+          }
+          .arttime{
+              font-family: "Comic Sans MS";
+              font-weight:800;
+              font-size:15px;
+              color:#884400;
+          }
+          .artframe{
+              border:none;
+
+          }
+          .author{
+              text-align:right;
+              font-family: "Comic Sans MS";
+              font-weight:800;
+              font-size:20px;
+              color:#884400;
+          }
+      </style>
   </head>
 
   <% include ../header.ejs %>
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
-<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
-<a href = "./exhposting">Post new article</a>
-<div class="container bg-white">
+
+<!--<a href = "./exhposting">Post new article</a>-->
+<div class="container" style="background-color:#FFCC00;padding-bottom:20px;margin-top:80px">
+    <p class = "headtitle"><%= title %> posts</p>
     <ul class="nav nav-tabs">
-        <li><a href="#all" data-toggle="tab">All</a></li>
-        <li><a href="#main" data-toggle="tab">Main Dish</a></li>
-        <li><a href="#dish" data-toggle="tab">Dishes</a></li>
-        <li><a href="#soup" data-toggle="tab">Soups</a></li>
-        <li><a href="#dessert" data-toggle="tab">Desserts</a></li>
+        <li><a href="#all" data-toggle="tab" class="setfont">All</a></li>
+        <li><a href="#main" data-toggle="tab" class="setfont">Main Dish</a></li>
+        <li><a href="#dish" data-toggle="tab" class="setfont">Dishes</a></li>
+        <li><a href="#soup" data-toggle="tab" class="setfont">Soups</a></li>
+        <li><a href="#dessert" data-toggle="tab" class="setfont">Desserts</a></li>
     </ul>
 
     <div class="tab-content">
@@ -25,23 +64,27 @@
         <div class="tab-pane active" id="all">
             <% if (allArticle){
                for (var i = 0; i < allArticle.length; i++) {%>
-                <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
-                    <div class="d-flex w-80 justify-content-between">
+                <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+                    <div class="d-flex w-80 flex-row">
                         <img src="<%= '../exhibitionSec/pictures/' + (allArticle[i].picturestart + allArticle[i].pictureno - 1) %>" style="width:315px;height:270px">
-                        <h5 class="mb-1"><%=allArticle[i].articlename%></h5>
-                        <small><%=allArticle[i].posttime%></small>
-                        <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
-                        <script>
-                            var frame = document.getElementById('textframe');
-                            frame.onload = function () {
-                                var body = frame.contentWindow.document.querySelector('body');
-                                body.style.color = 'grey';
-                                body.style.fontSize = '20px';
-                                body.style.lineHeight = '20px';
-                            };
-                        </script>
+                        <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
+                            <p class="arttit"><%=allArticle[i].articlename%></p>
+                            <p class="arttime"><%=allArticle[i].posttime%></p>
+                            <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" class="artframe" id="textframe"></iframe>
+                            <script>
+                                var frame = document.getElementById('textframe');
+                                frame.onload = function () {
+                                    var body = frame.contentWindow.document.querySelector('body');
+                                    body.style.color = 'grey';
+                                    body.style.fontSize = '20px';
+                                    body.style.lineHeight = '20px';
+                                };
+                            </script>
+                            <p class="author"><%=allArticle[i].authorname%></p>
+                        </div>
+
                     </div>
-                    <p class="mb-1" style="text-align:right"><%=allArticle[i].authorname%></p>
+
                 </a>
             <%  }
             } else { %>
@@ -52,14 +95,18 @@
         <div class="tab-pane" id="main">
             <% if (main){
                for (var i = 0; i < main.length; i++) {%>
-                <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
-                    <div class="d-flex w-80 justify-content-between">
+                <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+                    <div class="d-flex w-80 flex-row">
                         <img src="<%= '../exhibitionSec/pictures/' + (main[i].picturestart + main[i].pictureno - 1) %>" style="width:315px;height:270px">
-                        <h5 class="mb-1"><%=main[i].articlename%></h5>
-                        <small><%=main[i].posttime%></small>
-                        <iframe src="<%= '../exhibitionSec/texts/' + main[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
+                            <p class="arttit"><%=main[i].articlename%></p>
+                            <p class="arttime"><%=main[i].posttime%></p>
+                            <iframe src="<%= '../exhibitionSec/texts/' + main[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                            <p class="author"><%=main[i].authorname%></p>
+                        </div>
+
                     </div>
-                    <p class="mb-1" style="text-align:right"><%=main[i].authorname%></p>
+
                 </a>
             <% }
             }else{ %>
@@ -70,14 +117,18 @@
         <div class="tab-pane" id="dish">
             <% if (dish){
             for (var i = 0; i < dish.length; i++) {%>
-            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
-                <div class="d-flex w-80 justify-content-between">
+            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+                <div class="d-flex w-80 flex-row">
                     <img src="<%= '../exhibitionSec/pictures/' + (dish[i].picturestart + dish[i].pictureno - 1) %>" style="width:315px;height:270px">
-                    <h5 class="mb-1"><%=dish[i].articlename%></h5>
-                    <small><%=dish[i].posttime%></small>
-                    <iframe src="<%= '../exhibitionSec/texts/' + dish[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                    <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
+                        <p class="arttit"><%=dish[i].articlename%></p>
+                        <p class="arttime"><%=dish[i].posttime%></p>
+                        <iframe src="<%= '../exhibitionSec/texts/' + dish[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <p class="author"><%=dish[i].authorname%></p>
+                    </div>
+
                 </div>
-                <p class="mb-1" style="text-align:right"><%=dish[i].authorname%></p>
+
             </a>
             <% }
             }else{ %>
@@ -88,14 +139,18 @@
         <div class="tab-pane" id="soup">
             <% if (soup){
             for (var i = 0; i < soup.length; i++) {%>
-            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
-                <div class="d-flex w-80 justify-content-between">
+            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+                <div class="d-flex w-80 flex-row">
                     <img src="<%= '../exhibitionSec/pictures/' + (soup[i].picturestart + soup[i].pictureno - 1) %>" style="width:315px;height:270px">
-                    <h5 class="mb-1"><%=soup[i].articlename%></h5>
-                    <small><%=soup[i].posttime%></small>
-                    <iframe src="<%= '../exhibitionSec/texts/' + soup[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                    <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
+                        <p class="arttit"><%=soup[i].articlename%></p>
+                        <p class="arttime"><%=soup[i].posttime%></p>
+                        <iframe src="<%= '../exhibitionSec/texts/' + soup[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <p class="author"><%=soup[i].authorname%></p>
+                    </div>
+
                 </div>
-                <p class="mb-1" style="text-align:right"><%=soup[i].authorname%></p>
+
             </a>
             <% }
             }else{ %>
@@ -106,14 +161,18 @@
         <div class="tab-pane" id="dessert">
             <% if (dessert){
             for (var i = 0; i < dessert.length; i++) {%>
-            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
-                <div class="d-flex w-80 justify-content-between">
+            <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+                <div class="d-flex w-80 flex-row">
                     <img src="<%= '../exhibitionSec/pictures/' + (dessert[i].picturestart + dessert[i].pictureno - 1) %>" style="width:315px;height:270px">
-                    <h5 class="mb-1"><%=dessert[i].articlename%></h5>
-                    <small><%=dessert[i].posttime%></small>
-                    <iframe src="<%= '../exhibitionSec/texts/' + dessert[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                    <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
+                        <p class="arttit"><%=dessert[i].articlename%></p>
+                        <p class="arttime"><%=dessert[i].posttime%></p>
+                        <iframe src="<%= '../exhibitionSec/texts/' + dessert[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <p class="author"><%=dessert[i].authorname%></p>
+                    </div>
+
                 </div>
-                <p class="mb-1" style="text-align:right"><%=dessert[i].authorname%></p>
+
             </a>
             <% }
             }else{ %>
