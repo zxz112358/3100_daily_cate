@@ -55,7 +55,7 @@ router.post('/', upload.any('picture'), function (req,res,next) {
                 console.log('arti: ', result + 1, 'title: ', title, 'username: ', req.user.username, 'tag:', tag, 'picnum: ', picture.length, 'picstart: ', picstart+1, 'textnum: ', text.length, 'parastart: ', parastart + 1)
                 test.insert_article(result + 1, title, req.user.username, tag,(new Date()).toLocaleDateString(), picture.length, picstart + 1, text.length, parastart + 1);
 
-                res.send('Successfully Posted!');
+                res.redirect('./exhibition');
             });
         });
     });

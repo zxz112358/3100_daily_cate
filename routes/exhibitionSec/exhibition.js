@@ -13,12 +13,48 @@ router.get('/', function(req, res, next) {
         else{
             var all = result2;
         }
-        test.select
-        res.render('exhibitionSec/exhibition', {
-            title: 'Exhibition',
-            name:'Daily Cate',
-            user: req.user,
-            allArticle: all
+
+        test.select_article_list('main', function (num, mainlist) {
+            if (num === 0){
+                var main = undefined;
+            } else {
+                var main = mainlist;
+            }
+
+            test.select_article_list('dish', function (num, dishlist) {
+                if (num === 0){
+                    var dish = undefined;
+                } else {
+                    var dish = dishlist;
+                }
+
+                test.select_article_list('soup', function (num, souplist) {
+                    if (num === 0) {
+                        var soup = undefined;
+                    } else {
+                        var soup = souplist;
+                    }
+
+                    test.select_article_list('dessert', function (num, dessertlist) {
+                        if (num === 0) {
+                            var dessert = undefined;
+                        } else {
+                            var dessert = dessertlist;
+                        }
+
+                        res.render('exhibitionSec/exhibition', {
+                            title: 'Exhibition',
+                            name:'Daily Cate',
+                            user: req.user,
+                            allArticle: all,
+                            main:main,
+                            dish:dish,
+                            soup:soup,
+                            dessert:dessert
+                        });
+                    });
+                });
+            });
         });
     });
 });
