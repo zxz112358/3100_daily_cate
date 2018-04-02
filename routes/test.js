@@ -14,19 +14,20 @@ var connection = mysql.createConnection({
 
 //insert new client records into database
 function insert_client(name,email,pwd,desc){
-    var in_client = "insert into client values ("+'\''+name+'\''+","+'\''+email+'\''+","+'\''+pwd+'\''+","+'\''+desc+'\''+")";
-    connection.query(in_client, function(error, results) {
+    var in_client = "insert into client values ("+'\''+name.replace(/'/,"\\\'")+'\''+","+'\''+email.replace(/'/,"\\\'")+'\''+","+'\''+pwd.replace(/'/,"\\\'")+'\''+","+'\''+desc.replace(/'/,"\\\'")+'\''+")";
+    connection.query(in_client, function(error) {
         if (error) {
             return console.error(error);
         }
-        //console.log(results);
     });
 }
 
-
-
 function update_client(name,email,pwd,desc){
-    var up_client = "update client set email="+'\''+email+'\''+",password="+'\''+pwd+'\''+",description="+'\''+desc+'\''+"where username="+'\''+name+'\'';
+    //name.replace(/'/,'\'');
+    //email.replace(/'/,'\'');
+    //pwd.replace(/'/,'\'');
+    //desc.replace(/'/,'\'');
+    var up_client = "update client set email="+'\''+email.replace(/'/,"\\\'")+'\''+",password="+'\''+pwd.replace(/'/,"\\\'")+'\''+",description="+'\''+desc.replace(/'/,"\\\'")+'\''+"where username="+'\''+name.replace(/'/,"\\\'")+'\'';
     connection.query(up_client, function(error, results) {
         if (error) {
             return console.error(error);
@@ -120,6 +121,8 @@ test.count_picture_no(function(result){
 //insert new article records into database
 function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,parastart,type){
     //pictures for this article will be stored before and pass the startID and picture numbers
+    //arname.replace(/'/,'\'');
+    //auname.replace(/'/,'\'');
     for(var i=0;i<picNo;i++){
         var index=picstart+i;
         var in_picture = "insert into pictures values ("+index+")";
@@ -142,7 +145,7 @@ function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,pa
         });
     }
     //insert new article to the database
-    var in_article = "insert into articles values ("+arID+","+'\''+arname+'\''+","+'\''+auname+'\''+","+'\''+tag+'\''+","+'\''+posttime+'\''+","+picNo+","+picstart+","+paraNo+","+parastart+","+'\''+type+'\''+")";
+    var in_article = "insert into articles values ("+arID+","+'\''+arname.replace(/'/,"\\\'")+'\''+","+'\''+auname.replace(/'/,"\\\'")+'\''+","+'\''+tag+'\''+","+'\''+posttime+'\''+","+picNo+","+picstart+","+paraNo+","+parastart+","+'\''+type+'\''+")";
     connection.query(in_article, function(error, results) {
         if (error) {
             return console.error(error);
@@ -254,7 +257,9 @@ function delete_ingredient(ingredientID){
 
 //insert a new comment
 function insert_comment(coID,auname,content,arID){
-    var in_comment = "insert into comments values ("+coID+","+'\''+auname+'\''+","+'\''+content+'\''+","+arID+")";
+    //auname.replace(/'/,'\'');
+    //content.replace(/'/,'\'');
+    var in_comment = "insert into comments values ("+coID+","+'\''+auname.replace(/'/,"\\\'")+'\''+","+'\''+content.replace(/'/,"\\\'")+'\''+","+arID+")";
     connection.query(in_comment, function(error, results) {
         if (error) {
             return console.error(error);
@@ -361,7 +366,8 @@ function count_comment_no(arID,callback){
 });
 */
 function select_all_client_article(name,callback){
-    var sel_client_article="select * from articles where authorname="+'\''+name+'\'';
+    //name.replace(/'/,"\'");
+    var sel_client_article="select * from articles where authorname="+'\''+name.replace(/'/,"\\\'")+'\'';
     connection.query(sel_client_article, function(error, results) {
         if (error) {
             return console.error(error);
@@ -376,7 +382,8 @@ function select_all_client_article(name,callback){
 }
 
 function select_client_article(name,type,callback){
-    var sel_client_article="select * from articles where authorname="+'\''+name+'\''+"and type =" +'\''+type+'\'';
+    //name.replace(/'/,"\'");
+    var sel_client_article="select * from articles where authorname="+'\''+name.replace(/'/,"\\\'")+'\''+"and type =" +'\''+type+'\'';
     connection.query(sel_client_article, function(error, results) {
         if (error) {
             return console.error(error);
@@ -409,7 +416,8 @@ function select_client_ingredient(name,callback){
 }*/
 
 function select_client_comment(name,callback){
-    var sel_client_comment="select c.commentID, c.authorname as commentname, c.content, c.articleID,a.articlename, a.authorname,a.tag,a.posttime,a.pictureno,a.picturestart,a.parano,a.parastart   from comments c, articles a where c.authorname="+'\''+name+'\''+" and c.articleID=a.articleID";
+    //name.replace(/'/,"\'");
+    var sel_client_comment="select c.commentID, c.authorname as commentname, c.content, c.articleID,a.articlename, a.authorname,a.tag,a.posttime,a.pictureno,a.picturestart,a.parano,a.parastart   from comments c, articles a where c.authorname="+'\''+name.replace(/'/,"\\\'")+'\''+" and c.articleID=a.articleID";
     connection.query(sel_client_comment, function(error, results) {
         if (error) {
             return console.error(error);
@@ -537,7 +545,8 @@ function select_ingredient_list(tag){
 });*/
 
 function select_user(name,callback){
-    var sel_username="select username,email,password,description from client where username="+'\''+name+'\'';
+    //name.replace(/'/,"\'");
+    var sel_username="select username,email,password,description from client where username="+'\''+name.replace(/'/,"\\\'")+'\'';
     connection.query(sel_username, function(error, results) {
         if (error) {
             return console.error(error);
@@ -556,7 +565,9 @@ function select_user(name,callback){
 
 
 function follow(user1,user2) {
-    var fo = "insert into follow(user1,user2) values ("+'\''+user1+'\''+',\''+user2+'\')';
+    //user1.replace(/'/,"\'");
+    //user2.replace(/'/,"\'");
+    var fo = "insert into follow(user1,user2) values ("+'\''+user1.replace(/'/,"\\\'")+'\''+',\''+user2.replace(/'/,"\\\'")+'\')';
     connection.query(fo,function (error,results) {
         if (error){
             return console.error(error);
@@ -566,7 +577,8 @@ function follow(user1,user2) {
 }
 
 function like_article(articleid,user) {
-    var li_article = "insert into followarticle(article,user) values ("+articleid+',\''+user+'\')';
+    //user.replace(/'/,"\'");
+    var li_article = "insert into followarticle(article,user) values ("+articleid+',\''+user.replace(/'/,"\\\'")+'\')';
     connection.query(li_article,function (error,results) {
         if (error){
             return console.error(error);
@@ -575,7 +587,8 @@ function like_article(articleid,user) {
     });
 }
 function check_followers(name, callback) {
-    var ch_followers = "select count(user2) as count from follow where user2 = "+'\''+name+'\'';
+    //name.replace(/'/,"\'");
+    var ch_followers = "select count(user2) as count from follow where user2 = "+'\''+name.replace(/'/,"\\\'")+'\'';
     connection.query(ch_followers,function (error, results) {
         if (error){
             return console.error(error);
@@ -591,7 +604,8 @@ test.check_followers(<username>,function(result){
 
 
 function select_my_followers(name,callback){
-    var se_my_followers= "select * from follow f, client c where f.user2= "+'\''+name+'\''+" and f.user1=c.username";
+    //name.replace(/'/,"\'");
+    var se_my_followers= "select * from follow f, client c where f.user2= "+'\''+name.replace(/'/,"\\\'")+'\''+" and f.user1=c.username";
     connection.query(se_my_followers,function (error, results) {
         if (error){
             return console.error(error);
@@ -612,7 +626,8 @@ function select_my_followers(name,callback){
 
 
 function select_my_followings(name, callback) {
-    var se_my_followings= "select * from follow f, client c where f.user1= "+'\''+name+'\''+" and f.user2=c.username";
+    //name.replace(/'/,"\'");
+    var se_my_followings= "select * from follow f, client c where f.user1= "+'\''+name.replace(/'/,"\\\'")+'\''+" and f.user2=c.username";
     connection.query(se_my_followings,function (error, results) {
         if (error){
             return console.error(error);
@@ -633,7 +648,8 @@ function select_my_followings(name, callback) {
 
 
 function check_my_follow(name, callback) {
-    var ch_my_follow = "select count(user1) as count from follow where user1 ="+'\''+name+'\'';
+    //name.replace(/'/,"\'");
+    var ch_my_follow = "select count(user1) as count from follow where user1 ="+'\''+name.replace(/'/,"\\\'")+'\'';
     connection.query(ch_my_follow,function (error, results) {
         if (error){
             return console.error(error);
@@ -653,7 +669,8 @@ function article_like(articleid,callback) {
 }
 
 function select_article_like(username,callback) {
-    var se_article_like = "select * from followarticle f, articles a where f.user ="+'\''+username+'\''+" and f.article=a.articleid";
+    //name.replace(/'/,"\'");
+    var se_article_like = "select * from followarticle f, articles a where f.user ="+'\''+username.replace(/'/,"\\\'")+'\''+" and f.article=a.articleid";
     connection.query(se_article_like, function(error, results) {
         if (error) {
             return console.error(error);
@@ -676,7 +693,8 @@ function select_article_like(username,callback) {
 });*/
 
 function search(name,callback){
-    var an="select articlename, authorname from articles where authorname like "+'\''+"%"+name+"%"+'\''+"or articlename like"+'\''+"%"+name+"%"+'\'';
+    //name.replace(/'/,"\'");
+    var an="select articlename, authorname from articles where authorname like "+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\''+"or articlename like"+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\'';
     connection.query(an, function(error, results) {
         if (error) {
             return console.error(error);
