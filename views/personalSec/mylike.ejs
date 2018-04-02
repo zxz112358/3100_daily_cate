@@ -33,15 +33,15 @@
         <div class="col-10">
             <div class="container-fluid" style="padding:10px">
                 <div class="list-group mx-auto w-75">
-                    <% for (var i = 0; i < 3; i++) { %>
+                    <% for (var i = 0; i < artno; i++) { %>
                     <a href="../ingredientSec/post1" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
                         <div class="d-flex w-80 justify-content-between">
-                            <img src="../images/pic.jpg" style="width:315px;height:270px">
-                            <h5 class="mb-1"><%=arname%></h5>
-                            <small><%=potime%></small>
+                            <img src=<%=coverpic[i]%> style="width:315px;height:270px">
+                            <h5 class="mb-1"><%=artinfo[i].articlename%></h5>
+                            <small><%=artinfo[i].posttime%></small>
 
                         </div>
-                        <p class="mb-1" style="text-align:right"><%=auname%></p>
+                        <p class="mb-1" style="text-align:right"><%=artinfo[i].authorname%></p>
                     </a>
                     <% } %>
                 </div>
