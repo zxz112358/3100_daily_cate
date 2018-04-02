@@ -22,12 +22,14 @@
 
   </ul>
 
+    <form method="post" id = 'form'>
+        <input style="display: none" id="result" name="result">
   <div class="tab-content">
     <!--display contents under 'all' tab-->
     <div class="tab-pane active" id="all">
         <% if (allArticle){
         for (var i = 0; i < allArticle.length; i++) {%>
-      <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+      <a href="#" id = '<%= 'all' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
         <div class="d-flex w-80 justify-content-between">
           <img src="<%= '../exhibitionSec/pictures/' + (allArticle[i].picturestart + allArticle[i].pictureno - 1) %>" style="width:315px;height:270px">
           <h5 class="mb-1"><%=allArticle[i].articlename%></h5>
@@ -54,7 +56,7 @@
     <div class="tab-pane" id="main">
         <% if (main){
         for (var i = 0; i < main.length; i++) {%>
-      <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+      <a href="#" id = '<%= 'main' + i %>' onclick="enterArticle(this)"  class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
         <div class="d-flex w-80 justify-content-between">
           <img src="<%= '../exhibitionSec/pictures/' + (main[i].picturestart + main[i].pictureno - 1) %>" style="width:315px;height:270px">
           <h5 class="mb-1"><%=main[i].articlename%></h5>
@@ -72,7 +74,7 @@
     <div class="tab-pane" id="dish">
         <% if (dish){
         for (var i = 0; i < dish.length; i++) {%>
-      <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+      <a href="#" id = '<%= 'dish' + i %>' onclick="enterArticle(this)"  class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
         <div class="d-flex w-80 justify-content-between">
           <img src="<%= '../exhibitionSec/pictures/' + (dish[i].picturestart + dish[i].pictureno - 1) %>" style="width:315px;height:270px">
           <h5 class="mb-1"><%=dish[i].articlename%></h5>
@@ -90,7 +92,7 @@
     <div class="tab-pane" id="soup">
         <% if (soup){
         for (var i = 0; i < soup.length; i++) {%>
-      <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+      <a href="#" id = '<%= 'soup' + i %>' onclick="enterArticle(this)"  class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
         <div class="d-flex w-80 justify-content-between">
           <img src="<%= '../exhibitionSec/pictures/' + (soup[i].picturestart + soup[i].pictureno - 1) %>" style="width:315px;height:270px">
           <h5 class="mb-1"><%=soup[i].articlename%></h5>
@@ -109,7 +111,7 @@
     <div class="tab-pane" id="dessert">
         <% if (dessert){
         for (var i = 0; i < dessert.length; i++) {%>
-      <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+      <a href="#" id = '<%= 'dessert' + i %>' onclick="enterArticle(this)"  class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
         <div class="d-flex w-80 justify-content-between">
           <img src="<%= '../exhibitionSec/pictures/' + (dessert[i].picturestart + dessert[i].pictureno - 1) %>" style="width:315px;height:270px">
           <h5 class="mb-1"><%=dessert[i].articlename%></h5>
@@ -127,7 +129,7 @@
     <div class="tab-pane" id="ingredient">
         <% if (ingredient){
         for (var i = 0; i < ingredient.length; i++) {%>
-      <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+      <a href="#" id = '<%= 'ingredient' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
         <div class="d-flex w-80 justify-content-between">
           <img src="<%= '../exhibitionSec/pictures/' + (ingredient[i].picturestart + ingredient[i].pictureno - 1) %>" style="width:315px;height:270px">
           <h5 class="mb-1"><%=ingredient[i].articlename%></h5>
@@ -142,8 +144,16 @@
         <% }%>
     </div>
   </div>
+    </form>
 </div>
 
+<script>
+    function enterArticle(article) {
+        var result = document.getElementById('result');
+        result.value = article.id;
+        document.getElementById('form').submit();
+    }
+</script>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

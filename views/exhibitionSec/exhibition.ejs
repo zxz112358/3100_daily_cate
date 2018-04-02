@@ -52,7 +52,7 @@
 <div class="container" style="background-color:#FFCC00;padding-bottom:20px;margin-top:80px">
     <p class = "headtitle"><%= title %> posts</p>
     <ul class="nav nav-tabs">
-        <li><a href="#all" data-toggle="tab" class="setfont">All</a></li>
+        <li class="active"><a href="#all" data-toggle="tab" class="setfont">All</a></li>
         <li><a href="#main" data-toggle="tab" class="setfont">Main Dish</a></li>
         <li><a href="#dish" data-toggle="tab" class="setfont">Dishes</a></li>
         <li><a href="#soup" data-toggle="tab" class="setfont">Soups</a></li>
@@ -66,7 +66,7 @@
         <div class="tab-pane active" id="all">
             <% if (allArticle){
                for (var i = 0; i < allArticle.length; i++) {%>
-                <a href="#" id = '<%= 'all' + i %>' type="submit" onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+                <a href='#' id = '<%= 'all' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                     <div class="d-flex w-80 flex-row">
                         <img src="<%= '../exhibitionSec/pictures/' + (allArticle[i].picturestart + allArticle[i].pictureno - 1) %>" style="width:315px;height:270px">
                         <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
@@ -96,7 +96,7 @@
         <div class="tab-pane" id="main">
             <% if (main){
                for (var i = 0; i < main.length; i++) {%>
-                <a href="#" id = '<%= 'main' + i %>' type="submit" onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+                <a href='#' id = '<%= 'main' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                     <div class="d-flex w-80 flex-row">
                         <img src="<%= '../exhibitionSec/pictures/' + (main[i].picturestart + main[i].pictureno - 1) %>" style="width:315px;height:270px">
                         <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
@@ -119,7 +119,7 @@
         <div class="tab-pane" id="dish">
             <% if (dish){
             for (var i = 0; i < dish.length; i++) {%>
-            <a href="#" id = '<%= 'dish' + i %>' type="submit" onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+            <a href='#' id = '<%= 'dish' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                 <div class="d-flex w-80 flex-row">
                     <img src="<%= '../exhibitionSec/pictures/' + (dish[i].picturestart + dish[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
@@ -139,7 +139,7 @@
         <div class="tab-pane" id="soup">
             <% if (soup){
             for (var i = 0; i < soup.length; i++) {%>
-            <a href="#" id = '<%= 'soup' + i %>' type="submit" onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+            <a href='#' id = '<%= 'soup' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                 <div class="d-flex w-80 flex-row">
                     <img src="<%= '../exhibitionSec/pictures/' + (soup[i].picturestart + soup[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
@@ -160,7 +160,7 @@
         <div class="tab-pane" id="dessert">
             <% if (dessert){
             for (var i = 0; i < dessert.length; i++) {%>
-            <a href="#" id = '<%= 'dessert' + i %>' type="submit" onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+            <a href='#' id = '<%= 'dessert' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                 <div class="d-flex w-80 flex-row">
                     <img src="<%= '../exhibitionSec/pictures/' + (dessert[i].picturestart + dessert[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
