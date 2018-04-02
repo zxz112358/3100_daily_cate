@@ -360,6 +360,20 @@ function count_comment_no(arID,callback){
     console.log(result.count);
 });
 */
+function select_all_client_article(name,callback){
+    var sel_client_article="select * from articles where authorname="+'\''+name+'\'';
+    connection.query(sel_client_article, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(Object.keys(results).length,results);
+        /*Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
+
+        });*/
+    });
+}
 
 function select_client_article(name,type,callback){
     var sel_client_article="select * from articles where authorname="+'\''+name+'\''+"and type =" +'\''+type+'\'';
@@ -732,6 +746,7 @@ module.exports={
     select_article_list:select_article_list,
     select_user: select_user,
     select_client_article:select_client_article,
+    select_all_client_article:select_all_client_article,
     //select_client_help:select_client_help,
     //select_client_ingredient:select_client_ingredient,
     select_client_comment:select_client_comment,

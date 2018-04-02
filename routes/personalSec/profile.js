@@ -10,7 +10,7 @@ var fs=require("fs");
 /* GET user profile page. */
 router.get('/', authenticationMiddleware(), function(req, res, next) {
 
-    test.select_client_article(req.user.username,function(result1,result2){
+    test.select_all_client_article(req.user.username,function(result1,result2){
             var string1=[];
             var string2=[];
             var string3=[];
