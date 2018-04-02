@@ -59,5 +59,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
+
+
 module.exports = router;
 console.log("this is the exhibition page!");
