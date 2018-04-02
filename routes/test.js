@@ -585,7 +585,7 @@ test.check_followers(<username>,function(result){
 
 
 function select_my_followers(name,callback){
-    var se_my_followers= "select user1 from follow where user2= "+'\''+name+'\'';
+    var se_my_followers= "select * from follow f, client c where f.user2= "+'\''+name+'\''+" and f.user1=c.username";
     connection.query(se_my_followers,function (error, results) {
         if (error){
             return console.error(error);
@@ -593,20 +593,20 @@ function select_my_followers(name,callback){
         return callback(Object.keys(results).length,results);
     });
 }
-/*test.select_my_followers(<name_of_user2>,function(result1,result2){
+/*test.select_my_followers(<username>,function(result1,result2){
     //print the table includes all user2
     if(result1==0){
         console.log("no followers");
     }
     else{
-        console.log(result2[0].user1);
+        console.log(result2);
     }
 
 });*/
 
 
 function select_my_followings(name, callback) {
-    var se_my_followings = "select user2 from follow where user1 ="+'\''+name+'\'';
+    var se_my_followings= "select * from follow f, client c where f.user1= "+'\''+name+'\''+" and f.user2=c.username";
     connection.query(se_my_followings,function (error, results) {
         if (error){
             return console.error(error);
@@ -614,13 +614,13 @@ function select_my_followings(name, callback) {
         return callback(Object.keys(results).length,results);
     });
 }
-/*test.select_my_followings(<name_of_user1>,function(result1,result2){
+/*test.select_my_followers(<username>,function(result1,result2){
     //print the table includes all user2
     if(result1==0){
         console.log("no followings");
     }
     else{
-        console.log(result2[0].user2);
+        console.log(result2);
     }
 
 });*/
