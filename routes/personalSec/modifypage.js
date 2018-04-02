@@ -9,7 +9,7 @@ var storage = multer.diskStorage({
         cb(null, 'public/profileimgs/');
     },
     filename: function (req, file, cb) {
-        cb(null, req.body.name);
+        cb(null, String(req.user.username));
     }
 });
 var upload = multer({ storage: storage });
@@ -58,7 +58,12 @@ router.post('/', upload.single('profileimg'), function (req,res,next) {
     console.log(email);
 
 
-    test.update_client(name,email,pwd,desc){
+    test.update_client(name,email,pwd,desc,function(result){
+        if(result===true) {
+            console.log(result);
+            res.redirect('profile');
+        }
+    });
 
 
 
