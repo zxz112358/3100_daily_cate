@@ -26,19 +26,30 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 string3.push(data.toString());
             }
 
+            if(result1===0){
+                res.render('personalSec/profile', {
+                    title: 'Profile',
+                    name: 'Daily Cate',
+                    user: req.user,
+                    imgpath: '../profileimgs/' + req.user.username,
+                    articleno:result1
 
+                });
+            }
+            else{
+                res.render('personalSec/profile', {
+                    title: 'Profile',
+                    name: 'Daily Cate',
+                    user: req.user,
+                    imgpath: '../profileimgs/' + req.user.username,
+                    articleno:result1,
+                    result: result2,
+                    coverpic:string1,
+                    text:string3
 
-            res.render('personalSec/profile', {
-                title: 'Profile',
-                name: 'Daily Cate',
-                user: req.user,
-                imgpath: '../profileimgs/' + req.user.username,
-                articleno:result1,
-                result: result2,
-                coverpic:string1,
-                text:string3
+                });
+            }
 
-            });
         }
 
 

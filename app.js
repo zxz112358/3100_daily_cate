@@ -49,7 +49,8 @@ var signup = require('./routes/personalSec/signup');
 var signin = require('./routes/personalSec/signin');
 var signout = require('./routes/personalSec/signout');
 var profile = require('./routes/personalSec/profile');
-
+var myhelp = require('./routes/personalSec/myhelp');
+var modifypage = require('./routes/personalSec/modifypage');
 var homepage = require('./routes/homepage/homepage');
 var mycomment = require('./routes/personalSec/mycomment');
 var myfollowing = require('./routes/personalSec/myfollowing');
@@ -155,13 +156,14 @@ app.use('/personalSec/signup', signup);
 app.use('/personalSec/signin', signin);
 app.use('/personalSec/signout', signout);
 app.use('/personalSec/profile', profile);
+app.use('/personalSec/myhelp', myhelp);
 app.use('/homepage/homepage',homepage);
 app.use('/personalSec/mycomment',mycomment);
 app.use('/personalSec/mylike',mylike);
 app.use('/personalSec/myfollower',myfollower);
 app.use('/personalSec/myfollowing',myfollowing);
 app.use('/personalSec/userpostpage',userpostpage);
-
+app.use('/personalSec/modifypage', modifypage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
