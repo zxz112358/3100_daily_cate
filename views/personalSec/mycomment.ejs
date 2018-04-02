@@ -9,14 +9,14 @@
 <% include ../header.ejs %>
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
-<div class="container-fluid" style="padding: 10px; text-align:center; background-image:url('../images/personalhomepage.jpg');background-size:100% 100%;">
+<div class="container-fluid" style="padding: 10px; text-align:center; background-image:url('../images/posttop.jpg');background-size:100% 100%;">
     <img class="img-thumbnail img-circle" style="width: 140px;margin: 0 auto"  src=<%= imgpath %>>
     <p>
-    <h5 class="text-center" style="font-size:250%;font-weight:600;color:#FFA500"><%= user.username%><br><small><%= user.description%></small></h5>
+    <h5 class="text-center" style="font-size:250%;font-weight:600;color:#884400"><%= user.username%><br><small><%= user.description%></small></h5>
     </p>
     <p>
-        <button onclick="window.location.href='/exhibitionSec/exhposting'" class="btn btn-small" type="button">New post</button>
-        <button class="btn btn-small" type="button">Modify info</button>
+        <button onclick="window.location.href='/exhibitionSec/exhposting'" style="background-color:#FFCC00" class="btn btn-small" type="button">New post</button>
+        <button class="btn btn-small" style="background-color:#FFCC00" type="button">Modify info</button>
     </p>
 </div>
 <div class="container-fluid" style="padding: 10px">
