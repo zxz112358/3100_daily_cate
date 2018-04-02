@@ -35,8 +35,8 @@ function update_client(name,email,pwd,desc){
         //console.log(results);
     });
 }
-function count_article_no(type,callback){
-    var count_article="select count(articleID) as count from articles where type = "+'\''+type+'\'';
+function count_article_no(callback){
+    var count_article="select count(articleID) as count from articles";
     connection.query(count_article, function(error, results) {
         if (error) {
             return console.error(error);
