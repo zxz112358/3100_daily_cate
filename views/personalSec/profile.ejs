@@ -20,10 +20,6 @@
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
 
-<!--<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>-->
-<!--<div class="w-75 font-weight-light mx-auto">Username: <%= user.username%></div>-->
-<!--<div class="w-75 font-weight-light mx-auto">Description: <%= user.description%></div>-->
-<!--<div class="w-75 font-weight-light mx-auto">Profile Image</div>-->
 
 <div class="container-fluid" style="padding: 10px; text-align:center; background-image:url('../images/posttop.jpg');background-size:100% 100%;">
     <img class="img-thumbnail img-circle" style="width: 140px;margin: 0 auto"  src=<%= imgpath %>>
@@ -32,7 +28,7 @@
     </p>
     <p>
         <button onclick="window.location.href='/exhibitionSec/exhposting'" class="btn btn-small" style="background-color:#FFCC00" type="button">New post</button>
-        <button class="btn btn-small" style="background-color:#FFCC00" type="button">Modify info</button>
+        <button onclick="window.location.href='/personalSec/modifypage'" class="btn btn-small" style="background-color:#FFCC00" type="button">Modify info</button>
     </p>
 </div>
 <div class="container-fluid" style="padding: 10px; min-height:500px;">
