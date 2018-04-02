@@ -42,7 +42,7 @@ router.post('/', upload.any('picture'), function (req,res,next) {
     test.count_paragraph_no(function(parastart){
         for (var j = 0; j < text.length; j++) {
             console.log(text[j]);
-            fs.writeFile("routes/exhibitionSec/texts/" + (parastart + j + 1), text[j], function (error) {
+            fs.writeFile("routes/exhibitionSec/texts/" + (parastart + j + 1) + '.txt', text[j], function (error) {
                 if (error){
                     console.log(error);
                 }

@@ -8,7 +8,7 @@
 
   <% include ../header.ejs %>
 
-<body background="../images/background2.jpg">
+<body background="../images/background7.jpg" style="background-size:100% 500px">
 <h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
 <a href = "./exhposting">Post new article</a>
 <div class="container bg-white">
@@ -21,27 +21,57 @@
     </ul>
 
     <div class="tab-content">
+        <!--display contents under 'all' tab-->
         <div class="tab-pane active" id="all">
-            <% for (var i = 0; i < allArticle.length; i++) {%>
+            <% if (allArticle){
+               for (var i = 0; i < allArticle.length; i++) {%>
                 <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
                     <div class="d-flex w-80 justify-content-between">
-                        <img src="<%= '../exhibitionSec/pictures/' + allArticle[i].picturestart %>" style="width:315px;height:270px">
+                        <img src="<%= '../exhibitionSec/pictures/' + (allArticle[i].picturestart + allArticle[i].pictureno - 1) %>" style="width:315px;height:270px">
                         <h5 class="mb-1"><%=allArticle[i].articlename%></h5>
                         <small><%=allArticle[i].posttime%></small>
-                        <p><%=text[i]%></p>
+                        <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <script>
+                            var frame = document.getElementById('textframe');
+                            frame.onload = function () {
+                                var body = frame.contentWindow.document.querySelector('body');
+                                body.style.color = 'grey';
+                                body.style.fontSize = '20px';
+                                body.style.lineHeight = '20px';
+                            };
+                        </script>
                     </div>
                     <p class="mb-1" style="text-align:right"><%=allArticle[i].authorname%></p>
                 </a>
+            <%  }
+            } else { %>
+                No articles yet... Come back later!
             <% } %>
         </div>
+        <!--display contents under 'main dish' tab-->
         <div class="tab-pane" id="main">
-            Main Dish Recipes
+            <% if (allArticle){
+               for (var i = 0; i < allArticle.length; i++) {%>
+                <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+                    <div class="d-flex w-80 justify-content-between">
+                        <img src="<%= '../exhibitionSec/pictures/' + (allArticle[i].picturestart + allArticle[i].pictureno - 1) %>" style="width:315px;height:270px">
+                        <h5 class="mb-1"><%=allArticle[i].articlename%></h5>
+                        <small><%=allArticle[i].posttime%></small>
+                        <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                    </div>
+                    <p class="mb-1" style="text-align:right"><%=allArticle[i].authorname%></p>
+                </a>
+            <% }
+            }else{ %>
+                No articles yet... Come back later!
+            <% }%>
         </div>
         <div class="tab-pane" id="dish">Dish Recipes</div>
         <div class="tab-pane" id="soup">Soup Recipes</div>
         <div class="tab-pane" id="dessert">Dessert Recipes</div>
     </div>
 </div>
+
 
 </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

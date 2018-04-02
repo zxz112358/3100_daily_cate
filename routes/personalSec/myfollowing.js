@@ -21,12 +21,44 @@ var connection = test.connection;
 
 /* GET user profile page. */
 router.get('/', authenticationMiddleware(), function(req, res, next) {
-    res.render('personalSec/myfollowing', {
-        title: 'Profile',
-        name: 'Daily Cate',
-        user: req.user,
-        imgpath: '../profileimgs/' + req.user.username
+    test.select_my_followings(req.user.username,function(result1,result2){
+        //print the table includes all user2
+        var string=[];
+        for(var i=0;i<result1;i++){
+            string[i] ='../profileimgs/'+(result2[i].user2).toString();
+            console.log(string[i]);
+        }
+
+
+        if(result1===0){
+            res.render('personalSec/myfollowing', {
+                title: 'Profile',
+                name: 'Daily Cate',
+                user: req.user,
+                imgpath: '../profileimgs/' + req.user.username,
+                followingno:result1
+            });
+            console.log("no followings");
+        }
+        else{
+            res.render('personalSec/myfollowing', {
+                title: 'Profile',
+                name: 'Daily Cate',
+                user: req.user,
+                imgpath: '../profileimgs/' + req.user.username,
+                followingno:result1,
+                following:result2,
+                followingimg:string
+            });
+
+            console.log(result2[0].user2);
+        }
+
     });
+
+
+
+
 });
 
 /* Check user's authentication, if not logged in, redirect user to log in page */
