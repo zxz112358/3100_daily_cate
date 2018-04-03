@@ -13,7 +13,8 @@ router.get('/', function(req, res, next) {
                 user: req.user,
                 article: article,
                 comment:result2,
-                liked: false
+                liked: false,
+                liked:false
             });
             console.log(req.query.articleId);
             console.log('comments: ', result2);

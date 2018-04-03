@@ -222,9 +222,9 @@
     <form method="post" id="likeform">
         <input style="display: none" id="likeinput" name="operation">
         <% if (liked){ %>
-            <button id="like" onclick="like_operation(this)">Like!</button>
-        <% } else{ %>
             <button id="unlike" onclick="like_operation(this)">Unlike!</button>
+        <% } else{ %>
+            <button id="like" onclick="like_operation(this)">Like!</button>
         <% } %>
     </form>
 </div>

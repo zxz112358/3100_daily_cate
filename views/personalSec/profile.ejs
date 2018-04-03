@@ -52,27 +52,23 @@
                     <form method="post" id = 'form'>
                         <% for (var i = 0; i < articleno; i++) { %>
                         <% if(result[i].type=='article') { %>
+                            <div>
+                                <input style="display: none" id="result" name="result">
+                                <a href="#" id = '<%= result[i].articleID %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#F5D777;margin-top: 10px;height:320px">
+                                    <div class="d-flex w-80 justify-content-between">
+                                        <img src=<%=coverpic[i]%> style="width:315px;height:270px">
+                                        <h5 class="mb-1"><%=result[i].articlename%></h5>
+                                        <small><%=result[i].posttime%></small>
+                                        <p><%=text[i]%></p>
 
-                        <div>
-                            <input style="display: none" id="result" name="result">
-
-
-
-                            <a href="#" id = '<%= i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#F5D777;margin-top: 10px;height:320px">
-                                <div class="d-flex w-80 justify-content-between">
-                                    <img src=<%=coverpic[i]%> style="width:315px;height:270px">
-                                    <h5 class="mb-1"><%=result[i].articlename%></h5>
-                                    <small><%=result[i].posttime%></small>
-                                    <p><%=text[i]%></p>
-
-                                </div>
-                                <p class="mb-1" style="text-align:right"><%=result[i].authorname%></p>
-                            </a>
-                        </div>
-                        <p>
-                            <input style="display:none" id="id" name="id">
-                            <button id="<%= result[i].articleID%>" onclick="getID(this)" type="submit" class="btn btn-small" style="background-color:#FFCC00" type="button">Delete</button>
-                        </p>
+                                    </div>
+                                    <p class="mb-1" style="text-align:right"><%=result[i].authorname%></p>
+                                </a>
+                            </div>
+                            <p>
+                                <input style="display:none" id="id" name="id">
+                                <button id="<%= result[i].articleID%>" onclick="getID(this)" type="submit" class="btn btn-small" style="background-color:#FFCC00" type="button">Delete</button>
+                            </p>
                         <% } %>
                         <% } %>
                     </form>

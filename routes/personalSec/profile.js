@@ -46,15 +46,10 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                     result: result2,
                     coverpic:string1,
                     text:string3
-
                 });
             }
-
         }
-
-
     );
-
 });
 
 router.post('/', function (req, res, next) {
@@ -66,16 +61,13 @@ router.post('/', function (req, res, next) {
         new Promise(
             function (resolve, reject) {
                 console.log('username: ', req.user.username);
-                test.select_all_client_article(req.user.username, function (num, articleList) {
-                    resolve(encodeURIComponent(articleList[result[0]].articleID));
-                    console.log('articleId: ', articleList[result[0]].articleID);
-                });
+                resolve(encodeURIComponent(result[0]));
+                console.log('articleId: ', result[0]);
             }
         ).then(function (value) {
             res.redirect('../exhibitionSec/articlePost?articleId=' + value);
         });
-    }
-    if (id) {
+    }else if (id) {
         var i=id.length;
         var valid='';
         for(var j=0;j<i;j++){
