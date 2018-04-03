@@ -26,6 +26,10 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     var comment = req.body.comment;
     var like_operation = req.body.operation;
+    var authorname = String(req.body.author);
+    var username = encodeURIComponent(authorname);
+    res.redirect('../personalSec/userpostpage?username=' + username);
+
     if (comment || like_operation) {
         if (comment) {
             test.count_comment(function (commentNum) {
