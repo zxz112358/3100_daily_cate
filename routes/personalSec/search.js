@@ -33,7 +33,7 @@ router.get('/', function(req, res) {
             var results1= undefined;
         }
         else {
-            console.log(results);
+            //console.log(results);
             var results1 = results;
         }
         res.render('personalSec/search', {
