@@ -10,9 +10,9 @@
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
 
-<h1 class = "font-weight-bold p-3" style="margin-left: 24%;color:#884400"><%= title %></h1>
-<p style="margin-left: 25%;color:#884400;font-size: 20px;">Sign up and join us NOW!</p>
-<a class="mr-0" style="color:#884400;font-size: 20px;margin-left: 25%">Already have an account?</a>
+<h1 class = "font-weight-bold p-3" style="margin-left: 24%;color:#884400;font-family: 'Comic Sans MS'"><%= title %></h1>
+<p style="margin-left: 25%;color:#884400;font-size: 20px;font-family: 'Comic Sans MS'">Sign up and join us NOW!</p>
+<a class="mr-0" style="color:#884400;font-size: 20px;margin-left: 25%;font-family: 'Comic Sans MS'">Already have an account?</a>
 <a class="ml-0" href="./signin" style="color:#BB8800;font-size: 20px;margin-left: 25%">Sign In</a>
 
     <% if(errors){ %>
@@ -21,33 +21,36 @@
         <%})%>
     <%} %>
 
-<form class="w-50 mx-auto mt-5 p-3 border border-warning" style="background-color:#FFA500;margin-bottom:100px;" method="post" action="/personalSec/signup" enctype="multipart/form-data">
+<form class="w-50 mx-auto mt-5 p-3 border border-warning" style="background-color:#FFCC00;margin-bottom:100px;" method="post" action="/personalSec/signup" enctype="multipart/form-data">
     <div class="form-group">
-        <label>User name (less than 20 characters)</label>
+        <label style="font-family: 'Comic Sans MS';font-size:25px;">User name</label><br>
+        <label style="font-family:'Comic Sans MS';font-size:12px;">(less than 20 characters)</label>
         <input name="name" type="text" class="form-control" id="exampleInputName" placeholder="Enter user name">
     </div>
     <div class="form-group">
-        <label>Email address</label>
+        <label style="font-family: 'Comic Sans MS';font-size:25px;">Email address</label><br>
+        <label style="font-family:'Comic Sans MS';font-size:12px;">We'll never share your email with anyone else.</label>
         <input name="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+
     </div>
     <div class="form-group">
-        <label>Password (1-15 characters)</label>
+        <label style="font-family: 'Comic Sans MS';font-size:25px;">Password</label><br>
+        <label style="font-family:'Comic Sans MS';font-size:12px">1-15 characters</label>
         <input name = 'password' type="password" class="form-control" placeholder="Password">
     </div>
     <div class="form-group">
-        <label>Confirm Password</label>
+        <label style="font-family: 'Comic Sans MS';font-size:25px;">Confirm Password</label>
         <input name = 'password2' type="password" class="form-control" placeholder="Confirm Password">
     </div>
     <div class="form-group">
-        <label>Description</label>
+        <label style="font-family: 'Comic Sans MS';font-size:25px;">Description</label>
         <input name="description" type="text" class="form-control" placeholder="Enter description">
     </div>
     <div class="form-group">
-        <label>Profile Picture</label>
+        <label style="font-family: 'Comic Sans MS';font-size:25px;">Profile Picture</label>
         <input name="profileimg" type="file" class="form-control">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn" style="background-color: #FFA500">Submit</button>
 </form>
 
 <% include ../cprt.ejs %>

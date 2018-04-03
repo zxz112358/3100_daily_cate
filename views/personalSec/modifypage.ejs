@@ -22,38 +22,39 @@
 <% if (modify_message){ %>
 <div class="bg-success container text-white w-75" style="font-size: 1.5em"><%= modify_message%></div>
 <% } %>
-<form class="w-50 mx-auto mt-5 p-3 border border-warning" style="background-color:#FFA500" method="post" action="/personalSec/modifypage" enctype="multipart/form-data">
+<form class="w-50 mx-auto mt-5 p-3 border border-warning" style="background-color:#FFCC00;margin-bottom:50px;" method="post" action="/personalSec/modifypage" enctype="multipart/form-data">
     <div class="form-group">
-        <label>User name</label><br>
-        <label><%=user.username%></label>
+        <label style="font-size:25px;font-family:'Comic Sans MS'">User name</label><br>
+        <label style="font-size:20px;"><%=user.username%></label>
     </div>
     <div class="form-group">
-        <label>Email address</label><br>
-        <label><%=user.email%></label>
+        <label style="font-size:25px;font-family:'Comic Sans MS'">Email address</label><br>
+        <label style="font-size:20px;"><%=user.email%></label>
         <input name="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter New email">
     </div>
     <div class="form-group">
-        <label>Old Password</label>
+        <label style="font-size:25px;font-family:'Comic Sans MS'">Old Password</label>
         <input name = 'password' type="password" class="form-control" placeholder="Old Password">
     </div>
     <div class="form-group">
-        <label>New Password</label>
+        <label style="font-size:25px;font-family:'Comic Sans MS'">New Password</label><br>
+        <label style="font-family:'Comic Sans MS';font-size:12px">1-15 characters</label>
         <input name = 'password1' type="password" class="form-control" placeholder="New Password">
     </div>
     <div class="form-group">
-        <label>Confirm New Password</label>
+        <label style="font-size:25px;font-family:'Comic Sans MS'">Confirm New Password</label>
         <input name = 'password2' type="password" class="form-control" placeholder="Confirm New Password">
     </div>
     <div class="form-group">
-        <label>Description</label><br>
-        <label><%=user.description%></label>
+        <label style="font-size:25px;font-family:'Comic Sans MS'">Description</label><br>
+        <label style="font-size:20px;"><%=user.description%></label>
         <input name="description" type="text" class="form-control" placeholder="Enter New description">
     </div>
     <div class="form-group">
-        <label>Profile Picture</label>
-        <input name="profileimg" type="file" class="form-control">
+        <label style="font-size:25px;font-family:'Comic Sans MS'">Profile Picture</label>
+        <input name="profileimg" type="file" class="form-control"><br>
     </div>
-    <button type="submit" class="btn btn-primary">Submit Modification</button>
+    <button type="submit" class="btn" style="background-color: #FFA500">Submit Modification</button>
 </form>
 
 <% include ../cprt.ejs %>
