@@ -53,6 +53,22 @@
                         <input style="display: none" id="result" name="result">
                         <% for (var i = 0; i < articleno; i++) { %>
                             <% if(result[i].type=='article') { %>
+
+                        <!--<a href='#' id = '<%= 'main' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">-->
+                            <!--<div class="d-flex w-80 flex-row">-->
+                                <!--<img src="<%= '../exhibitionSec/pictures/' + (main[i].picturestart + main[i].pictureno - 1) %>" style="width:315px;height:270px">-->
+                                <!--<div class="d-flex flex-column" style="margin-left:40px;width:600px;">-->
+                                    <!--<p class="arttit"><%=main[i].articlename%></p>-->
+                                    <!--<p class="arttime"><%=main[i].posttime%></p>-->
+                                    <!--<iframe src="<%= '../exhibitionSec/texts/' + main[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>-->
+                                    <!--<p class="author"><%=main[i].authorname%></p>-->
+                                <!--</div>-->
+
+                            <!--</div>-->
+
+                        <!--</a>-->
+
+
                             <a href="#" id = '<%= i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
                                 <div class="d-flex w-80 justify-content-between">
                                     <img src=<%=coverpic[i]%> style="width:315px;height:270px">
