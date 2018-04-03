@@ -223,6 +223,20 @@
     </div>
 </div>
 
+<%if (comment){ %>
+    <% for (var i = 0; i < comment.length; i++) { %>
+        <div class="card">
+            <div class="card-header">
+                From <a class="font-weight-bold"><%= comment[i].authorname %></a>:
+            </div>
+            <div class="card-body">
+                <img src="<%= '../profileimgs/'+ comment[i].authorname%>">
+                <p class="card-text"><%= comment[i].content %></p>
+            </div>
+        </div>
+    <% }
+}%>
+
 <% include ../cprt.ejs %>
 </body>
 
