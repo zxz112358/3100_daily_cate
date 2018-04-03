@@ -33,13 +33,19 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
             console.log("you do not have any comment");
         }
         else{
-            res.render('personalSec/mycomment', {
+            var string=[];
+            for(var i=0;i<result1;i++){
+                string[i]='../routes/pictures/'+(result2[i].picturestart+result2[i].pictureno-1).toString();
+            }
+            re
+            s.render('personalSec/mycomment', {
                 title: 'MyComment',
                 name: 'Daily Cate',
                 user: req.user,
                 imgpath: '../profileimgs/' + req.user.username,
                 commentno:result1,
-                result:result2
+                result:result2,
+                coverpic:string
             });
         }
     });
