@@ -62,7 +62,7 @@ router.post('/', upload.single('profileimg'), function (req,res,next) {
         //--------update client info
             test.update_client(user.username,email,pwd,desc,function(result){
                 if(result===true) {
-                    res.redirect('profile');
+                    res.redirect('signout');
                 }
             });
         }
