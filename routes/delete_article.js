@@ -49,7 +49,24 @@ function select_article(arID,callback){
     //how to get the variables parastart, parano,picstart,picno
     //return all pictures, paragrahs and comments of this article
 }
-
+function delete_picture(id){
+    var de_picture="delete from pictures where pictureID="+id;
+    connection.query(de_picture, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        console.log(results);
+    });
+}
+function delete_paragraph(id){
+    var de_paragraph="delete from paragraphs where paraID="+id;
+    connection.query(de_paragraph, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        console.log(results);
+    });
+}
 /*
 var test = require('../delete_article');
 test.select_article(1,function(article){
@@ -89,5 +106,7 @@ module.exports={
     delete_article:delete_article,
     select_article:select_article,
     delete_followarticle:delete_followarticle,
-    delete_article_comment:delete_article_comment
+    delete_article_comment:delete_article_comment,
+    delete_picture:delete_picture,
+    delete_paragraph:delete_paragraph
 };
