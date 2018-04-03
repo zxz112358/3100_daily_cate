@@ -27,7 +27,7 @@ router.get('/', function(req, res) {
             });
         });
     });*/
-    test.search('au2',function(results){
+    test.search(req.query.searchname,function(results){
         if (results === undefined){
             //console.log(results);
             var results1= undefined;

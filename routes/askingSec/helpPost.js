@@ -22,12 +22,26 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     var comment = req.body.comment;
-
-    test.count_comment(function(commentNum){
-        test.insert_comment(commentNum+1, req.user.username, req.body.comment, req.query.articleId);
-    });
-
-    res.redirect('back');
+    var like_operation = req.body.operation;
+    if (comment || like_operation) {
+        if (comment) {
+            test.count_comment(function (commentNum) {
+                test.insert_comment(commentNum + 1, req.user.username, req.body.comment, req.query.articleId);
+            });
+        }
+        console.log('like operation: ', like_operation);
+        if (like_operation === 'like') {
+            test.like_article(req.query.articleId, req.user.username);
+        } else if (like_operation === 'unlike') {
+            test.unlike(req.user.username, req.query.articleId)
+        }
+        res.redirect('back');
+    }else{
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }
 });
 
 module.exports = router;

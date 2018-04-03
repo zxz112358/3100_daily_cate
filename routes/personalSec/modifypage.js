@@ -114,8 +114,13 @@ router.post('/', upload.single('profileimg'), function (req,res,next) {
         }
 
     });
-
     //Form validator
+    if (!(email || oldpassword || desc || pwd || pwd1)){
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }
 
 });
 
