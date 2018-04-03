@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/demo.css">
     <style type="text/css">
         .main-timeline{
             overflow: hidden;
@@ -222,6 +222,20 @@
         </div>
     </div>
 </div>
+
+<%if (comment){ %>
+    <% for (var i = 0; i < comment.length; i++) { %>
+        <div class="card">
+            <div class="card-header">
+                From <a class="font-weight-bold"><%= comment[i].authorname %></a>:
+            </div>
+            <div class="card-body">
+                <img src="<%= '../profileimgs/'+ comment[i].authorname%>">
+                <p class="card-text"><%= comment[i].content %></p>
+            </div>
+        </div>
+    <% }
+}%>
 
 <% include ../cprt.ejs %>
 </body>

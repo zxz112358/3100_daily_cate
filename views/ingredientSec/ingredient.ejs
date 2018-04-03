@@ -63,11 +63,11 @@
             for (var i = 0; i < allArticle.length; i++) {%>
             <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                 <div class="d-flex w-80 flex-row">
-                    <img src="<%= '../ingredientSec/pictures/' + (allArticle[i].picturestart + allArticle[i].pictureno - 1) %>" style="width:315px;height:270px">
+                    <img src="<%= '../exhibitionSec/pictures/' + (allArticle[i].picturestart + allArticle[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=allArticle[i].articlename%></p>
                         <p class="arttime"><%=allArticle[i].posttime%></p>
-                        <iframe src="<%= '../ingredientSec/texts/' + allArticle[i].parastart + '.txt' %>" class="artframe" id="textframe"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" class="artframe" id="textframe"></iframe>
                         <script>
                             var frame = document.getElementById('textframe');
                             frame.onload = function () {
@@ -94,11 +94,11 @@
             for (var i = 0; i < vegetables.length; i++) {%>
             <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                 <div class="d-flex w-80 flex-row">
-                    <img src="<%= '../ingredientSec/pictures/' + (vegetables[i].picturestart + vegetables[i].pictureno - 1) %>" style="width:315px;height:270px">
+                    <img src="<%= '../exhibitionSec/pictures/' + (vegetables[i].picturestart + vegetables[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=vegetables[i].articlename%></p>
                         <p class="arttime"><%=vegetables[i].posttime%></p>
-                        <iframe src="<%= '../ingredientSec/texts/' + vegetables[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + vegetables[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
                         <p class="author"><%=vegetables[i].authorname%></p>
                     </div>
 
@@ -116,7 +116,7 @@
             for (var i = 0; i < fruits.length; i++) {%>
             <a href="#" id = 'frame' class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                 <div class="d-flex w-80 flex-row">
-                    <img src="<%= '../ingredientSec/pictures/' + (fruits[i].picturestart + fruits[i].pictureno - 1) %>" style="width:315px;height:270px">
+                    <img src="<%= '../exhibitionSec/pictures/' + (fruits[i].picturestart + fruits[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=fruits[i].articlename%></p>
                         <p class="arttime"><%=fruits[i].posttime%></p>

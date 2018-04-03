@@ -27,8 +27,34 @@ router.get('/', function(req, res, next) {
 
         console.log(k_articles);
     });
+});
 
+router.post('/', function (req, res, next) {
+    var result = String(req.body.result).match(/[^\d]+|\d+/g);
+    console.log('result: ', result);
 
+    new Promise(
+        function (resolve, reject) {
+            test.select_k(function(articleList){
+                console.log(articleList);
+                console.log('articleID: ', articleList[result[0]].articleID);
+                console.log(encodeURIComponent(articleList[result[0]].articleID));
+                resolve(articleList[result[0]]);
+            });
+        }
+    ).then(function (article) {
+        var type = article.type;
+        var id = article.articleID;
+        console.log(type, ',', id);
+        if (type === 'article') {
+            res.redirect('../exhibitionSec/articlePost?articleId=' + id);
+        }else if(type === 'help'){
+            res.redirect('../askingSec/helpPost?articleId=' + id);
+        }else if(type === 'ingredient'){
+            //TO DO: ingredient post page
+            res.send('ingredient post page is not completed yet.');
+        }
+    });
 });
 
 module.exports = router;

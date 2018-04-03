@@ -20,11 +20,6 @@
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
 
-<!--<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>-->
-<!--<div class="w-75 font-weight-light mx-auto">Username: <%= user.username%></div>-->
-<!--<div class="w-75 font-weight-light mx-auto">Description: <%= user.description%></div>-->
-<!--<div class="w-75 font-weight-light mx-auto">Profile Image</div>-->
-
 <div class="container-fluid" style="padding: 10px; text-align:center; background-image:url('../images/posttop.jpg');background-size:100% 100%;">
     <img class="img-thumbnail img-circle" style="width: 140px;margin: 0 auto"  src=<%= imgpath %>>
     <p>
@@ -51,10 +46,11 @@
         <div class="col-10">
             <div class="container-fluid" style="padding:10px">
                 <div class="list-group mx-auto w-75">
-
+                    <form method="post" id = 'form'>
+                        <input style="display: none" id="result" name="result">
                     <% for (var i = 0; i < articleno; i++) { %>
                     <% if(result[i].type=='help') { %>
-                    <a href="../ingredientSec/post1" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
+                    <a href="#" id = '<%= i %>' onclick="enterHelp(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
                         <div class="d-flex w-80 justify-content-between">
                             <img src=<%=coverpic[i]%> style="width:315px;height:270px">
                             <h5 class="mb-1"><%=result[i].articlename%></h5>
@@ -66,6 +62,7 @@
                     </a>
                     <% } %>
                     <% } %>
+                    </form>
                 </div>
             </div>
         </div>
@@ -77,5 +74,13 @@
 <!--<img src= <%= imgpath %>>-->
 
 </body>
+
+<script>
+    function enterHelp(help) {
+        var result = document.getElementById('result');
+        result.value = help.id;
+        document.getElementById('form').submit();
+    }
+</script>
 
 </html>
