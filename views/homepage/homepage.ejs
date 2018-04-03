@@ -99,26 +99,12 @@
 
 <div style="max-width: 1300px; margin:0 auto; padding: 10px">
     <div class="container-fluid">
+        <form method="post" id = 'form'>
+            <input style="display: none" id="result" name="result">
         <div class="row" style="margin-top:20px;">
-
-            <!--<div class="col-xs-8 col-sm-8 col-md-8 d-flex flex-row" style="margin-top: 15px; background-color: #ffdd83; border:10px solid #FFA500">-->
-            <!--<img src=<%=coverpic[0]%> class="table-responsive img-thumbnail" style="height: 400px; width: 500px">-->
-            <!--<div class="d-flex flex column" style="margin-left:40px;width:600px">-->
-            <!--<a href="/ingredientSec/post1" class="card-img-overlay" style="text-align:center">-->
-            <!--<div class="desc">-->
-            <!--<h1 style="margin-top:140px;color:#884400"><%=articles[0].articlename%></h1>-->
-            <!--<h3 style="color:#884400"><%=articles[0].authorname%></h3>-->
-            <!--</div>-->
-            <!--</a>-->
-            <!--</div>-->
-
-            <!--</div>-->
-
-
-
             <div class="col-xs-8 col-sm-8 col-md-8 d-flex flex-row" style="margin-top: 15px; background-color: #ffdd83; border:10px solid #FFA500">
-                <img href="/ingredientSec/post1"  src=<%=coverpic[0]%> class="table-responsive img-thumbnail" style="height: 400px; width: 500px">
-                <a href="/ingredientSec/post1" class="d-flex flex-column" style="width:40%">
+                <img src='<%=coverpic[0]%>' class="table-responsive img-thumbnail" style="height: 400px; width: 500px">
+                <a href='#' id = '0' onclick="enterArticle(this)" class="d-flex flex-column" style="width:40%">
                     <div class="desc" style="text-align:center">
                         <h1 style="margin-top:140px;color:#884400"><%=articles[0].articlename%></h1>
                         <h3 style="color:#884400"><%=articles[0].authorname%></h3>
@@ -126,8 +112,8 @@
                 </a>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4" style="margin-top: 15px; background-color: #FFDD83; border:10px solid #FFA500">
-                <img src=<%=coverpic[1]%>  class="table-responsive img-thumbnail" style="height: 300px">
-                <a href="/ingredientSec/post1" class="card-img-overlay text-center">
+                <img src='<%=coverpic[1]%>'  class="table-responsive img-thumbnail" style="height: 300px">
+                <a href='#' id = '1' onclick="enterArticle(this)" class="card-img-overlay text-center">
                     <div class="desc">
                         <h1 style="margin-top:280px;color:#884400"><%=articles[1].articlename%></h1>
                         <h3 style="color:#884400"><%=articles[1].authorname%></h3>
@@ -138,8 +124,8 @@
         <div class="row" style="margin-top:20px; height:420px">
 
             <div class="col-xs-6 col-sm-6 col-md-6" style="margin-bottom: 15px; background-color: #FFDD83; border:10px solid #FFA500">
-                <img src=<%=coverpic[2]%>  class="table-responsive img-thumbnail" style="height: 300px;width:450px;margin: 0 auto">
-                <a href="/ingredientSec/post1" class="card-img-overlay text-center">
+                <img src='<%=coverpic[2]%>'  class="table-responsive img-thumbnail" style="height: 300px;width:450px;margin: 0 auto">
+                <a href='#' id = '2' onclick="enterArticle(this)" class="card-img-overlay text-center">
                     <div class="desc">
                         <h1 style="margin-top:270px; color:#884400"><%=articles[2].articlename%></h1>
                         <h3 style="color:#884400"><%=articles[2].authorname%></h3>
@@ -147,8 +133,8 @@
                 </a>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3" style="margin-bottom: 15px; background-color: #FFDD83; border:10px solid #FFA500">
-                <img src=<%=coverpic[3]%>  class="table-responsive img-thumbnail" style="height: 250px">
-                <a href="/ingredientSec/post1" class="card-img-overlay text-center">
+                <img src='<%=coverpic[3]%>'  class="table-responsive img-thumbnail" style="height: 250px">
+                <a href='#' id = '3' onclick="enterArticle(this)" class="card-img-overlay text-center">
                     <div class="desc">
                         <h1 style="margin-top:250px; color:#884400"><%=articles[3].articlename%></h1>
                         <h3 style="color:#884400"><%=articles[3].authorname%></h3>
@@ -156,8 +142,8 @@
                 </a>
             </div>
             <div class="col-xs-3 col-sm-3 col-md-3" style="margin-bottom: 15px; background-color: #FFDD83; border:10px solid #FFA500">
-                <img src=<%=coverpic[4]%>  class="table-responsive img-thumbnail" style="height: 250px">
-                <a href="/ingredientSec/post1" class="card-img-overlay text-center">
+                <img src='<%=coverpic[4]%>'  class="table-responsive img-thumbnail" style="height: 250px">
+                <a href='#' id = '4' onclick="enterArticle(this)" class="card-img-overlay text-center">
                     <div class="desc">
                         <h1 style="margin-top:250px; color:#884400"><%=articles[4].articlename%></h1>
                         <h3 style="color:#884400"><%=articles[4].authorname%></h3>
@@ -165,12 +151,21 @@
                 </a>
             </div>
         </div>
+        </form>
     </div>
 
 </div>
 
 <% include ../cprt.ejs %>
 
-
 </body>
+
+<script>
+    function enterArticle(article) {
+        var result = document.getElementById('result');
+        result.value = article.id;
+        document.getElementById('form').submit();
+    }
+</script>
+
 </html>
