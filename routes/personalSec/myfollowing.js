@@ -64,8 +64,8 @@ router.post('/', function (req, res, next) {
     var username = encodeURIComponent(followinguser);
     var id = req.body.id;
 
-    if(id[0]){
-        test.unfollow(req.user.username,id[0]);
+    if(id){
+        test.unfollow(req.user.username,id);
         res.redirect('myfollowing');
 
     }
