@@ -425,19 +425,14 @@ function select_article_like(username,callback) {
 
 function search(name,callback){
     //name.replace(/'/,"\'");
-    var an="select articlename, authorname from articles where authorname like "+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\''+"or articlename like"+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\'';
+    var an="select * from articles where authorname like "+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\''+"or articlename like"+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\'';
     connection.query(an, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        if(Object.keys(results).length===0){
-            return callback(false);
+        else {
+            return callback(results);
         }
-        Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
-
-        });
     });
     //return T or F
 }
