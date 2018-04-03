@@ -215,11 +215,18 @@
                         </div>
                     </div>
                     <% } %>
-
                 </div>
             </div>
         </div>
     </div>
+    <form method="post" id="likeform">
+        <input style="display: none" id="likeinput" name="operation">
+        <% if (liked){ %>
+            <button id="like" onclick="like_operation(this)">Like!</button>
+        <% } else{ %>
+            <button id="unlike" onclick="like_operation(this)">Unlike!</button>
+        <% } %>
+    </form>
 </div>
 
 <%if (comment){ %>
@@ -244,5 +251,14 @@
 
 <% include ../cprt.ejs %>
 </body>
+
+<script>
+    function like_operation(button) {
+        var form = document.getElementById('likeform');
+        document.getElementById('operation').value = button.id;
+        form.submit();
+    }
+
+</script>
 
 </html>

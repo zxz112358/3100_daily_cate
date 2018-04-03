@@ -58,20 +58,24 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    var result = String(req.body.result).match(/[^\d]+|\d+/g);
+    var result = req.body.result;
     var id = req.body.id;
+    console.log('result: ', result);
 
-    if (req.body.result[0] !== ''){
+    if (req.body.result[0]){
         new Promise(
             function (resolve, reject) {
+                console.log('username: ', req.user.username);
                 test.select_all_client_article(req.user.username, function (num, articleList) {
                     resolve(encodeURIComponent(articleList[result[0]].articleID));
+                    console.log('articleId: ', articleList[result[0]].articleID);
                 });
             }
         ).then(function (value) {
             res.redirect('../exhibitionSec/articlePost?articleId=' + value);
         });
-    }else {
+    }
+    if (id) {
         var i=id.length;
         var valid='';
         for(var j=0;j<i;j++){

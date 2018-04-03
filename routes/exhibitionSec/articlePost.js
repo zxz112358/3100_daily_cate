@@ -5,16 +5,17 @@ var test = require('../test');
 
 /* GET exhibition page. */
 router.get('/', function(req, res, next) {
-    test.select_article(decodeURIComponent(req.query.articleId), function (article) {
-        test.select_article_comment(decodeURIComponent(req.query.articleId),function(result1,result2){
+    test.select_article(req.query.articleId, function (article) {
+        test.select_article_comment(req.query.articleId,function(result1,result2){
             res.render('exhibitionSec/articlePost', {
                 title: 'articlePost',
                 name: 'Daily Cate',
                 user: req.user,
                 article: article,
-                comment:result2
+                comment:result2,
+                liked: false
             });
-            console.log(decodeURIComponent(req.query.articleId));
+            console.log(req.query.articleId);
             console.log('comments: ', result2);
         });
         //console.log(article);
@@ -23,11 +24,18 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     var comment = req.body.comment;
+    var like_operation = req.body.operation;
 
-    test.count_comment(function(commentNum){
-        test.insert_comment(commentNum+1, req.user.username, req.body.comment, req.query.articleId);
-    });
-
+    if (comment) {
+        test.count_comment(function (commentNum) {
+            test.insert_comment(commentNum + 1, req.user.username, req.body.comment, req.query.articleId);
+        });
+    }
+    if (like_operation === 'like'){
+        test.like_article(req.query.articleId, req.user.username);
+    } else if (like_operation === 'unlike'){
+        test.unlike(req.user.username, req.query.articleId)
+    }
     res.redirect('back');
 });
 

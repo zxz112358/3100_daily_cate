@@ -72,16 +72,7 @@
                         <div class="d-flex flex-column" style="margin-left:40px;width:330px;">
                             <p class="arttit"><%=allArticle[i].articlename%></p>
                             <p class="arttime"><%=allArticle[i].posttime%></p>
-                            <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" class="artframe" id="textframe"></iframe>
-                            <script>
-                                var frame = document.getElementById('textframe');
-                                frame.onload = function () {
-                                    var body = frame.contentWindow.document.querySelector('body');
-                                    body.style.color = 'grey';
-                                    body.style.fontSize = '20px';
-                                    body.style.lineHeight = '20px';
-                                };
-                            </script>
+                            <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" class="artframe" id="<%= "textall"+i%>"></iframe>
                             <p class="author"><%=allArticle[i].authorname%></p>
                         </div>
                     </div>
@@ -102,7 +93,7 @@
                         <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                             <p class="arttit"><%=main[i].articlename%></p>
                             <p class="arttime"><%=main[i].posttime%></p>
-                            <iframe src="<%= '../exhibitionSec/texts/' + main[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                            <iframe src="<%= '../exhibitionSec/texts/' + main[i].parastart + '.txt' %>" style="border: none" id="<%= "textmain"+i%>"></iframe>
                             <p class="author"><%=main[i].authorname%></p>
                         </div>
 
@@ -125,7 +116,7 @@
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=dish[i].articlename%></p>
                         <p class="arttime"><%=dish[i].posttime%></p>
-                        <iframe src="<%= '../exhibitionSec/texts/' + dish[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + dish[i].parastart + '.txt' %>" style="border: none" id="<%= "textdish"+i%>"></iframe>
                         <p class="author"><%=dish[i].authorname%></p>
                     </div>
                 </div>
@@ -145,7 +136,7 @@
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=soup[i].articlename%></p>
                         <p class="arttime"><%=soup[i].posttime%></p>
-                        <iframe src="<%= '../exhibitionSec/texts/' + soup[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + soup[i].parastart + '.txt' %>" style="border: none" id="<%= "textsoup"+i%>"></iframe>
                         <p class="author"><%=soup[i].authorname%></p>
                     </div>
                 </div>
@@ -166,7 +157,7 @@
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=dessert[i].articlename%></p>
                         <p class="arttime"><%=dessert[i].posttime%></p>
-                        <iframe src="<%= '../exhibitionSec/texts/' + dessert[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + dessert[i].parastart + '.txt' %>" style="border: none" id="<%= "textdessert"+i%>"></iframe>
                         <p class="author"><%=dessert[i].authorname%></p>
                     </div>
                 </div>
@@ -179,7 +170,7 @@
     </div>
     </form>
 </div>
-
+<!--enter specific article page-->
 <script>
     function enterArticle(article) {
         var result = document.getElementById('result');
@@ -187,6 +178,21 @@
         document.getElementById('form').submit();
     }
 </script>
+<!--change font in iframe-->
+<script>
+    var tablist = ['all', 'main', 'dish', 'soup', 'dessert']
+    forEach(var tab in tablist)
+
+    var frame = document.getElementById('textframe');
+    frame.onload = function () {
+        var body = frame.contentWindow.document.querySelector('body');
+        body.style.color = 'grey';
+        body.style.fontSize = '20px';
+        body.style.lineHeight = '20px';
+    };
+</script>
+
+
 <% include ../cprt.ejs %>
 </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
