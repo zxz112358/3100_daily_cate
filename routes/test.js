@@ -786,6 +786,31 @@ function select_article_and_comment(arID,callback){
         });*/
     });
 }
+function count_comment(callback){
+    var co_comment_no="select distinct count(*) as count from comments";
+    connection.query(co_comment_no, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        if(Object.keys(results).length==0){
+            return callback(0);
+        }
+
+        return callback(results[0].count);
+
+    });
+}
+/*test.count_comment(function(number){
+
+    if (number==0){
+        console.log("no comment");
+    }
+    else{
+        console.log(number);
+
+    }
+
+});*/
 module.exports={
     connection:connection,
     insert_client:insert_client,
@@ -831,7 +856,8 @@ module.exports={
     //select_all_help:select_all_help,
     //select_all_ingredient:select_all_ingredient
     unfollow:unfollow,
-    select_article_and_comment:select_article_and_comment
+    select_article_and_comment:select_article_and_comment,
+    count_comment:count_comment
 
 };
 
