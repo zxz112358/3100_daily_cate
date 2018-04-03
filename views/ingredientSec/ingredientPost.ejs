@@ -193,13 +193,16 @@
 <% include ../header.ejs %>
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
-<div class="container-fluid" style="color:#FFA500;padding-top:10px;text-align:center;height:200px;background-image:url('../../images/posttop.jpg');background-size:100% 100%;">
+<div class="container-fluid" style="color:#773300;font-family:'Comic Sans MS';padding-top:10px;text-align:center;height:200px;background-image:url('../../images/posttop.jpg');background-size:100% 100%;">
     <h1><%= article.articlename%></h1>
     <h2><%= article.authorname%></h2>
 </div>
 
 
-<div class="demo" style="min-height:500px">
+
+
+
+<div class="demo" style="min-height:500px;margin-bottom:100px;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -220,33 +223,37 @@
             </div>
         </div>
     </div>
-    <form method="post" id="likeform">
+    <br><br><br><br><br><br>
+    <form method="post" id="likeform" style="margin-left:80%">
         <input style="display: none" id="likeinput" name="operation">
         <% if (liked){ %>
-        <button id="unlike" onclick="like_operation(this)">Unlike!</button>
+        <button id="unlike" style="background-color: #F5D777" onclick="like_operation(this)">Unlike!</button>
         <% } else{ %>
-        <button id="like" onclick="like_operation(this)">Like!</button>
+        <button id="like" style="background-color: #F5D777" onclick="like_operation(this)">Like!</button>
         <% } %>
     </form>
 </div>
 
 <%if (comment){ %>
 <% for (var i = 0; i < comment.length; i++) { %>
-<div class="card">
+<div class="card w-75 mx-auto" style="background-color: #F5D777">
     <div class="card-header">
         From <a class="font-weight-bold"><%= comment[i].authorname %></a>:
     </div>
     <div class="card-body">
-        <img src="<%= '../profileimgs/'+ comment[i].authorname%>">
-        <p class="card-text"><%= comment[i].content %></p>
+        <img src="<%= '../profileimgs/'+ comment[i].authorname%>" style="float: left; width: 150px;">
+        <div class="card-text" style="margin-left: 200px">
+        <p style="color:#773300"><%= comment[i].content %></p>
+        </div>
     </div>
 </div>
+<br>
 <% }
 }%>
 
-<form class="mx-auto w-75" method="post">
+<form class="mx-auto w-75" method="post"style="margin-bottom:100px;">
     <br><label>Leave your comment:</label>
-    <br><textarea type="text" name = "comment" class="mx-auto w-100"></textarea>
+    <br><textarea type="text" name = "comment" class="mx-auto w-100" style="height:100px;"></textarea>
     <br><button type="submit" class="btn btn-warning btn-right" style="color:#000000;margin-left:90%;float: right">Submit</button>
 </form>
 

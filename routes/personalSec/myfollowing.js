@@ -62,9 +62,11 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 router.post('/', function (req, res, next) {
     var followinguser = req.body.followinguser;//username
     var username = encodeURIComponent(followinguser);
-    var id = req.body.id;
-    console.log('ssss ',followinguser);
-    console.log(id);
+    if (req.body.id !== undefined) {
+        var id = (typeof (req.body.id) === "string") ? req.body.id : req.body.id[0];
+    }
+    //console.log('ssss ',followinguser);
+    //console.log(typeof (req.body.id));
     if (req.body.followinguser || id) {
         if (id) {
             test.unfollow(req.user.username, id);
@@ -72,6 +74,7 @@ router.post('/', function (req, res, next) {
 
         }
         else {
+            console.log('fdsdf');
             res.redirect('./userpostpage?username=' + username);
         }
     }else {

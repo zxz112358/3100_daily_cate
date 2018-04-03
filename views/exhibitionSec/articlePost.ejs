@@ -193,7 +193,7 @@
 <% include ../header.ejs %>
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
-<div class="container-fluid" style="color:#773300;padding-top:10px;text-align:center;height:200px;background-image:url('../../images/posttop.jpg');background-size:100% 100%;">
+<div class="container-fluid" style="color:#773300;font-family:'Comic Sans MS';padding-top:10px;text-align:center;height:200px;background-image:url('../../images/posttop.jpg');background-size:100% 100%;">
     <br><h1><%= article.articlename%></h1>
     <form method="post" id = 'form'>
         <input style="display: none" id="author" name="author">
@@ -250,7 +250,7 @@
     <% }
 }%>
 
-<form class="mx-auto w-75" style="margin-bottom" method="post">
+<form class="mx-auto w-75" style="margin-bottom:100px;" method="post">
     <br><label>Leave your comment:</label>
     <br><textarea type="text" name = "comment" class="mx-auto w-100" style="height: 100px"></textarea>
     <br><button type="submit" class="btn btn-warning btn-right" style="color:#000000;margin-left:90%;float: right">Submit</button>

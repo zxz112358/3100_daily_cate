@@ -4,6 +4,52 @@
 <head>
     <title><%= name%>-<%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <style>
+        .headtitle{
+            font-family:"Vladimir Script";
+            color:#884400;
+            font-size:50px;
+            font-weight:800;
+            margin-left: 10%;
+        }
+        .setfont{
+            font-family: "Vladimir Script";
+            font-weight:800;
+            font-size:25px;
+            color:#884400;
+        }
+        .arttit{
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:30px;
+            color:#884400;
+        }
+        .arttime{
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:15px;
+            color:#884400;
+        }
+        .artframe{
+            border:none;
+
+        }
+        .author{
+            text-align:right;
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:20px;
+            color:#884400;
+        }
+        .arttext{
+            font-family:"Comic Sans MS";
+            font-weight:800;
+            font-size:20px;
+            color:#884400;
+            max-width:400px;
+            word-wrap:break-word;
+        }
+    </style>
 </head>
 
 <% include ../header.ejs %>
@@ -19,7 +65,7 @@
         <% if (followed) {%>
             <button id="unfollow" onclick="f_author(this)" style="background-color: #F5D777">Unfollow</button>
         <% } else {%>
-            <button id="follow" onclick="f_author(this)">Follow</button>
+            <button id="follow" onclick="f_author(this)" style="background-color: #F5D777">Follow</button>
         <% } %>
     </form>
 </div>
@@ -36,19 +82,22 @@
             </p>
         </div>
         <div class="col-10">
-            <div class="container-fluid" style="background-color: #ffc107;padding:10px">
+            <div class="container-fluid" style="padding:10px">
                 <div class="list-group mx-auto w-75">
                     <form method="post" id = 'form'>
                         <input style="display: none" id="result" name="result">
                         <% for(var i=0;i<article.length;i++) {%>
                         <div>
-                            <a href="#" id = '<%=article[i].articleID%>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <img src="../images/pic.jpg">
-                                    <h5 class="mb-1"><%=article[i].articlename%></h5>
-                                    <small><%=article[i].posttime%></small>
+                            <a href="#" id = '<%=article[i].articleID%>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start"style="background-color:#F5D777;min-width:800px;margin-top: 10px;height:320px">
+                                <div class="d-flex w-100 flex-row" style="min-width:800px">
+                                    <img src="../images/pic.jpg" style="width:315px;height:270px">
+                                        <div class="d-flex flex-column" style="margin-left:40px;width:330px;">
+                                            <p class="arttit"><%=article[i].articlename%></p>
+                                            <p class="arttime"><%=article[i].posttime%></p>
+                                            <p class="author">name</p>
+                                        </div>
                                 </div>
-                                <p class="mb-1">name</p>
+
                             </a>
                         </div>
                         <%}%>
