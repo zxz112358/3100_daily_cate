@@ -4,11 +4,8 @@ var router = express.Router();
 var test = require('../test');
 
 router.get('/', function(req, res, next) {
-    //console.log("!!!!",decodeURIComponent(req.query.articleId));
     test.select_article(decodeURIComponent(req.query.articleId), function (article) {
         test.select_article_comment(decodeURIComponent(req.query.articleId),function(result1,result2){
-            //console.log(result1);//the no. of comments in that article;
-            //console.log(result2);//all comments -> result2[i].content
             res.render('exhibitionSec/articlePost', {
                 title: 'helpPost',
                 name: 'Daily Cate',
@@ -16,10 +13,18 @@ router.get('/', function(req, res, next) {
                 article: article,
                 comment:result2
             });
-
         });
-        //console.log(article);
     });
+});
+
+router.post('/', function(req, res, next) {
+    var comment = req.body.comment;
+
+    test.count_comment(function(commentNum){
+        test.insert_comment(commentNum+1, req.user.username, req.body.comment, req.query.articleId);
+    });
+
+    res.redirect('back');
 });
 
 module.exports = router;

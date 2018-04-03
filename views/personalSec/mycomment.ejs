@@ -4,6 +4,39 @@
 <head>
     <title><%= name%>-<%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <style>
+        .arttit{
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:30px;
+            color:#884400;
+        }
+        .arttime{
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:15px;
+            color:#884400;
+        }
+        .artframe{
+            border:none;
+
+        }
+        .author{
+            text-align:right;
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:20px;
+            color:#884400;
+        }
+        .arttext{
+            font-family:"Comic Sans MS";
+            font-weight:800;
+            font-size:20px;
+            color:#884400;
+            max-width:300px;
+            word-wrap:break-word;
+        }
+    </style>
 </head>
 
 <% include ../header.ejs %>
@@ -26,7 +59,7 @@
 
 
                 <a href="./profile" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%;min-width:3.5cm">My Articles</a><br>
-                <a href="./myehlp" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%;min-width:3.5cm">My Helps</a><br>
+                <a href="./myhelp" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%;min-width:3.5cm">My Helps</a><br>
                 <a href="./mycomment" class="btn btn-warning active" aria-pressed="true" role="button" style="width:75%;min-width:3.5cm">My Comments</a><br>
                 <a href="./myfollowing" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%;min-width:3.5cm">My Followings</a><br>
                 <a href="./myfollower" class="btn btn-warning" aria-pressed="true" role="button" style="width:75%;min-width:3.5cm">My Followers</a><br>
@@ -38,16 +71,29 @@
             <div class="container-fluid" style="padding:10px">
                 <div class="list-group mx-auto w-75">
                     <% for (var i = 0; i < commentno; i++) { %>
-                    <a href="../ingredientSec/post1" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px">
-                        <div class="d-flex w-80 justify-content-between">
-                            <img src="../images/pic.jpg" style="width:315px;height:270px">
-                            <h5 class="mb-1"><%=result[i].articlename%></h5>
-                            <small><%=result[i].posttime%></small>
-                            <p>My comment: <%=result[i].content%></p>
+
+
+                    <a href="#" id = '<%= i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFCC00;margin-top: 10px;height:320px;width:800px">
+                        <div class="d-flex w-80 flex-row">
+                            <img src=<%=coverpic[i]%> style="width:315px;height:270px">
+                            <div class="d-flex flex-column" style="margin-left:40px;width:400px;">
+                                <p class="arttit"><%=result[i].articlename%></p>
+                                <p class="arttime"><%=result[i].posttime%></p>
+                                <div class="arttext">
+                                    <p><%=text[i]%></p>
+                                </div>
+
+
+                                <p class="author"><%=result[i].authorname%></p>
+                            </div>
+
 
                         </div>
-                        <p class="mb-1" style="text-align:right"><%=result[i].authorname%></p>
+
                     </a>
+
+
+
                     <% } %>
                 </div>
             </div>
