@@ -15,8 +15,8 @@
     <h5 class="text-center" style="font-size:250%;font-weight:600;color:#884400"><%= user.username%><br><small><%= user.description%></small></h5>
     </p>
     <p>
-        <button onclick="window.location.href='/exhibitionSec/exhposting'" style="background-color:#FFCC00" class="btn btn-small" type="button">New post</button>
-        <button onclick="window.location.href='/personalSec/modifypage'" class="btn btn-small" type="button" style="background-color:#FFCC00">Modify info</button>
+        <button onclick="window.location.href='/exhibitionSec/exhposting'" style="background-color:#F5D777" class="btn btn-small" type="button">New post</button>
+        <button onclick="window.location.href='/personalSec/modifypage'" class="btn btn-small" type="button" style="background-color:#F5D777">Modify info</button>
     </p>
 </div>
 <div class="container-fluid" style="padding: 10px; min-height:500px;">
@@ -37,7 +37,7 @@
             <div class="container-fluid" style="padding:10px">
                 <div class="row">
                     <% for (var i = 0; i < followerno; i++) { %>
-                    <div class="col-2" style="text-align:center;margin-top:10px;margin-bottom:10px;margin-right:60px;margin-left:40px;background-color:#FFCC00;padding-top:2px;">
+                    <div class="col-2" style="text-align:center;margin-top:10px;margin-bottom:10px;margin-right:60px;margin-left:40px;background-color:#F5D777;padding-top:2px;">
                         <a href="/personalSec/userpostpage">
                             <img src=<%=followerimg[i]%> class="img-thumbnail" style="width: 140px">
                             <p style="font-size:200%; color: #884400;font-weight: 600"><%=follower[i].user1%></p>
