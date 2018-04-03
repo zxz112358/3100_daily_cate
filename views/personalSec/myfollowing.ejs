@@ -36,6 +36,7 @@
         <div class="col-10">
             <div class="container-fluid" style="padding:10px">
                 <div class="row">
+
                     <% for (var i = 0; i < followingno; i++) { %>
                     <div class="col-2" style="text-align:center;margin-top:10px;margin-bottom:10px;margin-right:60px;margin-left:40px;background-color:#F5D777;padding-top:2px;">
                         <a href="./userpostpage">
@@ -47,6 +48,23 @@
                     </div>
 
                     <% } %>
+
+                    <form method="post" id = 'form'>
+                        <input style="display: none" id="followinguser" name="followinguser">
+                        <% for (var i = 0; i < followingno; i++) { %>
+                        <div class="col-2" style="text-align:center;margin-top:10px;margin-bottom:10px;margin-right:60px;margin-left:40px;background-color:#FFCC00;padding-top:2px;">
+                            <a href="#" id = '<%=following[i].user2%>' onclick="enterUser(this)">
+                                <img src=<%=followingimg[i]%> class="img-thumbnail" style="width: 140px">
+                                <p style="font-size:200%; color: #884400;font-weight: 600"><%=following[i].user2%></p>
+                                <p style="font-size:100%; color:#884400"><%=following[i].description%></p>
+                            </a>
+                            <button class="btn btn-warning" aria-pressed="true" type="button">Unfollow</button>
+
+                        </div>
+
+                        <% } %>
+                    </form>
+
                 </div>
 
             </div>
@@ -56,5 +74,11 @@
 </div>
 <% include ../cprt.ejs %>
 </body>
-
+<script>
+    function enterUser(user) {
+        var followinguser = document.getElementById('followinguser');
+        followinguser.value = user.id;
+        document.getElementById('form').submit();
+    }
+</script>
 </html>
