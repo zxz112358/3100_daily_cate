@@ -411,6 +411,7 @@ function select_article_like(username,callback) {
         return callback(Object.keys(results).length,results);
     });
 }
+
 /*test.select_article_like('1',function(result1,result2){
     //print the table includes all user2
     if(result1==0){
@@ -478,6 +479,15 @@ function select_k(callback){
 });*/
 function unfollow(user1,user2) {
     var unfo = "delete from follow where user1="+'\''+user1+'\''+" and user2 ="+'\''+user2+'\'';
+    connection.query(unfo,function (error,results) {
+        if (error){
+            return console.error(error);
+        }
+        console.log(results);
+    });
+}
+function unlike(username,articleid) {
+    var unfo = "delete from followarticle where user="+'\''+username+'\''+" and article ="+articleid;
     connection.query(unfo,function (error,results) {
         if (error){
             return console.error(error);
@@ -612,6 +622,7 @@ test.count_comment(function(length,array){
     }
 
 });*/
+
 module.exports={
     connection:connection,
     insert_client:insert_client,
@@ -639,8 +650,13 @@ module.exports={
     select_article_like:select_article_like,
     select_all_article:select_all_article,
     unfollow:unfollow,
+    unlike:unlike,
     select_article_and_comment:select_article_and_comment,
     count_comment:count_comment,
     delete_followarticle:delete_followarticle,
-    delete_article_comment:delete_article_comment
+    delete_article_comment:delete_article_comment,
+    like_article:like_article,
+    check_followers:check_followers,
+    check_my_follow:check_my_follow
+
 };
