@@ -80,7 +80,30 @@ router.post('/', function (req, res, next) {
             }
         }
         console.log('valid: ',valid);
-        test.delete_article(valid);
+        var test = require('../delete_article');
+        test.select_article(valid,function(article){
+            var parastart=article.parastart;
+            var parano=article.parano;
+            test.delete_article_comment(valid,function(result1){
+                if(result1==true){
+                    test.delete_followarticle(valid,function(result2){
+                        if(result2==true){
+                            test.delete_article(valid,function(result3){
+                                if(result3==true){
+                                    for(var i=0;i<parano;i++){
+                                        var id=parano+i;
+                                        test.delete_paragraph(id);
+                                        test.delete_picture(id);
+                                    }
+
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+        })
         res.redirect('profile');
     }
     // }
