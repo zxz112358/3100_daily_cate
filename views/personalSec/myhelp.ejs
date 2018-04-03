@@ -80,32 +80,33 @@
             <div class="container-fluid" style="padding:10px">
                 <div class="list-group mx-auto w-75">
                     <form method="post" id = 'form'>
-                        <input style="display: none" id="result" name="result">
-                    <% for (var i = 0; i < articleno; i++) { %>
-                    <% if(result[i].type=='help') { %>
 
+                        <% for (var i = 0; i < articleno; i++) { %>
+                        <% if(result[i].type=='help') { %>
 
+                        <div>
+                            <input style="display: none" id="result" name="result">
 
-                        <a href="#" id = '<%= i %>' onclick="enterHelp(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#F5D777;margin-top: 10px;height:320px;width:800px">
-                            <div class="d-flex w-80 flex-row">
-                                <img src=<%=coverpic[i]%> style="width:315px;height:270px">
-                                <div class="d-flex flex-column" style="margin-left:40px;width:400px;">
-                                    <p class="arttit"><%=result[i].articlename%></p>
-                                    <p class="arttime"><%=result[i].posttime%></p>
-                                    <div class="arttext">
-                                        <p><%=text[i]%></p>
+                            <a href="#" id = '<%= i %>' onclick="enterHelp(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#F5D777;margin-top: 10px;height:320px;width:800px">
+                                <div class="d-flex w-80 flex-row">
+                                    <img src=<%=coverpic[i]%> style="width:315px;height:270px">
+                                    <div class="d-flex flex-column" style="margin-left:40px;width:400px;">
+                                        <p class="arttit"><%=result[i].articlename%></p>
+                                        <p class="arttime"><%=result[i].posttime%></p>
+                                        <div class="arttext">
+                                            <p><%=text[i]%></p>
+                                        </div>
+                                        <p class="author"><%=result[i].authorname%></p>
                                     </div>
-
-
-                                    <p class="author"><%=result[i].authorname%></p>
                                 </div>
-
-
-                            </div>
-
-                        </a>
-                    <% } %>
-                    <% } %>
+                            </a>
+                        </div>
+                        <p>
+                            <input style="display:none" id="id" name="id">
+                            <button id="<%= result[i].articleID%>" onclick="getID(this)" type="submit" class="btn btn-small" style="background-color:#FFCC00" type="button">Delete</button>
+                        </p>
+                        <% } %>
+                        <% } %>
                     </form>
                 </div>
             </div>
@@ -123,6 +124,11 @@
     function enterHelp(help) {
         var result = document.getElementById('result');
         result.value = help.id;
+        document.getElementById('form').submit();
+    }
+    function getID(delButton) {
+        var id = document.getElementById('id');
+        id.value = delButton.id;
         document.getElementById('form').submit();
     }
 </script>

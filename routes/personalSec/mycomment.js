@@ -56,6 +56,19 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 
 });
 
+router.post('/', function (req, res, next) {
+    var result = req.body.result;
+    console.log('result: ', result);
+
+    new Promise(
+        function (resolve, reject) {
+            resolve(encodeURIComponent(result[0]));
+        }
+    ).then(function (value) {
+        res.redirect('../exhibitionSec/articlePost?articleId=' + value);
+    });
+});
+
 /* Check user's authentication, if not logged in, redirect user to log in page */
 function authenticationMiddleware () {
     return function (req, res, next){

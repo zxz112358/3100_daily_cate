@@ -58,18 +58,57 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    var result = String(req.body.result).match(/[^\d]+|\d+/g);
-    console.log('result: ', result);
-
-    new Promise(
-        function (resolve, reject) {
-            test.select_all_client_article(req.user.username,function(num, articleList){
-                resolve(encodeURIComponent(articleList[result[0]].articleID));
-            });
+    var result = String(req.body.result);
+    var id = req.body.id;
+    if (req.body.result[0]){
+        new Promise(
+            function (resolve, reject) {
+                test.select_all_client_article(req.user.username,function(num, articleList){
+                    resolve(encodeURIComponent(articleList[result[0]].articleID));
+                });
+            }
+        ).then(function (value) {
+            res.redirect('../exhibitionSec/articlePost?articleId=' + value);
+        });
+    }
+    else{
+        var i=id.length;
+        var valid='';
+        for(var j=0;j<i;j++){
+            if(id[j]!==''){
+                valid = id[j];
+            }
         }
-    ).then(function (value) {
-        res.redirect('../exhibitionSec/articlePost?articleId=' + value);
-    });
+        console.log('valid: ',valid);
+        var test = require('../delete_article');
+        test.select_article(valid,function(article){
+            var parastart=article.parastart;
+            var parano=article.parano;
+            test.delete_article_comment(valid,function(result1){
+                if(result1==true){
+                    test.delete_followarticle(valid,function(result2){
+                        if(result2==true){
+                            test.delete_article(valid,function(result3){
+                                if(result3==true){
+                                    for(var i=0;i<parano;i++){
+                                        var id=parano+i;
+                                        test.delete_paragraph(id);
+                                        test.delete_picture(id);
+                                    }
+
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+        })
+        res.redirect('myhelp');
+    }
+
+
+
 });
 
 /* Check user's authentication, if not logged in, redirect user to log in page */

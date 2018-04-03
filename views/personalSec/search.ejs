@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= name%>-<%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <style>
+        .headtitle{
+            font-family:"Vladimir Script";
+            color:#884400;
+            font-size:50px;
+            font-weight:800;
+            margin-left: 10%;
+        }
+        .setfont{
+            font-family: "Vladimir Script";
+            font-weight:800;
+            font-size:25px;
+            color:#884400;
+        }
+        .arttit{
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:30px;
+            color:#884400;
+        }
+        .arttime{
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:15px;
+            color:#884400;
+        }
+        .artframe{
+            border:none;
+
+        }
+        .author{
+            text-align:right;
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:20px;
+            color:#884400;
+        }
+    </style>
+</head>
+
+<% include ../header.ejs %>
+
+<body background="../images/background7.jpg" style="background-size:100% 500px">
+
+<!--<a href = "./exhposting">Post new article</a>-->
+<div class="container" style="background-color:#FFCC00;padding-bottom:20px;margin-top:80px;width:55%;min-height:400px;margin-bottom: 100px">
+    <p class = "headtitle"><%= title %> posts</p>
+
+    <form method="post" id = 'form'>
+        <input style="display: none" id="results" name="results">
+        <div class="tab-content">
+            <!--display contents under 'all' tab-->
+            <div class="tab-pane active" id="results">
+                <% if (results.length != 0){
+                for (var i = 0; i < results.length; i++) {%>
+                <a href="#" id = '<%= 'all' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+                    <div class="d-flex w-80 flex-row">
+                        <img src="<%= '../exhibitionSec/pictures/' + (results[i].picturestart + results[i].pictureno - 1) %>" style="width:315px;height:270px">
+                        <div class="d-flex flex-column" style="margin-left:40px;width:330px;">
+                            <p class="arttit"><%=results[i].articlename%></p>
+                            <p class="arttime"><%=results[i].posttime%></p>
+                            <iframe src="<%= '../exhibitionSec/texts/' + results[i].parastart + '.txt' %>" class="artframe" id="textframe"></iframe>
+                            <script>
+                                var frame = document.getElementById('textframe');
+                                frame.onload = function () {
+                                    var body = frame.contentWindow.document.querySelector('body');
+                                    body.style.color = 'grey';
+                                    body.style.fontSize = '20px';
+                                    body.style.lineHeight = '20px';
+                                };
+                            </script>
+                            <p class="author"><%=results[i].authorname%></p>
+                        </div>
+                    </div>
+                </a>
+                <%  }
+                } else { %>
+                Can't find articles! Try other words.
+                <% } %>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function enterArticle(article) {
+        var results = document.getElementById('results');
+        results.value = article.id;
+        document.getElementById('form').submit();
+    }
+</script>
+<% include ../cprt.ejs %>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+</html>

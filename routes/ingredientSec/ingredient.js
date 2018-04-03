@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
                     if (num === 0){
                         var meat = undefined;
                     } else {
-                        var meat = fruitslist;
+                        var meat = meatlist;
                     }
                     test.select_article_list('grain', 'ingredient', function (num, grainlist) {
                         if (num === 0){
