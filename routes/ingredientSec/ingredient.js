@@ -60,16 +60,17 @@ router.post('/', function (req, res, next) {
     new Promise(
         function (resolve, reject) {
             if (result[0] === 'all'){
-                test.select_all_article('article', function(num, articleList){
+                test.select_all_article('ingredient', function(num, articleList){
                     resolve(encodeURIComponent(articleList[result[1]].articleID));
                 })
             } else {
-                test.select_article_list(result[0], 'article', function(num, articleList){
+                test.select_article_list(result[0], 'ingredient', function(num, articleList){
                     resolve(encodeURIComponent(articleList[result[1]].articleID));
                 })
             }
         }
     ).then(function (value) {
+        console.log('ingredient articleId: ', value);
         res.redirect('./ingredientPost?articleId=' + value);
     });
 });
