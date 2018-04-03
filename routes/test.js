@@ -553,9 +553,7 @@ function select_ingredient_list(tag){
     }
 
 });*/
-
 function select_user(name,callback){
-    //name.replace(/'/,"\'");
     var sel_username="select username,email,password,description from client where username="+'\''+name.replace(/'/,"\\\'")+'\'';
     connection.query(sel_username, function(error, results) {
         if (error) {
@@ -565,13 +563,22 @@ function select_user(name,callback){
             return callback(false);
         }
         //console.log(results.username);
-        Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
+        return callback(results[0]);
 
-        });
     });
 }
+
+/*test.select_user('i',function(user){
+
+    if (user==false){
+        console.log("no such person");
+    }
+    else{
+        console.log(user.description);
+
+    }
+
+});*/
 
 
 function follow(user1,user2) {
