@@ -24,12 +24,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    var comment = req.body.comment;
-
-    test.count_comment(function(commentNum){
-        test.insert_comment(commentNum+1, req.user.username, req.body.comment, req.query.articleId);
-    });
-
+    if (req.body.comment) {
+        test.count_comment(function (commentNum) {
+            test.insert_comment(commentNum + 1, req.user.username, req.body.comment, req.query.articleId);
+        });
+    }else{
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }
     res.redirect('back');
 });
 

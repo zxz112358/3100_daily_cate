@@ -22,12 +22,18 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
     var comment = req.body.comment;
+    if (comment){
+        test.count_comment(function(commentNum){
+            test.insert_comment(commentNum+1, req.user.username, req.body.comment, req.query.articleId);
+        });
 
-    test.count_comment(function(commentNum){
-        test.insert_comment(commentNum+1, req.user.username, req.body.comment, req.query.articleId);
-    });
-
-    res.redirect('back');
+        res.redirect('back');
+    }else{
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }
 });
 
 module.exports = router;

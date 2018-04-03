@@ -54,6 +54,7 @@ var myfollowing = require('./routes/personalSec/myfollowing');
 var myfollower = require('./routes/personalSec/myfollower');
 var mylike = require('./routes/personalSec/mylike');
 var userpostpage = require('./routes/personalSec/userpostpage');
+var search = require('./routes/personalSec/search');
 
 var test = require('./routes/test');
 
@@ -158,6 +159,7 @@ app.use('/personalSec/myfollower',myfollower);
 app.use('/personalSec/myfollowing',myfollowing);
 app.use('/personalSec/userpostpage',userpostpage);
 app.use('/personalSec/modifypage', modifypage);
+app.use('/personalSec/search',search);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

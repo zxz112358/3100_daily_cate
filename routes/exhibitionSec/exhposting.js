@@ -33,42 +33,46 @@ router.post('/', upload.any('picture'), function (req,res,next) {
     var title = req.body.title;
     var tag = req.body.tag;
     var type = req.body.type;
+    //
+    // console.log('title: ', title);
+    // console.log('text: ', text);
+    // console.log('pic: ', picture);
+    // console.log('tag: ', tag);
+    // console.log('type:', req.body.type);
+    // console.log((new Date()).toLocaleDateString());
+    if (text && picture && title && tag && type) {
+        test.count_paragraph_no(function (parastart) {
+            for (var j = 0; j < text.length; j++) {
+                console.log(text[j]);
+                fs.writeFile("routes/exhibitionSec/texts/" + (parastart + j + 1) + '.txt', text[j], function (error) {
+                    if (error) {
+                        console.log(error);
+                    }
+                });
+            }
 
-    console.log('title: ', title);
-    console.log('text: ', text);
-    console.log('pic: ', picture);
-    console.log('tag: ', tag);
-    console.log('type:', req.body.type);
-    console.log((new Date()).toLocaleDateString());
-
-    test.count_paragraph_no(function(parastart){
-        for (var j = 0; j < text.length; j++) {
-            console.log(text[j]);
-            fs.writeFile("routes/exhibitionSec/texts/" + (parastart + j + 1) + '.txt', text[j], function (error) {
-                if (error){
-                    console.log(error);
-                }
-            });
-        }
-
-        test.count_picture_no(function(picstart){
-            test.count_article_no(function(result){
-                console.log('arti: ', result + 1, 'title: ', title, 'username: ', req.user.username, 'tag:', tag, 'picnum: ', picture.length, 'picstart: ', picstart+1, 'textnum: ', text.length, 'parastart: ', parastart + 1)
+            test.count_picture_no(function (picstart) {
+                test.count_article_no(function (result) {
+                    console.log('arti: ', result + 1, 'title: ', title, 'username: ', req.user.username, 'tag:', tag, 'picnum: ', picture.length, 'picstart: ', picstart + 1, 'textnum: ', text.length, 'parastart: ', parastart + 1)
 
 
+                    test.insert_article(result + 1, title, req.user.username, tag, (new Date()).toLocaleDateString(), picture.length, picstart + 1, text.length, parastart + 1, type);
 
-                test.insert_article(result + 1, title, req.user.username, tag,(new Date()).toLocaleDateString(), picture.length, picstart + 1, text.length, parastart + 1,type);
-
-                if (type === 'article'){
-                    res.redirect('./exhibition');
-                }
-                else if (type === 'help') {
-                    res.redirect('../askingSec/asking');
-                }
+                    if (type === 'article') {
+                        res.redirect('./exhibition');
+                    }
+                    else if (type === 'help') {
+                        res.redirect('../askingSec/asking');
+                    }
+                });
             });
         });
-    });
-
+    }else{
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }
 
 });
 

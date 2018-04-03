@@ -60,13 +60,20 @@ router.post('/', function (req, res, next) {
     var result = req.body.result;
     console.log('result: ', result);
 
-    new Promise(
-        function (resolve, reject) {
-            resolve(encodeURIComponent(result[0]));
-        }
-    ).then(function (value) {
-        res.redirect('../exhibitionSec/articlePost?articleId=' + value);
-    });
+    if (result[0] !== '' && result[0] !== 'undefined') {
+        new Promise(
+            function (resolve, reject) {
+                resolve(encodeURIComponent(result[0]));
+            }
+        ).then(function (value) {
+            res.redirect('../exhibitionSec/articlePost?articleId=' + value);
+        });
+    }else{
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }
 });
 
 /* Check user's authentication, if not logged in, redirect user to log in page */

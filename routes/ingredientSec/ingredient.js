@@ -57,22 +57,29 @@ router.post('/', function (req, res, next) {
     var result = String(req.body.result).match(/[^\d]+|\d+/g);//result[0] is tag, result[1] is index
     console.log('result: ', result);
 
-    new Promise(
-        function (resolve, reject) {
-            if (result[0] === 'all'){
-                test.select_all_article('ingredient', function(num, articleList){
-                    resolve(encodeURIComponent(articleList[result[1]].articleID));
-                })
-            } else {
-                test.select_article_list(result[0], 'ingredient', function(num, articleList){
-                    resolve(encodeURIComponent(articleList[result[1]].articleID));
-                })
+    if (result[0] !== '' && result[0] !== 'undefined') {
+        new Promise(
+            function (resolve, reject) {
+                if (result[0] === 'all') {
+                    test.select_all_article('ingredient', function (num, articleList) {
+                        resolve(encodeURIComponent(articleList[result[1]].articleID));
+                    })
+                } else {
+                    test.select_article_list(result[0], 'ingredient', function (num, articleList) {
+                        resolve(encodeURIComponent(articleList[result[1]].articleID));
+                    })
+                }
             }
-        }
-    ).then(function (value) {
-        console.log('ingredient articleId: ', value);
-        res.redirect('./ingredientPost?articleId=' + value);
-    });
+        ).then(function (value) {
+            console.log('ingredient articleId: ', value);
+            res.redirect('./ingredientPost?articleId=' + value);
+        });
+    }else{
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }
 });
 
 module.exports = router;
