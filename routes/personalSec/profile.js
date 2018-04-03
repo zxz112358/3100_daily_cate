@@ -4,6 +4,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var router = express.Router();
 
 var test = require('../test');
+var delete_article = require('../delete_article');
 var connection = test.connection;
 var fs=require("fs");
 
@@ -76,20 +77,19 @@ router.post('/', function (req, res, next) {
             }
         }
         console.log('valid: ',valid);
-        var test = require('../delete_article');
-        test.select_article(valid,function(article){
+        delete_article.select_article(valid,function(article){
             var parastart=article.parastart;
             var parano=article.parano;
-            test.delete_article_comment(valid,function(result1){
+            delete_article.delete_article_comment(valid,function(result1){
                 if(result1==true){
-                    test.delete_followarticle(valid,function(result2){
+                    delete_article.delete_followarticle(valid,function(result2){
                         if(result2==true){
-                            test.delete_article(valid,function(result3){
+                            delete_article.delete_article(valid,function(result3){
                                 if(result3==true){
                                     for(var i=0;i<parano;i++){
                                         var id=parano+i;
-                                        test.delete_paragraph(id);
-                                        test.delete_picture(id);
+                                        delete_article.delete_paragraph(id);
+                                        delete_article.delete_picture(id);
                                     }
 
                                 }

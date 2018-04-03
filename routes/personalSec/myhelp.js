@@ -4,6 +4,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var router = express.Router();
 
 var test = require('../test');
+var delete_article = require('../delete_article');
 var connection = test.connection;
 var fs=require("fs");
 
@@ -60,40 +61,37 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 router.post('/', function (req, res, next) {
     var result = String(req.body.result);
     var id = req.body.id;
+
+    console.log('result0: ', result[0]);
+    console.log('id: ', id);
+    console.log(req.body.result[0]);
     if (req.body.result[0]){
         new Promise(
             function (resolve, reject) {
-                test.select_all_client_article(req.user.username,function(num, articleList){
-                    resolve(encodeURIComponent(articleList[result[0]].articleID));
-                });
+                resolve(encodeURIComponent(result[0]));
             }
         ).then(function (value) {
             res.redirect('../exhibitionSec/articlePost?articleId=' + value);
         });
     }
-    else{
-        var i=id.length;
-        var valid='';
-        for(var j=0;j<i;j++){
-            if(id[j]!==''){
-                valid = id[j];
-            }
-        }
+    else {
+        var valid = id;
+
         console.log('valid: ',valid);
-        var test = require('../delete_article');
-        test.select_article(valid,function(article){
+
+        delete_article.select_article(valid,function(article){
             var parastart=article.parastart;
             var parano=article.parano;
-            test.delete_article_comment(valid,function(result1){
+            delete_article.delete_article_comment(valid,function(result1){
                 if(result1==true){
-                    test.delete_followarticle(valid,function(result2){
+                    delete_article.delete_followarticle(valid,function(result2){
                         if(result2==true){
-                            test.delete_article(valid,function(result3){
+                            delete_article.delete_article(valid,function(result3){
                                 if(result3==true){
                                     for(var i=0;i<parano;i++){
                                         var id=parano+i;
-                                        test.delete_paragraph(id);
-                                        test.delete_picture(id);
+                                        delete_article.delete_paragraph(id);
+                                        delete_article.delete_picture(id);
                                     }
 
                                 }
@@ -104,7 +102,7 @@ router.post('/', function (req, res, next) {
             });
 
         })
-        res.redirect('myhelp');
+        res.redirect('back');
     }
 
 
