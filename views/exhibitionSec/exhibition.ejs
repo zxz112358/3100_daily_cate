@@ -49,7 +49,7 @@
 <body background="../images/background7.jpg" style="background-size:100% 500px">
 
 <!--<a href = "./exhposting">Post new article</a>-->
-<div class="container" style="background-color:#FFCC00;padding-bottom:20px;margin-top:80px">
+<div class="container" style="background-color:#FFCC00;padding-bottom:20px;margin-top:80px;width:55%">
     <p class = "headtitle"><%= title %> posts</p>
     <ul class="nav nav-tabs">
         <li class="active"><a href="#all" data-toggle="tab" class="setfont">All</a></li>
@@ -69,7 +69,7 @@
                 <a href='#' id = '<%= 'all' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                     <div class="d-flex w-80 flex-row">
                         <img src="<%= '../exhibitionSec/pictures/' + (allArticle[i].picturestart + allArticle[i].pictureno - 1) %>" style="width:315px;height:270px">
-                        <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
+                        <div class="d-flex flex-column" style="margin-left:40px;width:330px;">
                             <p class="arttit"><%=allArticle[i].articlename%></p>
                             <p class="arttime"><%=allArticle[i].posttime%></p>
                             <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" class="artframe" id="textframe"></iframe>
@@ -187,7 +187,7 @@
         document.getElementById('form').submit();
     }
 </script>
-
+<% include ../cprt.ejs %>
 </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
