@@ -34,8 +34,10 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
         }
         else{
             var string=[];
+            var string2=[];
             for(var i=0;i<result1;i++){
                 string[i]='../routes/pictures/'+(result2[i].picturestart+result2[i].pictureno-1).toString();
+                string2[i]=result2[i].content;
             }
             res.render('personalSec/mycomment', {
                 title: 'MyComment',
@@ -45,7 +47,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 commentno:result1,
                 result:result2,
                 coverpic:string,
-                text:result2.content
+                text:string2
             });
         }
     });
