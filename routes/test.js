@@ -235,15 +235,7 @@ function insert_ingredient(ingredientID,ingredientname,auname,tag,posttime,picNo
 }
 */
 //delete an article with the given articleID
-function delete_article(arID){
-    var de_article="delete from articles where articleID="+arID;
-    connection.query(de_article, function(error, results) {
-        if (error) {
-            return console.error(error);
-        }
-        console.log(results);
-    });
-}
+
 /*function delete_help(helpID){
     var de_help="delete from help where helpID="+helpID;
     connection.query(de_help, function(error, results) {
@@ -811,6 +803,34 @@ function count_comment(callback){
     }
 
 });*/
+function delete_article_comment(arID,callback){
+    var de_article_comment="delete from comments where articleID="+arID;
+    connection.query(de_article_comment, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(true);
+    });
+}
+function delete_followarticle(arID,callback){
+    var de_followarticle="delete from followarticle where article="+arID;
+    connection.query(de_followarticle, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(true);
+    });
+}
+//delete an article with the given articleID
+function delete_article(arID,callback){
+    var de_article="delete from articles where articleID="+arID;
+    connection.query(de_article, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(true);
+    });
+}
 module.exports={
     connection:connection,
     insert_client:insert_client,
@@ -857,7 +877,10 @@ module.exports={
     //select_all_ingredient:select_all_ingredient
     unfollow:unfollow,
     select_article_and_comment:select_article_and_comment,
-    count_comment:count_comment
+    count_comment:count_comment,
+    delete_followarticle:delete_followarticle,
+    delete_article_comment:delete_article_comment
+
 
 };
 
