@@ -35,9 +35,9 @@ var flash = require('connect-flash');
 
 var index = require('./routes/index');
 var ingredient = require('./routes/ingredientSec/ingredient');
+var ingredientPost = require('./routes/ingredientSec/ingredientPost');
 var ingredient_vegetables = require('./routes/ingredientSec/ingredient_vegetables');
 var ingredient_fruits = require('./routes/ingredientSec/ingredient_fruits');
-var ingredientPost= require('./routes/ingredientSec/ingredient');
 var exhibition = require('./routes/exhibitionSec/exhibition');
 var exhposting = require('./routes/exhibitionSec/exhposting');
 var articlePost = require('./routes/exhibitionSec/articlePost');

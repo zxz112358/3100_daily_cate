@@ -12,36 +12,68 @@ router.get('/', function(req, res, next) {
         else{
             var all = result2;
         }
-
-        test.select_article_list('vegetables', 'ingredient', function (num, vegetableslist) {
+        test.select_article_list('vegetable', 'ingredient', function (num, vegetablelist) {
             if (num === 0){
-                var vegetables = undefined;
+                var vegetable = undefined;
             } else {
-                var vegetables = vegetableslist;
+                var vegetable = vegetablelist;
             }
-
-            test.select_article_list('fruits', 'ingredient', function (num, fruitslist) {
+            test.select_article_list('fruit', 'ingredient', function (num, fruitlist) {
                 if (num === 0){
-                    var fruits = undefined;
+                    var fruit = undefined;
                 } else {
-                    var fruits = fruitslist;
+                    var fruit = fruitlist;
                 }
-
+                test.select_article_list('meat', 'ingredient', function (num, meatlist) {
+                    if (num === 0){
+                        var meat = undefined;
+                    } else {
+                        var meat = fruitslist;
+                    }
+                    test.select_article_list('grain', 'ingredient', function (num, grainlist) {
+                        if (num === 0){
+                            var grain = undefined;
+                        } else {
+                            var grain = grainlist;
+                        }
                         res.render('ingredientSec/ingredient', {
                             title: 'Ingredient',
                             name:'Daily Cate',
                             user: req.user,
                             allArticle: all,
-                            vegetables: vegetables,
-                            fruits:fruits
+                            vegetable: vegetable,
+                            fruit:fruit,
+                            meat:meat,
+                            grain:grain
                         });
                     });
                 });
             });
+        });
+    });
 });
 
+router.post('/', function (req, res, next) {
+    var result = String(req.body.result).match(/[^\d]+|\d+/g);//result[0] is tag, result[1] is index
+    console.log('result: ', result);
 
-
+    new Promise(
+        function (resolve, reject) {
+            if (result[0] === 'all'){
+                test.select_all_article('ingredient', function(num, articleList){
+                    resolve(encodeURIComponent(articleList[result[1]].articleID));
+                })
+            } else {
+                test.select_article_list(result[0], 'ingredient', function(num, articleList){
+                    resolve(encodeURIComponent(articleList[result[1]].articleID));
+                })
+            }
+        }
+    ).then(function (value) {
+        console.log('ingredient articleId: ', value);
+        res.redirect('./ingredientPost?articleId=' + value);
+    });
+});
 
 module.exports = router;
 console.log("this is the ingredient page!");
