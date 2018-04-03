@@ -622,7 +622,21 @@ test.count_comment(function(length,array){
     }
 
 });*/
+function check_whether_like_article(username,arid,callback) {
+    var che_whether_like_article = "select * from followarticle where user ="+'\''+username.replace(/'/,"\\\'")+'\''+" and article="+arid;
+    connection.query(che_whether_like_article, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        if (Object.keys(results).length==0){
+            return callback(false);
+        }
+        return callback(true);
+    });
 
+}/*test.check_whether_like_article('1',4,function(result){
+    console.log(result);
+});*/
 module.exports={
     connection:connection,
     insert_client:insert_client,
@@ -657,6 +671,7 @@ module.exports={
     delete_article_comment:delete_article_comment,
     like_article:like_article,
     check_followers:check_followers,
-    check_my_follow:check_my_follow
+    check_my_follow:check_my_follow,
+    check_whether_like_article:check_whether_like_article
 
 };
