@@ -37,8 +37,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
             for(var i=0;i<result1;i++){
                 string[i]='../routes/pictures/'+(result2[i].picturestart+result2[i].pictureno-1).toString();
             }
-            re
-            s.render('personalSec/mycomment', {
+            res.render('personalSec/mycomment', {
                 title: 'MyComment',
                 name: 'Daily Cate',
                 user: req.user,
