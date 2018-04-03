@@ -411,6 +411,7 @@ function select_article_like(username,callback) {
         return callback(Object.keys(results).length,results);
     });
 }
+
 /*test.select_article_like('1',function(result1,result2){
     //print the table includes all user2
     if(result1==0){
@@ -424,19 +425,14 @@ function select_article_like(username,callback) {
 
 function search(name,callback){
     //name.replace(/'/,"\'");
-    var an="select articlename, authorname from articles where authorname like "+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\''+"or articlename like"+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\'';
+    var an="select * from articles where authorname like "+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\''+"or articlename like"+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\'';
     connection.query(an, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        if(Object.keys(results).length===0){
-            return callback(false);
+        else {
+            return callback(results);
         }
-        Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
-
-        });
     });
     //return T or F
 }
@@ -478,6 +474,15 @@ function select_k(callback){
 });*/
 function unfollow(user1,user2) {
     var unfo = "delete from follow where user1="+'\''+user1+'\''+" and user2 ="+'\''+user2+'\'';
+    connection.query(unfo,function (error,results) {
+        if (error){
+            return console.error(error);
+        }
+        console.log(results);
+    });
+}
+function unlike(username,articleid) {
+    var unfo = "delete from followarticle where user="+'\''+username+'\''+" and article ="+articleid;
     connection.query(unfo,function (error,results) {
         if (error){
             return console.error(error);
@@ -535,7 +540,14 @@ function count_article_no(callback){
         if (error) {
             return console.error(error);
         }
-        return callback(Object.keys(results).length,results);
+        var index=Object.keys(results).length;
+        if(index==0){
+            return callback(0);
+        }
+        else{
+            return callback(results[index-1].articleID);
+        }
+
     });
 
 }
@@ -545,7 +557,13 @@ function count_paragraph_no(callback){
         if (error) {
             return console.error(error);
         }
-        return callback(Object.keys(results).length,results);
+        var index=Object.keys(results).length;
+        if(index==0){
+            return callback(0);
+        }
+        else{
+            return callback(results[index-1].paraID);
+        }
 
     });
 
@@ -556,7 +574,13 @@ function count_picture_no(callback){
         if (error) {
             return console.error(error);
         }
-        return callback(Object.keys(results).length,results);
+        var index=Object.keys(results).length;
+        if(index==0){
+            return callback(0);
+        }
+        else{
+            return callback(results[index-1].pictureID);
+        }
 
     });
 
@@ -567,50 +591,30 @@ function count_comment(callback){
         if (error) {
             return console.error(error);
         }
-        return callback(Object.keys(results).length,results);
-
+        var index=Object.keys(results).length;
+        if(index==0){
+            return callback(0);
+        }
+        else{
+            return callback(results[index-1].commentID);
+        }
     });
 }
 
-/*test.count_article_no(function(length,array){
-    console.log(length);
-    if(length==0){
-        console.log(0);
-    }
-    else{
-        console.log(array[length-1].articleID);
-    }
+function check_whether_like_article(username,arid,callback) {
+    var che_whether_like_article = "select * from followarticle where user ="+'\''+username.replace(/'/,"\\\'")+'\''+" and article="+arid;
+    connection.query(che_whether_like_article, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        if (Object.keys(results).length==0){
+            return callback(false);
+        }
+        return callback(true);
+    });
 
-});
-test.count_picture_no(function(length,array){
-    console.log(length);
-    if(length==0){
-        console.log(0);
-    }
-    else{
-        console.log(array[length-1].pictureID);
-    }
-
-});
-test.count_paragraph_no(function(length,array){
-    console.log(length);
-    if(length==0){
-        console.log(0);
-    }
-    else{
-        console.log(array[length-1].paraID);
-    }
-
-});
-test.count_comment(function(length,array){
-    console.log(length);
-    if(length==0){
-        console.log(0);
-    }
-    else{
-        console.log(array[length-1].commentID);
-    }
-
+}/*test.check_whether_like_article('1',4,function(result){
+    console.log(result);
 });*/
 module.exports={
     connection:connection,
@@ -639,8 +643,14 @@ module.exports={
     select_article_like:select_article_like,
     select_all_article:select_all_article,
     unfollow:unfollow,
+    unlike:unlike,
     select_article_and_comment:select_article_and_comment,
     count_comment:count_comment,
     delete_followarticle:delete_followarticle,
-    delete_article_comment:delete_article_comment
+    delete_article_comment:delete_article_comment,
+    like_article:like_article,
+    check_followers:check_followers,
+    check_my_follow:check_my_follow,
+    check_whether_like_article:check_whether_like_article
+
 };

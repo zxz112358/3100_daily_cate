@@ -195,7 +195,10 @@
 <body background="../images/background7.jpg" style="background-size:100% 500px">
 <div class="container-fluid" style="color:#773300;padding-top:10px;text-align:center;height:200px;background-image:url('../../images/posttop.jpg');background-size:100% 100%;">
     <br><h1><%= article.articlename%></h1>
-    <h2><%= article.authorname%></h2>
+    <form method="post" id = 'form'>
+        <input style="display: none" id="author" name="author">
+    <h2 href="#" id ="<%= article.authorname%>" onclick="enterpage(this)"><img style="height:70px;width:70px" src="../profileimgs/<%=article.authorname%>"><br><%= article.authorname%></h2>
+    </form>
 </div>
 
 
@@ -215,11 +218,18 @@
                         </div>
                     </div>
                     <% } %>
-
                 </div>
             </div>
         </div>
     </div>
+    <form method="post" id="likeform">
+        <input style="display: none" id="likeinput" name="operation">
+        <% if (liked){ %>
+            <button id="unlike" onclick="like_operation(this)">Unlike!</button>
+        <% } else{ %>
+            <button id="like" onclick="like_operation(this)">Like!</button>
+        <% } %>
+    </form>
 </div>
 
 <%if (comment){ %>
@@ -244,5 +254,23 @@
 
 <% include ../cprt.ejs %>
 </body>
+
+<script>
+    function like_operation(button) {
+        new Promise(function (resolve, reject) {
+            var form = document.getElementById('likeform');
+            document.getElementById('likeinput').value = button.id;
+            resolve();
+        }).then(function () {
+            form.submit();
+        })
+    }
+    function enterpage(user) {
+        var author = document.getElementById('author');
+        author.value = user.id;
+        document.getElementById('form').submit();
+    }
+
+</script>
 
 </html>

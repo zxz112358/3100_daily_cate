@@ -4,6 +4,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var router = express.Router();
 
 var test = require('../test');
+var delete_article = require('../delete_article');
 var connection = test.connection;
 var fs=require("fs");
 
@@ -58,18 +59,54 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    var result = String(req.body.result).match(/[^\d]+|\d+/g);
-    console.log('result: ', result);
+    var id = req.body.id;
+    var valid = (typeof (id) === "string")? id: id[0];
 
-    new Promise(
-        function (resolve, reject) {
-            test.select_all_client_article(req.user.username,function(num, articleList){
-                resolve(encodeURIComponent(articleList[result[0]].articleID));
+    if (valid) {
+        console.log('valid: ',valid);
+        console.log('id: ', id);
+
+        delete_article.select_article(valid,function(article){
+            var parastart=article.parastart;
+            var parano=article.parano;
+            delete_article.delete_article_comment(valid,function(result1){
+                if(result1==true){
+                    delete_article.delete_followarticle(valid,function(result2){
+                        if(result2==true){
+                            delete_article.delete_article(valid,function(result3){
+                                if(result3==true){
+                                    for(var i=0;i<parano;i++){
+                                        var id=parano+i;
+                                        delete_article.delete_paragraph(id);
+                                        delete_article.delete_picture(id);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }
             });
-        }
-    ).then(function (value) {
-        res.redirect('../exhibitionSec/articlePost?articleId=' + value);
-    });
+        })
+        res.redirect('back');
+    }else if (req.body.searchname){
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }else if (req.body.result){
+        console.log('result: ', result);
+        var result = (typeof (req.body.result) === "string")? req.body.result: req.body.result[0];
+        new Promise(
+            function (resolve, reject) {
+                resolve(encodeURIComponent(result));
+            }
+        ).then(function (value) {
+            res.redirect('../askingSec/helpPost?articleId=' + value);
+        });
+    }
+
+
+
 });
 
 /* Check user's authentication, if not logged in, redirect user to log in page */

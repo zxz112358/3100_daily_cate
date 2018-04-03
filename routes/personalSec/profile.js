@@ -4,6 +4,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var router = express.Router();
 
 var test = require('../test');
+var delete_article = require('../delete_article');
 var connection = test.connection;
 var fs=require("fs");
 
@@ -46,42 +47,65 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                     result: result2,
                     coverpic:string1,
                     text:string3
-
                 });
             }
-
         }
-
-
     );
-
 });
 
 router.post('/', function (req, res, next) {
-    var result = String(req.body.result).match(/[^\d]+|\d+/g);
     var id = req.body.id;
+    if(id)
+        var valid = (typeof (id) === "string")? id: id[0];
 
-    if (req.body.result[0] !== ''){
+    if (valid) {
+        console.log('id: ', req.body.id);
+        console.log('valid: ',valid);
+        delete_article.select_article(valid,function(article){
+            var parastart=article.parastart;
+            var parano=article.parano;
+            delete_article.delete_article_comment(valid,function(result1){
+                if(result1==true){
+                    delete_article.delete_followarticle(valid,function(result2){
+                        if(result2==true){
+                            delete_article.delete_article(valid,function(result3){
+                                if(result3==true){
+                                    for(var i=0;i<parano;i++){
+                                        var id=parano+i;
+                                        delete_article.delete_paragraph(id);
+                                        delete_article.delete_picture(id);
+                                    }
+
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+
+        })
+        res.redirect('back');
+    }else if (req.body.searchname){
+        //search handling
+        console.log('search: ', req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    } else if (req.body.result){
+        console.log('result: ', req.body.result);
+        var result = (typeof(req.body.result)==="string")? req.body.result:req.body.result[0];
         new Promise(
             function (resolve, reject) {
-                test.select_all_client_article(req.user.username, function (num, articleList) {
-                    resolve(encodeURIComponent(articleList[result[0]].articleID));
-                });
+                console.log('username: ', req.user.username);
+                resolve(encodeURIComponent(result));
+                console.log('articleId: ', result);
             }
         ).then(function (value) {
             res.redirect('../exhibitionSec/articlePost?articleId=' + value);
         });
     }else {
-        var i=id.length;
-        var valid='';
-        for(var j=0;j<i;j++){
-            if(id[j]!==''){
-                valid = id[j];
-            }
-        }
-        console.log('valid: ',valid);
-        test.delete_article(valid);
-        res.redirect('profile');
+        console.log('search: ', req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
     }
     // }
 });

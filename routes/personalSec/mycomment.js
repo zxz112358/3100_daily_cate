@@ -33,19 +33,47 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
             console.log("you do not have any comment");
         }
         else{
+            var string=[];
+            var string2=[];
+            for(var i=0;i<result1;i++){
+                string[i]='../exhibitionSec/pictures/'+(result2[i].picturestart+result2[i].pictureno-1).toString();
+                string2[i]=result2[i].content;
+            }
             res.render('personalSec/mycomment', {
                 title: 'MyComment',
                 name: 'Daily Cate',
                 user: req.user,
                 imgpath: '../profileimgs/' + req.user.username,
                 commentno:result1,
-                result:result2
+                result:result2,
+                coverpic:string,
+                text:string2
             });
         }
     });
 
 
 
+});
+
+router.post('/', function (req, res, next) {
+    var result = req.body.result;
+    console.log('result: ', result);
+
+    if (result !== '' && result !== undefined) {
+        new Promise(
+            function (resolve, reject) {
+                resolve(encodeURIComponent(result[0]));
+            }
+        ).then(function (value) {
+            res.redirect('../exhibitionSec/articlePost?articleId=' + value);
+        });
+    }else{
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }
 });
 
 /* Check user's authentication, if not logged in, redirect user to log in page */

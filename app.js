@@ -36,8 +36,6 @@ var flash = require('connect-flash');
 var index = require('./routes/index');
 var ingredient = require('./routes/ingredientSec/ingredient');
 var ingredientPost = require('./routes/ingredientSec/ingredientPost');
-var ingredient_vegetables = require('./routes/ingredientSec/ingredient_vegetables');
-var ingredient_fruits = require('./routes/ingredientSec/ingredient_fruits');
 var exhibition = require('./routes/exhibitionSec/exhibition');
 var exhposting = require('./routes/exhibitionSec/exhposting');
 var articlePost = require('./routes/exhibitionSec/articlePost');
@@ -47,6 +45,7 @@ var signup = require('./routes/personalSec/signup');
 var signin = require('./routes/personalSec/signin');
 var signout = require('./routes/personalSec/signout');
 var profile = require('./routes/personalSec/profile');
+var search = require('./routes/personalSec/search');
 var myhelp = require('./routes/personalSec/myhelp');
 var modifypage = require('./routes/personalSec/modifypage');
 var homepage = require('./routes/homepage/homepage');
@@ -55,6 +54,7 @@ var myfollowing = require('./routes/personalSec/myfollowing');
 var myfollower = require('./routes/personalSec/myfollower');
 var mylike = require('./routes/personalSec/mylike');
 var userpostpage = require('./routes/personalSec/userpostpage');
+var search = require('./routes/personalSec/search');
 
 var test = require('./routes/test');
 
@@ -140,8 +140,6 @@ app.use(function(req, res, next){
 
 app.use('/', index);
 app.use('/ingredientSec/ingredient', ingredient);
-app.use('/ingredientSec/ingredient_vegetables', ingredient_vegetables);
-app.use('/ingredientSec/ingredient_fruits', ingredient_fruits);
 app.use('/ingredientSec/ingredientPost', ingredientPost);
 app.use('/exhibitionSec/exhibition', exhibition);
 app.use('/exhibitionSec/exhposting', exhposting);
@@ -152,6 +150,7 @@ app.use('/personalSec/signup', signup);
 app.use('/personalSec/signin', signin);
 app.use('/personalSec/signout', signout);
 app.use('/personalSec/profile', profile);
+app.use('/personalSec/search', search);
 app.use('/personalSec/myhelp', myhelp);
 app.use('/homepage/homepage',homepage);
 app.use('/personalSec/mycomment',mycomment);
@@ -160,6 +159,7 @@ app.use('/personalSec/myfollower',myfollower);
 app.use('/personalSec/myfollowing',myfollowing);
 app.use('/personalSec/userpostpage',userpostpage);
 app.use('/personalSec/modifypage', modifypage);
+app.use('/personalSec/search',search);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

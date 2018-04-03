@@ -10,10 +10,18 @@
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
 <div class="container-fluid" style="padding: 10px; background-color: #ffc107">
-    <img src="../images/pic.jpg" class="img-thumbnail img-circle" style="width: 60px;margin-left: 15.1cm;margin-top:12px">
+    <img src="../profileimgs/<%=checked_user.username%>" class="img-thumbnail img-circle" style="width: 60px;margin-left: 15.1cm;margin-top:12px">
     <p>
     <h5 class="text-center"><%=checked_user.username%><br><small><%=checked_user.description%></small></h5>
     </p>
+    <form id="followform">
+        <input id="followinput" name="follow_operation">
+        <% if (followed) {%>
+            <button id="unfollow" onclick="follow_operation(this)">Unfollow</button>
+        <% } else {%>
+            <button id="follow" onclick="follow_operation(this)">Follow</button>
+        <% } %>
+    </form>
 </div>
 <div class="container-fluid" style="padding: 10px; background-color: #efa2a9">
     <div class="row">
@@ -63,6 +71,15 @@
         var result = document.getElementById('result');
         result.value = article.id;
         document.getElementById('form').submit();
+    }
+    function follow_operation(button) {
+        new Promise(function (resolve, reject) {
+            var form = document.getElementById('followform');
+            document.getElementById('followinput').value = button.id;
+            resolve();
+        }).then(function () {
+            form.submit();
+        })
     }
 </script>
 

@@ -133,9 +133,9 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto" style="float: right;">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" name="search" placeholder="Type in names" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <form class="form-inline my-2 my-lg-0" id="searchform" method="post">
+                <input class="form-control mr-sm-2" name="searchname" placeholder="Type in names" aria-label="Search">
+                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
             </form>
             <% if (isAuthenticated == false || user == null){ %>
             <li class="nav-item">
