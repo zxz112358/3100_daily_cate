@@ -20,6 +20,16 @@ router.get('/', function(req, res, next) {
     });
 });
 
+router.post('/', function(req, res, next) {
+    var comment = req.body.comment;
+
+    test.count_comment(function(commentNum){
+        test.insert_comment(commentNum+1, req.user.username, req.body.comment, req.query.articleId);
+    });
+
+    res.redirect('back');
+});
+
 module.exports = router;
 
 
