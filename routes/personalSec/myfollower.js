@@ -53,12 +53,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 follower:result2,
                 followerimg:string
             });
-            router.post('/', function (req, res, next) {
-                var follower = String(req.body.follower);//username
-                var username = encodeURIComponent(follower);
-                res.redirect('./userpostpage?username=' + username);
 
-            });
 
         }
 
@@ -68,10 +63,17 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    //search handling
-    console.log(req.body.searchname);
-    var searchname = encodeURIComponent(req.body.searchname);
-    res.redirect('../personalSec/search?searchname=' + searchname);
+
+    if (req.body.follower) {
+        var follower = String(req.body.follower);//username
+        var username = encodeURIComponent(follower);
+        res.redirect('./userpostpage?username=' + username);
+    }else {
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }
 });
 
 

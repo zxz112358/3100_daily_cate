@@ -23,21 +23,30 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     var comment = req.body.comment;
     var like_operation = req.body.operation;
-    if (comment || like_operation) {
+    var authorname = String(req.body.author);
+
+    if (comment || like_operation|| authorname) {
         if (comment) {
             //submit comment
             test.count_comment(function (commentNum) {
                 test.insert_comment(commentNum + 1, req.user.username, req.body.comment, req.query.articleId);
             });
+            res.redirect('back');
         }
         //like & unlike
         console.log('like operation: ', like_operation);
         if (like_operation === 'like') {
             test.like_article(req.query.articleId, req.user.username);
+            res.redirect('back');
         } else if (like_operation === 'unlike') {
-            test.unlike(req.user.username, req.query.articleId)
+            test.unlike(req.user.username, req.query.articleId);
+            res.redirect('back');
         }
-        res.redirect('back');
+        if (authorname){
+            var username = encodeURIComponent(authorname);
+            res.redirect('../personalSec/userpostpage?username=' + username);
+        }
+
     }else{
         //search handling
         console.log(req.body.searchname);

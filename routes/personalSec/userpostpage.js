@@ -13,7 +13,8 @@ router.get('/', function(req, res, next) {
                 name:'Daily Cate',
                 user: req.user,
                 checked_user: checked_user,
-                article: article
+                article: article,
+                followed:false
             });
         })
     });

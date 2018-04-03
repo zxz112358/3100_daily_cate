@@ -63,6 +63,7 @@ router.post('/', function (req, res, next) {
     var followinguser = String(req.body.followinguser);//username
     var username = encodeURIComponent(followinguser);
     var id = req.body.id;
+    console.log('ssss ',followinguser);
     console.log(id);
     if (req.body.followinguser) {
         if (id) {
