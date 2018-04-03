@@ -56,10 +56,10 @@
         <input style="display: none" id="results" name="results">
         <div class="tab-content">
             <!--display contents under 'all' tab-->
-            <div class="tab-pane active" id="results">
+            <div class="tab-pane active">
                 <% if (results.length != 0){
                 for (var i = 0; i < results.length; i++) {%>
-                <a href="#" id = '<%= 'all' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
+                <a href="#" id = '<%= results[i].articleID %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
                     <div class="d-flex w-80 flex-row">
                         <img src="<%= '../exhibitionSec/pictures/' + (results[i].picturestart + results[i].pictureno - 1) %>" style="width:315px;height:270px">
                         <div class="d-flex flex-column" style="margin-left:40px;width:330px;">
