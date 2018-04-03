@@ -54,28 +54,11 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    var result = req.body.result;
-    var id = req.body.id;
-    console.log('result: ', result);
+    if (req.body.id) {
+        console.log('id: ', req.body.id);
+        var id = req.body.id;
+        var valid = (typeof (id) === "string")? id: id[0];
 
-    if (req.body.result[0]){
-        new Promise(
-            function (resolve, reject) {
-                console.log('username: ', req.user.username);
-                resolve(encodeURIComponent(result[0]));
-                console.log('articleId: ', result[0]);
-            }
-        ).then(function (value) {
-            res.redirect('../exhibitionSec/articlePost?articleId=' + value);
-        });
-    }else{
-        var i=id.length;
-        var valid='';
-        for(var j=0;j<i;j++){
-            if(id[j]!==''){
-                valid = id[j];
-            }
-        }
         console.log('valid: ',valid);
         delete_article.select_article(valid,function(article){
             var parastart=article.parastart;
@@ -101,6 +84,27 @@ router.post('/', function (req, res, next) {
 
         })
         res.redirect('profile');
+    }else if (req.body.searchname){
+        //search handling
+        console.log('search: ', req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    } else if (req.body.result){
+        console.log('result: ', req.body.result);
+        var result = req.body.result;
+        new Promise(
+            function (resolve, reject) {
+                console.log('username: ', req.user.username);
+                resolve(encodeURIComponent(result));
+                console.log('articleId: ', result);
+            }
+        ).then(function (value) {
+            res.redirect('../exhibitionSec/articlePost?articleId=' + value);
+        });
+    }else {
+        console.log('search: ', req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
     }
     // }
 });

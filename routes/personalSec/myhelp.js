@@ -61,6 +61,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 router.post('/', function (req, res, next) {
     var result = req.body.result;
     var id = req.body.id;
+    var valid = (typeof (id) === "string")? id: id[0];
 
     console.log('result: ', result);
     console.log('id: ', id);
