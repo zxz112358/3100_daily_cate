@@ -616,6 +616,23 @@ function check_whether_like_article(username,arid,callback) {
 }/*test.check_whether_like_article('1',4,function(result){
     console.log(result);
 });*/
+function check_whether_follow(user1,user2,callback) {
+    var che_whether_follow = "select * from follow where user1 ="+'\''+user1+'\''+" and user2="+'\''+user2.replace(/'/,"\\\'")+'\'';
+    connection.query(che_whether_follow, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        //console.log(results);
+        if (Object.keys(results).length==0){
+            return callback(false);
+        }
+        return callback(true);
+    });
+
+}
+/*test.check_whether_follow('1','2',function(result){
+    console.log(result);
+});*/
 module.exports={
     connection:connection,
     insert_client:insert_client,
@@ -651,6 +668,7 @@ module.exports={
     like_article:like_article,
     check_followers:check_followers,
     check_my_follow:check_my_follow,
-    check_whether_like_article:check_whether_like_article
+    check_whether_like_article:check_whether_like_article,
+    check_whether_follow:check_whether_follow
 
 };
