@@ -8,21 +8,36 @@ router.get('/', function(req, res, next) {
     var checked_username = req.query.username;
     test.select_user(checked_username, function (checked_user) {
         test.select_all_client_article(checked_username, function (length, article) {
-            res.render('personalSec/userpostpage', {
-                title: 'Home',
-                name:'Daily Cate',
-                user: req.user,
-                checked_user: checked_user,
-                article: article,
-                followed:false
+            test.check_whether_follow(req.user.username,checked_username,function(result){
+                res.render('personalSec/userpostpage', {
+                    title: 'Home',
+                    name:'Daily Cate',
+                    user: req.user,
+                    checked_user: checked_user,
+                    article: article,
+                    followed:result
+                });
             });
+
         })
     });
 });
 
 router.post('/', function (req, res, next) {
     var result = req.body.result;
-    if (result) {
+    var fo_operation = req.body.follow_operation;
+
+    console.log('fo: ', fo_operation);
+
+    if (fo_operation){
+        if (fo_operation === 'follow'){
+            test.follow(req.user.username, req.query.username);
+            res.redirect('back');
+        }else if (fo_operation === 'unfollow'){
+            test.unfollow(req.user.username, req.query.username);
+            res.redirect('back');
+        }
+    }else if (result) {
         var postID = encodeURIComponent(result);
         res.redirect('../exhibitionSec/articlePost?articleId=' + postID);
     }else{
