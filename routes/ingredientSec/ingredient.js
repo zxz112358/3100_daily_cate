@@ -5,7 +5,7 @@ var fs=require("fs");
 
 /* GET ingredient page. */
 router.get('/', function(req, res, next) {
-    test.select_all_article('article', function(result1,result2){
+    test.select_all_article('ingredient', function(result1,result2){
         if(result1===0){
             var all = undefined;
         }
