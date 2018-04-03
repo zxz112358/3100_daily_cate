@@ -38,65 +38,87 @@ router.post('/', upload.single('profileimg'), function (req,res,next) {
     var desc = req.body.description;
     var pwd = req.body.password1;
     var pwd1 = req.body.password2;
-    var name = req.user.username;
 
-    console.log('dadfsf', req.user);
-
-
-    //Form validator
-    if(pwd=''&&(pwd1='')&&(oldpassword='')){
-        if(email===''){
-            email = req.user.email;
+    console.log('1111',pwd,pwd1,oldpassword);
+    console.log('2222',typeof desc);
+    test.select_user(req.user.username,function(user){
+        if (user===false){
+            console.log("no such person");
         }
-        else{
-            req.checkBody('email', 'Email is not valid').isEmail();
-        }
+        //get user password
 
-        if(desc===''){
-            desc = req.user.description;
-        }
-        test.update_client(name,email,pwd,desc,function(result){
-            if(result===true) {
-                res.redirect('profile');
-            }
-        });
-    }
-    else{
-        console.log(oldpassword);
 
-        if(oldpassword===req.user.password){
-            if(pwd!==pwd1){
-                console.log('2');
-                req.flash('modify message','You have different new password input!');
-                res.redirect('modifypage');
+        if(pwd===''&&(pwd1==='')&&(oldpassword==='')){//if no change in password
+        //--------check email format
+            pwd=user.password;
+            if(email===''){
+                email = req.user.email;
             }
             else{
-                if(email===''){
-                    email = req.user.email;
+                req.checkBody('email', 'Email is not valid').isEmail();
+            }
+        //--------check if any change in description,if no, return original
+            if(desc===''){
+                desc = user.description;
+            }
+        //--------update client info
+            test.update_client(user.username,email,pwd,desc,function(result){
+                if(result===true) {
+                    res.redirect('profile');
                 }
+            });
+        }
+        else{//if change password
+        //---------if old password verified
+            if(oldpassword===user.password){
+            //--------if new password confirm fail(confirm a different one)
+                if(pwd!==pwd1){
+                    console.log('2');
+                    req.flash('modify message','You have different new password input!');
+                    res.redirect('modifypage');
+                }
+            //--------if no new password input
+                else if((pwd==='')&&(pwd1==='')){
+                    console.log('3');
+                    req.flash('modify message','Please input your new password!');
+                    res.redirect('modifypage')
+                }
+            //--------new password confirmed
                 else{
-                    req.checkBody('email', 'Email is not valid').isEmail();
-                }
-
-                if(desc==='') {
-                    desc = req.user.description;
-                }
-
-                test.update_client(name,email,pwd,desc,function(result){
-                    if(result===true) {
-                        console.log(result);
-                        res.redirect('signin');
+                //------check email changes,if no return original
+                    if(email===''){
+                        email = user.email;
                     }
-                });
+                //------if email changes,check format
+                    else{
+                        req.checkBody('email', 'Email is not valid').isEmail();
+                    }
+                //------check description changes,if no return original
+                    if(desc==='') {
+                        desc = user.description;
+                    }
+                //------update client info
+                    test.update_client(user.username,email,pwd,desc,function(result){
+                        if(result===true) {
+                            console.log(result);
+                            res.redirect('signout');
+                        }
+                    });
+                }
+            }
+        //-------if old password not verified
+            else{
+                console.log('1');
+                req.flash('modify message','Wrong password!');
+                res.redirect('modifypage');
+
             }
         }
-        else{
-            console.log('1');
-            req.flash('modify message','Wrong password!');
-            res.redirect('modifypage');
 
-        }
-    }
+    });
+
+    //Form validator
+
 });
 
 
