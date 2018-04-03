@@ -51,7 +51,6 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 followingimg:string
             });
 
-            console.log(result2[0].user2);
         }
 
     });
@@ -59,6 +58,35 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 
 
 
+});
+router.post('/', function (req, res, next) {
+    var followinguser = String(req.body.followinguser);//username
+    var username = encodeURIComponent(followinguser);
+
+    res.redirect('./userpostpage?username=' + username);
+    // if (req.body.result[0] !== ''){
+    //     new Promise(
+    //         function (resolve, reject) {
+    //             test.select_all_client_article(req.user.username, function (num, articleList) {
+    //                 resolve(encodeURIComponent(articleList[result[0]].articleID));
+    //             });
+    //         }
+    //     ).then(function (value) {
+    //         res.redirect('../exhibitionSec/articlePost?articleId=' + value);
+    //     });
+    // }else {
+    //     var i=id.length;
+    //     var valid='';
+    //     for(var j=0;j<i;j++){
+    //         if(id[j]!==''){
+    //             valid = id[j];
+    //         }
+    //     }
+    //     console.log('valid: ',valid);
+    //     test.delete_article(valid);
+    //     res.redirect('profile');
+    // }
+    // }
 });
 
 /* Check user's authentication, if not logged in, redirect user to log in page */

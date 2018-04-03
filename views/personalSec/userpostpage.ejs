@@ -12,7 +12,7 @@
 <div class="container-fluid" style="padding: 10px; background-color: #ffc107">
     <img src="../images/pic.jpg" class="img-thumbnail img-circle" style="width: 60px;margin-left: 15.1cm;margin-top:12px">
     <p>
-    <h5 class="text-center">Name<br><small>Description</small></h5>
+    <h5 class="text-center"><%=checked_user.username%><br><small><%=checked_user.description%></small></h5>
     </p>
 </div>
 <div class="container-fluid" style="padding: 10px; background-color: #efa2a9">
@@ -30,30 +30,21 @@
         <div class="col-10">
             <div class="container-fluid" style="background-color: #ffc107;padding:10px">
                 <div class="list-group mx-auto w-75">
-                    <a href="../ingredientSec/post1" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <img src="../images/pic.jpg">
-                            <h5 class="mb-1">xxx</h5>
-                            <small>time</small>
+                    <form method="post" id = 'form'>
+                        <input style="display: none" id="result" name="result">
+                        <% for(var i=0;i<article.length;i++) {%>
+                        <div>
+                            <a href="#" id = '<%=article[i].articleID%>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <img src="../images/pic.jpg">
+                                    <h5 class="mb-1"><%=article[i].articlename%></h5>
+                                    <small><%=article[i].posttime%></small>
+                                </div>
+                                <p class="mb-1">name</p>
+                            </a>
                         </div>
-                        <p class="mb-1">name</p>
-                    </a>
-                    <a href="../ingredientSec/post2" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <img src="../images/pic.jpg">
-                            <h5 class="mb-1">xxx</h5>
-                            <small class="text-muted">time</small>
-                        </div>
-                        <p class="mb-1">name</p>
-                    </a>
-                    <a href="../ingredientSec/post3" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <img src="../images/pic.jpg">
-                            <h5 class="mb-1">xxx</h5>
-                            <small class="text-muted">time</small>
-                        </div>
-                        <p class="mb-1">name</p>
-                    </a>
+                        <%}%>
+                    </form>
                 </div>
 
             </div>
@@ -67,5 +58,12 @@
 
 <% include ../cprt.ejs %>
 </body>
+<script>
+    function enterArticle(article) {
+        var result = document.getElementById('result');
+        result.value = article.id;
+        document.getElementById('form').submit();
+    }
+</script>
 
 </html>

@@ -4,39 +4,6 @@
 <head>
     <title><%= name%>-<%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
-    <style>
-        .arttit{
-            font-family: "Comic Sans MS";
-            font-weight:600;
-            font-size:30px;
-            color:#884400;
-        }
-        .arttime{
-            font-family: "Comic Sans MS";
-            font-weight:800;
-            font-size:15px;
-            color:#884400;
-        }
-        .artframe{
-            border:none;
-
-        }
-        .author{
-            text-align:right;
-            font-family: "Comic Sans MS";
-            font-weight:800;
-            font-size:20px;
-            color:#884400;
-        }
-        .arttext{
-            font-family:"Comic Sans MS";
-            font-weight:800;
-            font-size:20px;
-            color:#884400;
-            max-width:300px;
-            word-wrap:break-word;
-        }
-    </style>
 </head>
 
 <script>
@@ -57,12 +24,11 @@
 <div class="container-fluid" style="padding: 10px; text-align:center; background-image:url('../images/posttop.jpg');background-size:100% 100%;">
     <img class="img-thumbnail img-circle" style="width: 140px;margin: 0 auto"  src=<%= imgpath %>>
     <p>
-    <h5 class="text-center" style="font-size:280%;font-weight:600;color:#884400"><%= user.username%><br>
-        <p style="font-size:20px"><%= user.description%></p></h5>
+    <h5 class="text-center" style="font-size:250%;font-weight:600;color:#884400"><%= user.username%><br><small><%= user.description%></small></h5>
     </p>
     <p>
-        <button onclick="window.location.href='/exhibitionSec/exhposting'" class="btn btn-small" style="background-color:#FFCC00" type="button">New post</button>
-        <button onclick="window.location.href='/personalSec/modifypage'" class="btn btn-small" style="background-color:#FFCC00" type="button">Modify info</button>
+        <button onclick="window.location.href='/exhibitionSec/exhposting'" class="btn btn-small" style="background-color:#F5D777" type="button">New post</button>
+        <button onclick="window.location.href='/personalSec/modifypage'" class="btn btn-small" style="background-color:#F5D777" type="button">Modify info</button>
     </p>
 </div>
 <div class="container-fluid" style="padding: 10px; min-height:500px;">
@@ -84,38 +50,30 @@
             <div class="container-fluid" style="padding:10px">
                 <div class="list-group mx-auto w-75">
                     <form method="post" id = 'form'>
-                        <input style="display: none" id="result" name="result">
-                        <% if(articleno == 0){%>
-                            <div style="color:#884400;font-size:20px;font-weight:bold;margin-left:5%;font-family:'Comic Sans MS'">
-                                <p>You have no post now! Click on the below button to post your first article!</p>
-                                <button onclick="window.location.href='/exhibitionSec/exhposting'" class="btn btn-small" style="background-color:#FFCC00;margin-left:28%" type="button">New post</button>
-                            </div>
-                        <%}%>
                         <% for (var i = 0; i < articleno; i++) { %>
-                            <% if(result[i].type=='article') { %>
+                        <% if(result[i].type=='article') { %>
 
-                            <a href="#" id = '<%= i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#F5D777;margin-top: 10px;height:320px;width:800px">
-                            <div class="d-flex w-80 flex-row">
-                                <img src=<%=coverpic[i]%> style="width:315px;height:270px">
-                                <div class="d-flex flex-column" style="margin-left:40px;width:400px;">
-                                    <p class="arttit"><%=result[i].articlename%></p>
-                                    <p class="arttime"><%=result[i].posttime%></p>
-                                    <div class="arttext">
-                                        <p><%=text[i]%></p>
-                                    </div>
+                        <div>
+                            <input style="display: none" id="result" name="result">
 
 
-                                    <p class="author"><%=result[i].authorname%></p>
+
+                            <a href="#" id = '<%= i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#F5D777;margin-top: 10px;height:320px">
+                                <div class="d-flex w-80 justify-content-between">
+                                    <img src=<%=coverpic[i]%> style="width:315px;height:270px">
+                                    <h5 class="mb-1"><%=result[i].articlename%></h5>
+                                    <small><%=result[i].posttime%></small>
+                                    <p><%=text[i]%></p>
+
                                 </div>
-
-
-                            </div>
-
+                                <p class="mb-1" style="text-align:right"><%=result[i].authorname%></p>
                             </a>
-
-
-
-                            <% } %>
+                        </div>
+                        <p>
+                            <input style="display:none" id="id" name="id">
+                            <button id="<%= i+1 %>" onclick="getID(this)" type="submit" class="btn btn-small" style="background-color:#FFCC00" type="button">Delete</button>
+                        </p>
+                        <% } %>
                         <% } %>
                     </form>
                 </div>
@@ -133,6 +91,11 @@
     function enterArticle(article) {
         var result = document.getElementById('result');
         result.value = article.id;
+        document.getElementById('form').submit();
+    }
+    function getID(delButton) {
+        var id = document.getElementById('id');
+        id.value = delButton.id;
         document.getElementById('form').submit();
     }
 </script>
