@@ -54,11 +54,12 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    if (req.body.id) {
-        console.log('id: ', req.body.id);
-        var id = req.body.id;
+    var id = req.body.id;
+    if(id)
         var valid = (typeof (id) === "string")? id: id[0];
 
+    if (valid) {
+        console.log('id: ', req.body.id);
         console.log('valid: ',valid);
         delete_article.select_article(valid,function(article){
             var parastart=article.parastart;
@@ -91,7 +92,7 @@ router.post('/', function (req, res, next) {
         res.redirect('../personalSec/search?searchname=' + searchname);
     } else if (req.body.result){
         console.log('result: ', req.body.result);
-        var result = req.body.result;
+        var result = (typeof(req.body.result)==="string")? req.body.result:req.body.result[0];
         new Promise(
             function (resolve, reject) {
                 console.log('username: ', req.user.username);

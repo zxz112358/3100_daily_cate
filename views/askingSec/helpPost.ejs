@@ -195,7 +195,10 @@
 <body background="../images/background7.jpg" style="background-size:100% 500px">
 <div class="container-fluid" style="color:#FFA500;padding-top:10px;text-align:center;height:200px;background-image:url('../../images/posttop.jpg');background-size:100% 100%;">
     <h1><%= article.articlename%></h1>
-    <h2><%= article.authorname%></h2>
+    <form method="post" id = 'form'>
+        <input style="display: none" id="author" name="author">
+        <h2 href="#" id ="<%= article.authorname%>" onclick="enterpage(this)"><img style="height:70px;width:70px" src="../profileimgs/<%=article.authorname%>"><br><%= article.authorname%></h2>
+    </form>
 </div>
 
 
@@ -261,6 +264,11 @@
         }).then(function () {
             form.submit();
         })
+    }
+    function enterpage(user) {
+        var author = document.getElementById('author');
+        author.value = user.id;
+        document.getElementById('form').submit();
     }
 </script>
 
