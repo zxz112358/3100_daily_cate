@@ -343,6 +343,7 @@ function select_article_comment(arID,callback){
         if (error) {
             return console.error(error);
         }
+        //console.log(results);
         return callback(Object.keys(results).length,results);
         /*Object.keys(results).forEach(function(key){
             var row=results[key];
@@ -735,7 +736,7 @@ function search(name,callback){
 
 //select the articleid with kth largest number of likes
 function select_k(callback){
-    var se_nok="select distinct f.article, count(user) as count, a.articlename,a.authorname,a.tag,a.posttime,a.picturestart,a.pictureno,a.parastart,a.parano from followarticle f, articles a where a.articleID=f.article group by f.article order by count desc";
+    var se_nok="select distinct f.article, count(user) as count, a.articleID, a.type,a.articlename,a.authorname,a.tag,a.posttime,a.picturestart,a.pictureno,a.parastart,a.parano from followarticle f, articles a where a.articleID=f.article group by f.article order by count desc";
     connection.query(se_nok, function(error, results) {
         if (error) {
             return console.error(error);
@@ -764,7 +765,20 @@ function unfollow(user1,user2) {
         console.log(results);
     });
 }
+function select_article_and_comment(arID,callback){
+    var sel_article_and_comment="select * from comments c, articles a where c.articleID="+arID+" and a.articleID="+arID;
+    connection.query(sel_article_and_comment, function(error, results) {
+        if (error) {
+            return console.error(error);
+        }
+        return callback(Object.keys(results).length,results);
+        /*Object.keys(results).forEach(function(key){
+            var row=results[key];
+            return callback(row);
 
+        });*/
+    });
+}
 module.exports={
     connection:connection,
     insert_client:insert_client,
@@ -809,7 +823,9 @@ module.exports={
     select_all_article:select_all_article,
     //select_all_help:select_all_help,
     //select_all_ingredient:select_all_ingredient
-    unfollow:unfollow
+    unfollow:unfollow,
+    select_article_and_comment:select_article_and_comment
+
 };
 
 
