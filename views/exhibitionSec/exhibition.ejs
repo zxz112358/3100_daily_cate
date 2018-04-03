@@ -49,7 +49,7 @@
 <body background="../images/background7.jpg" style="background-size:100% 500px">
 
 <!--<a href = "./exhposting">Post new article</a>-->
-<div class="container" style="background-color:#FFCC00;padding-bottom:20px;margin-top:80px;width:55%;min-height:400px;margin-bottom: 100px">
+<div class="container" style="background-color:#F5D777;padding-bottom:20px;margin-top:80px;width:55%;min-width:800px;min-height:400px;margin-bottom: 100px">
     <p class = "headtitle"><%= title %> posts</p>
     <ul class="nav nav-tabs">
         <li class="active"><a href="#all" data-toggle="tab" class="setfont">All</a></li>
@@ -66,8 +66,8 @@
         <div class="tab-pane active" id="all">
             <% if (allArticle){
                for (var i = 0; i < allArticle.length; i++) {%>
-                <a href='#' id = '<%= 'all' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
-                    <div class="d-flex w-80 flex-row">
+                <a href='#' id = '<%= 'all' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFEE99;margin-top: 10px;height:320px">
+                    <div class="d-flex w-80 flex-row" style="min-width:600px">
                         <img src="<%= '../exhibitionSec/pictures/' + (allArticle[i].picturestart + allArticle[i].pictureno - 1) %>" style="width:315px;height:270px">
                         <div class="d-flex flex-column" style="margin-left:40px;width:330px;">
                             <p class="arttit"><%=allArticle[i].articlename%></p>
@@ -87,8 +87,8 @@
         <div class="tab-pane" id="main">
             <% if (main){
                for (var i = 0; i < main.length; i++) {%>
-                <a href='#' id = '<%= 'main' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
-                    <div class="d-flex w-80 flex-row">
+                <a href='#' id = '<%= 'main' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFEE99;margin-top: 10px;height:320px">
+                    <div class="d-flex w-80 flex-row" style="min-width:600px">
                         <img src="<%= '../exhibitionSec/pictures/' + (main[i].picturestart + main[i].pictureno - 1) %>" style="width:315px;height:270px">
                         <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                             <p class="arttit"><%=main[i].articlename%></p>
@@ -110,8 +110,8 @@
         <div class="tab-pane" id="dish">
             <% if (dish){
             for (var i = 0; i < dish.length; i++) {%>
-            <a href='#' id = '<%= 'dish' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
-                <div class="d-flex w-80 flex-row">
+            <a href='#' id = '<%= 'dish' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFEE99;margin-top: 10px;height:320px">
+                <div class="d-flex w-80 flex-row" style="min-width:600px">
                     <img src="<%= '../exhibitionSec/pictures/' + (dish[i].picturestart + dish[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=dish[i].articlename%></p>
@@ -130,8 +130,8 @@
         <div class="tab-pane" id="soup">
             <% if (soup){
             for (var i = 0; i < soup.length; i++) {%>
-            <a href='#' id = '<%= 'soup' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
-                <div class="d-flex w-80 flex-row">
+            <a href='#' id = '<%= 'soup' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFEE99;margin-top: 10px;height:320px">
+                <div class="d-flex w-80 flex-row" style="min-width:600px">
                     <img src="<%= '../exhibitionSec/pictures/' + (soup[i].picturestart + soup[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=soup[i].articlename%></p>
@@ -152,7 +152,7 @@
             <% if (dessert){
             for (var i = 0; i < dessert.length; i++) {%>
             <a href='#' id = '<%= 'dessert' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFDD83;margin-top: 10px;height:320px">
-                <div class="d-flex w-80 flex-row">
+                <div class="d-flex w-80 flex-row" style="min-width:600px">
                     <img src="<%= '../exhibitionSec/pictures/' + (dessert[i].picturestart + dessert[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=dessert[i].articlename%></p>
