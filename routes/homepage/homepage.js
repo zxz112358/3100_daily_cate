@@ -34,7 +34,7 @@ router.post('/', function (req, res, next) {
     console.log('result: ', result);
     console.log(req.body.searchname);
 
-    if (result[0] !== '' && result[0] !== 'undefined') {
+    if (result[0] != '' && result[0] != 'undefined') {
         console.log('click result not null')
         new Promise(
             function (resolve, reject) {
