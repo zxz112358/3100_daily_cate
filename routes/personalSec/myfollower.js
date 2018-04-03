@@ -67,6 +67,13 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 
 });
 
+router.post('/', function (req, res, next) {
+    //search handling
+    console.log(req.body.searchname);
+    var searchname = encodeURIComponent(req.body.searchname);
+    res.redirect('../personalSec/search?searchname=' + searchname);
+});
+
 
 /* Check user's authentication, if not logged in, redirect user to log in page */
 function authenticationMiddleware () {

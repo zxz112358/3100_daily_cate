@@ -60,7 +60,7 @@ router.post('/', function (req, res, next) {
     var result = req.body.result;
     console.log('result: ', result);
 
-    if (req.body.result[0]) {
+    if (result !== '' && result !== undefined) {
         new Promise(
             function (resolve, reject) {
                 resolve(encodeURIComponent(result[0]));

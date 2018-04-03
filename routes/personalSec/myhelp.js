@@ -59,22 +59,13 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    var result = String(req.body.result);
+    var result = req.body.result;
     var id = req.body.id;
 
-    console.log('result0: ', result[0]);
+    console.log('result: ', result);
     console.log('id: ', id);
-    console.log(req.body.result[0]);
-    if (req.body.result[0]){
-        new Promise(
-            function (resolve, reject) {
-                resolve(encodeURIComponent(result[0]));
-            }
-        ).then(function (value) {
-            res.redirect('../exhibitionSec/articlePost?articleId=' + value);
-        });
-    }
-    else {
+
+    if (id) {
         var valid = id;
 
         console.log('valid: ',valid);
@@ -93,16 +84,27 @@ router.post('/', function (req, res, next) {
                                         delete_article.delete_paragraph(id);
                                         delete_article.delete_picture(id);
                                     }
-
                                 }
                             });
                         }
                     });
                 }
             });
-
         })
         res.redirect('back');
+    }else if (req.body.searchname){
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }else if (req.body.result){
+        new Promise(
+            function (resolve, reject) {
+                resolve(encodeURIComponent(result));
+            }
+        ).then(function (value) {
+            res.redirect('../askingSec/helpPost?articleId=' + value);
+        });
     }
 
 

@@ -64,16 +64,21 @@ router.post('/', function (req, res, next) {
     var username = encodeURIComponent(followinguser);
     var id = req.body.id;
     console.log(id);
+    if (req.body.followinguser) {
+        if (id) {
+            test.unfollow(req.user.username, id);
+            res.redirect('myfollowing');
 
-    if(id){
-        test.unfollow(req.user.username,id);
-        res.redirect('myfollowing');
-
+        }
+        else {
+            res.redirect('./userpostpage?username=' + username);
+        }
+    }else {
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
     }
-    else{
-        res.redirect('./userpostpage?username=' + username);
-    }
-
 
 
 });
