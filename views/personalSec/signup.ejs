@@ -21,9 +21,9 @@
         <%})%>
     <%} %>
 
-<form class="w-50 mx-auto mt-5 p-3 border border-warning" style="background-color:#FFA500" method="post" action="/personalSec/signup" enctype="multipart/form-data">
+<form class="w-50 mx-auto mt-5 p-3 border border-warning" style="background-color:#FFA500;margin-bottom:100px;" method="post" action="/personalSec/signup" enctype="multipart/form-data">
     <div class="form-group">
-        <label>User name</label>
+        <label>User name (less than 20 characters)</label>
         <input name="name" type="text" class="form-control" id="exampleInputName" placeholder="Enter user name">
     </div>
     <div class="form-group">
@@ -32,7 +32,7 @@
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
-        <label>Password</label>
+        <label>Password (1-15 characters)</label>
         <input name = 'password' type="password" class="form-control" placeholder="Password">
     </div>
     <div class="form-group">

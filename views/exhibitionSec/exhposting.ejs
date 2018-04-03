@@ -4,17 +4,26 @@
 <head>
     <title><%= name%>-<%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <style>
+        .titlefont{
+            margin-left:15%;
+            font-family:"Vladimir Script";
+            color:#884400;
+            font-weight:800;
+            font-size:45px;
+        }
+    </style>
 </head>
 
 <% include ../header.ejs %>
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
-<h1 class = "font-weight-bold p-3" style="margin-left: 4.5em"><%= title %></h1>
+<p class = "titlefont"><%= title %></p>
 
-<div class="container bg-white">
+<div class="container" style="background-color:#FFDD66;padding:bottom:50px">
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#exhibition" data-toggle="tab">Exhibition Post</a></li>
-        <li><a href="#help" data-toggle="tab">Help Post</a></li>
+        <li class="active"><a href="#exhibition" style="background-color: #FFA500" data-toggle="tab">Exhibition Post</a></li>
+        <li><a href="#help" data-toggle="tab" style="background-color: #FFA500">Help Post</a></li>
     </ul>
     <div class="tab-content">
         <div class="tab-pane active" id="exhibition">
@@ -44,33 +53,41 @@
                 <br><label id = "formchild1">Paragraph:</label>
                 <br><textarea id = "formchild2" type="text" name = "text" class="mx-auto w-75" required ></textarea>
                 <br><label id = "formchild3" >Picture:</label>
-                <input id = "formchild4" type="file" name = "picture" class="mx-auto w-75" required >
+                <input id = "formchild4" type="file" name = "picture" class="w-75" style="margin-left:0px" required >
 
-                <br><button id = "end_input_btn" type="submit" class="btn">End input</button>
+
+
+
+                <br><button id = "end_input_btn" type="submit" class="btn btn-warning btn-right" style="color:#000000;margin-left:90%">End input</button>
+
+                <br><button id = "next_btn" class="btn btn-warning" style="color:#000000;margin-bottom:50px;">Next</button>
+                <script>
+                    document.getElementById("next_btn").addEventListener("click", nextPara_arti);
+                    function nextPara_arti() {
+                        var form = document.getElementById("inputForm");
+                        var submit = document.getElementById("end_input_btn");
+
+                        var newpara = document.createElement("textarea");
+                        newpara.rows=2;
+                        newpara.cols=98;
+                        newpara.name = 'text';
+                        newpara.required = true;
+                        form.insertBefore(document.createElement("br"), submit);
+                        form.insertBefore(newpara, submit);
+                        form.insertBefore(document.createElement("br"), submit);
+
+                        var newpic = document.createElement("input");
+                        newpic.type = 'file';
+                        newpic.name = 'picture';
+                        newpic.required = true;
+                        form.insertBefore(document.createElement("br"), submit);
+                        form.insertBefore(newpic, submit);
+                        form.insertBefore(document.createElement("br"), submit);
+                    }
+                </script>
             </form>
 
-            <br><button id = "next_btn" class="btn btn-primary">Next</button>
-            <script>
-                document.getElementById("next_btn").addEventListener("click", nextPara_arti);
-                function nextPara_arti() {
-                    var form = document.getElementById("inputForm");
-                    var submit = document.getElementById("end_input_btn");
 
-                    var newpara = document.createElement("textarea");
-                    newpara.name = 'text';
-                    newpara.required = true;
-                    form.insertBefore(document.createElement("br"), submit);
-                    form.insertBefore(newpara, submit);
-
-                    var newpic = document.createElement("input");
-                    newpic.type = 'file';
-                    newpic.name = 'picture';
-                    newpic.required = true;
-                    form.insertBefore(document.createElement("br"), submit);
-                    form.insertBefore(newpic, submit);
-                    form.insertBefore(document.createElement("br"), submit);
-                }
-            </script>
         </div>
         <div class="tab-pane" id="help">
             <form method="post" id = "helpForm" enctype="multipart/form-data"class="mx-auto w-75">
@@ -103,33 +120,36 @@
                 <br><label id = "formchild1">Paragraph:</label>
                 <br><textarea id = "formchild2" type="text" name = "text" class="mx-auto w-75" required></textarea>
                 <br><label id = "formchild3" >Picture:</label>
-                <input id = "formchild4" type="file" name = "picture" class="mx-auto w-75" required>
+                <input id = "formchild4" type="file" name = "picture" class="w-75" required>
 
-                <br><button id = "end_input_btn_help" type="submit" class="btn">End input</button>
+                <br><button id = "end_input_btn_help" type="submit" class="btn btn-warning" style="color:#000000;margin-left:90%">End input</button>
+                <br><button id = "next_btn_help" class="btn btn-warning" style="color: #000000;margin-bottom:50px">Next</button>
+                <script>
+                    document.getElementById("next_btn_help").addEventListener("click", nextPara_help);
+                    function nextPara_help() {
+                        var form = document.getElementById("helpForm");
+                        var submit = document.getElementById("end_input_btn_help");
+
+                        var newpara = document.createElement("textarea");
+                        newpara.rows=2;
+                        newpara.cols=98;
+                        newpara.name = 'text';
+                        newpara.required = true;
+                        form.insertBefore(document.createElement("br"), submit);
+                        form.insertBefore(newpara, submit);
+
+                        var newpic = document.createElement("input");
+                        newpic.type = 'file';
+                        newpic.name = 'picture';
+                        newpic.required = true;
+                        form.insertBefore(document.createElement("br"), submit);
+                        form.insertBefore(newpic, submit);
+                        form.insertBefore(document.createElement("br"), submit);
+                    }
+                </script>
             </form>
 
-            <br><button id = "next_btn_help" class="btn btn-primary">Next</button>
-            <script>
-                document.getElementById("next_btn_help").addEventListener("click", nextPara_help);
-                function nextPara_help() {
-                    var form = document.getElementById("helpForm");
-                    var submit = document.getElementById("end_input_btn_help");
 
-                    var newpara = document.createElement("textarea");
-                    newpara.name = 'text';
-                    newpara.required = true;
-                    form.insertBefore(document.createElement("br"), submit);
-                    form.insertBefore(newpara, submit);
-
-                    var newpic = document.createElement("input");
-                    newpic.type = 'file';
-                    newpic.name = 'picture';
-                    newpic.required = true;
-                    form.insertBefore(document.createElement("br"), submit);
-                    form.insertBefore(newpic, submit);
-                    form.insertBefore(document.createElement("br"), submit);
-                }
-            </script>
         </div>
     </div>
 
