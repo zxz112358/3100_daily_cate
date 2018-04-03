@@ -19,6 +19,9 @@
 <% include ../header.ejs %>
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
+<% if (modify_message){ %>
+<div class="bg-success container text-white w-75" style="font-size: 1.5em"><%= modify_message%></div>
+<% } %>
 <form class="w-50 mx-auto mt-5 p-3 border border-warning" style="background-color:#FFA500" method="post" action="/personalSec/modifypage" enctype="multipart/form-data">
     <div class="form-group">
         <label>User name</label><br>
