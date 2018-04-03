@@ -36,8 +36,6 @@ var flash = require('connect-flash');
 var index = require('./routes/index');
 var ingredient = require('./routes/ingredientSec/ingredient');
 var ingredientPost = require('./routes/ingredientSec/ingredientPost');
-var ingredient_vegetables = require('./routes/ingredientSec/ingredient_vegetables');
-var ingredient_fruits = require('./routes/ingredientSec/ingredient_fruits');
 var exhibition = require('./routes/exhibitionSec/exhibition');
 var exhposting = require('./routes/exhibitionSec/exhposting');
 var articlePost = require('./routes/exhibitionSec/articlePost');
@@ -141,8 +139,6 @@ app.use(function(req, res, next){
 
 app.use('/', index);
 app.use('/ingredientSec/ingredient', ingredient);
-app.use('/ingredientSec/ingredient_vegetables', ingredient_vegetables);
-app.use('/ingredientSec/ingredient_fruits', ingredient_fruits);
 app.use('/ingredientSec/ingredientPost', ingredientPost);
 app.use('/exhibitionSec/exhibition', exhibition);
 app.use('/exhibitionSec/exhposting', exhposting);
