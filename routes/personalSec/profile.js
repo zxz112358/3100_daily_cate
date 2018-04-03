@@ -67,7 +67,7 @@ router.post('/', function (req, res, next) {
         ).then(function (value) {
             res.redirect('../exhibitionSec/articlePost?articleId=' + value);
         });
-    }else if (id) {
+    }else{
         var i=id.length;
         var valid='';
         for(var j=0;j<i;j++){
