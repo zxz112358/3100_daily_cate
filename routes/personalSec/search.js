@@ -8,7 +8,7 @@ var connection = test.connection;
 var fs=require("fs");
 
 /* GET user search page. */
-router.get('/', authenticationMiddleware(), function(req, res) {
+router.get('/', function(req, res) {
     /*req.on('data',function (data) {
         test.search(decodeURIComponent(data),function(results){
             if (results === undefined){
@@ -27,7 +27,7 @@ router.get('/', authenticationMiddleware(), function(req, res) {
             });
         });
     });*/
-    test.search('au1',function(results){
+    test.search('au2',function(results){
         if (results === undefined){
             //console.log(results);
             var results1= undefined;
@@ -61,9 +61,9 @@ router.get('/', authenticationMiddleware(), function(req, res) {
 });
 
 /* Check user's authentication, if not logged in, redirect user to log in page */
-function authenticationMiddleware () {
+/*function authenticationMiddleware () {
     return function (req, res, next){
-        console.log('user:', req.session.passport.user);
+        //console.log('user:', req.session.passport.user);
 
         if (req.isAuthenticated()) {
             return next();
@@ -71,7 +71,7 @@ function authenticationMiddleware () {
             res.redirect('signin');
         }
     }
-}
+}*/
 
 
 module.exports = router;
