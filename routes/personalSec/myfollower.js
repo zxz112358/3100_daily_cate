@@ -24,9 +24,10 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
     test.select_my_followers(req.user.username,function(result1,result2){
         //print the table includes all user2
         var string=[];
+        console.log(result1);
+        console.log(result2);
         for(var i=0;i<result1;i++){
             string[i] ='../profileimgs/'+(result2[i].user1).toString();
-            console.log(string[i]);
         }
 
 
@@ -52,13 +53,20 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 follower:result2,
                 followerimg:string
             });
-            console.log(result2[0].user1);
+            router.post('/', function (req, res, next) {
+                var follower = String(req.body.follower);//username
+                var username = encodeURIComponent(follower);
+                res.redirect('./userpostpage?username=' + username);
+
+            });
+
         }
 
     });
 
 
 });
+
 
 /* Check user's authentication, if not logged in, redirect user to log in page */
 function authenticationMiddleware () {

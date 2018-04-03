@@ -36,9 +36,11 @@
         <div class="col-10">
             <div class="container-fluid" style="padding:10px">
                 <div class="row">
+                    <form method="post" id = 'form'>
+                    <input style="display: none" id="follower" name="follower">
                     <% for (var i = 0; i < followerno; i++) { %>
                     <div class="col-2" style="text-align:center;margin-top:10px;margin-bottom:10px;margin-right:60px;margin-left:40px;background-color:#F5D777;padding-top:2px;">
-                        <a href="/personalSec/userpostpage">
+                        <a href="#" id = '<%=follower[i].user1%>' onclick="enterUser(this)">
                             <img src=<%=followerimg[i]%> class="img-thumbnail" style="width: 140px">
                             <p style="font-size:200%; color: #884400;font-weight: 600"><%=follower[i].user1%></p>
                             <p style="font-size:100%; color:#884400"><%=follower[i].description%></p>
@@ -46,6 +48,7 @@
                     </div>
 
                     <% } %>
+                    </form>
                 </div>
 
             </div>
@@ -57,6 +60,14 @@
 </div>
 <% include ../cprt.ejs %>
 </body>
+<script>
+    function enterUser(user) {
+        var follower = document.getElementById('follower');
+        follower.value = user.id;
+        document.getElementById('form').submit();
+    }
+
+</script>
 
 </html>
 
