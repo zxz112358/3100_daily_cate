@@ -545,7 +545,14 @@ function count_article_no(callback){
         if (error) {
             return console.error(error);
         }
-        return callback(Object.keys(results).length,results);
+        var index=Object.keys(results).length;
+        if(index==0){
+            return callback(0);
+        }
+        else{
+            return callback(results[index-1].articleID);
+        }
+
     });
 
 }
@@ -555,7 +562,13 @@ function count_paragraph_no(callback){
         if (error) {
             return console.error(error);
         }
-        return callback(Object.keys(results).length,results);
+        var index=Object.keys(results).length;
+        if(index==0){
+            return callback(0);
+        }
+        else{
+            return callback(results[index-1].paraID);
+        }
 
     });
 
@@ -566,7 +579,13 @@ function count_picture_no(callback){
         if (error) {
             return console.error(error);
         }
-        return callback(Object.keys(results).length,results);
+        var index=Object.keys(results).length;
+        if(index==0){
+            return callback(0);
+        }
+        else{
+            return callback(results[index-1].pictureID);
+        }
 
     });
 
@@ -577,51 +596,16 @@ function count_comment(callback){
         if (error) {
             return console.error(error);
         }
-        return callback(Object.keys(results).length,results);
-
+        var index=Object.keys(results).length;
+        if(index==0){
+            return callback(0);
+        }
+        else{
+            return callback(results[index-1].commentID);
+        }
     });
 }
 
-/*test.count_article_no(function(length,array){
-    console.log(length);
-    if(length==0){
-        console.log(0);
-    }
-    else{
-        console.log(array[length-1].articleID);
-    }
-
-});
-test.count_picture_no(function(length,array){
-    console.log(length);
-    if(length==0){
-        console.log(0);
-    }
-    else{
-        console.log(array[length-1].pictureID);
-    }
-
-});
-test.count_paragraph_no(function(length,array){
-    console.log(length);
-    if(length==0){
-        console.log(0);
-    }
-    else{
-        console.log(array[length-1].paraID);
-    }
-
-});
-test.count_comment(function(length,array){
-    console.log(length);
-    if(length==0){
-        console.log(0);
-    }
-    else{
-        console.log(array[length-1].commentID);
-    }
-
-});*/
 function check_whether_like_article(username,arid,callback) {
     var che_whether_like_article = "select * from followarticle where user ="+'\''+username.replace(/'/,"\\\'")+'\''+" and article="+arid;
     connection.query(che_whether_like_article, function(error, results) {
