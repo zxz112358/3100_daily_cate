@@ -44,7 +44,8 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 imgpath: '../profileimgs/' + req.user.username,
                 commentno:result1,
                 result:result2,
-                coverpic:string
+                coverpic:string,
+                text:result2.content
             });
         }
     });
