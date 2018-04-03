@@ -208,7 +208,6 @@
                     <div class="timeline" style="margin-top:-220px">
                         <div class="timeline-icon"><span class="year"><%= i+1 %></span></div>
                         <div class="timeline-content" style="text-align:center;">
-                            <!--<h3 class="title">Web Desginer</h3>-->
                             <img src="<%= '../exhibitionSec/pictures/' + (article.parastart + i) %>" style="width:315px;height:270px">
                             <p class="description">
                                 <iframe src="<%= '../exhibitionSec/texts/' + (article.parastart + i) + '.txt' %>" style="border: none" id="textframe"></iframe>
@@ -216,25 +215,32 @@
                         </div>
                     </div>
                     <% } %>
-
                 </div>
             </div>
         </div>
     </div>
+    <form method="post" id="likeform">
+        <input style="display: none" id="likeinput" name="operation">
+        <% if (liked){ %>
+        <button id="unlike" onclick="like_operation(this)">Unlike!</button>
+        <% } else{ %>
+        <button id="like" onclick="like_operation(this)">Like!</button>
+        <% } %>
+    </form>
 </div>
 
 <%if (comment){ %>
-    <% for (var i = 0; i < comment.length; i++) { %>
-        <div class="card">
-            <div class="card-header">
-                From <a class="font-weight-bold"><%= comment[i].authorname %></a>:
-            </div>
-            <div class="card-body">
-                <img src="<%= '../profileimgs/'+ comment[i].authorname%>">
-                <p class="card-text"><%= comment[i].content %></p>
-            </div>
-        </div>
-    <% }
+<% for (var i = 0; i < comment.length; i++) { %>
+<div class="card w-75 mx-auto">
+    <div class="card-header">
+        From <a class="font-weight-bold"><%= comment[i].authorname %></a>:
+    </div>
+    <div class="card-body">
+        <img src="<%= '../profileimgs/'+ comment[i].authorname%>" style="float: left; height: 270px; width: 270px;">
+        <p class="card-text"><%= comment[i].content %></p>
+    </div>
+</div>
+<% }
 }%>
 
 <form class="mx-auto w-75" method="post">
@@ -245,6 +251,18 @@
 
 <% include ../cprt.ejs %>
 </body>
+
+<script>
+    function like_operation(button) {
+        new Promise(function (resolve, reject) {
+            var form = document.getElementById('likeform');
+            document.getElementById('likeinput').value = button.id;
+            resolve();
+        }).then(function () {
+            form.submit();
+        })
+    }
+</script>
 
 </html>
 
