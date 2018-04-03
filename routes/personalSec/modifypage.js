@@ -23,11 +23,11 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 title: 'Profile',
                 name: 'Daily Cate',
                 user: req.user,
-                imgpath: '../profileimgs/' + req.user.username
+                imgpath: '../profileimgs/' + req.user.username,
+                modify_message: req.flash('modify message'),
 
 
             });
-
 
 });
 router.post('/', upload.single('profileimg'), function (req,res,next) {
@@ -40,34 +40,65 @@ router.post('/', upload.single('profileimg'), function (req,res,next) {
     var pwd1 = req.body.password2;
     var name = req.user.username;
 
+    console.log('dadfsf', req.user);
+
 
     //Form validator
-    if(email===''){
-        email = req.user.email;
+    if(pwd=''&&(pwd1='')&&(oldpassword='')){
+        if(email===''){
+            email = req.user.email;
+        }
+        else{
+            req.checkBody('email', 'Email is not valid').isEmail();
+        }
+
+        if(desc===''){
+            desc = req.user.description;
+        }
+        test.update_client(name,email,pwd,desc,function(result){
+            if(result===true) {
+                res.redirect('profile');
+            }
+        });
     }
     else{
-        req.checkBody('email', 'Email is not valid').isEmail();
-    }
+        console.log(oldpassword);
 
-    if(desc===''){
-        desc = req.user.description;
-    }
+        if(oldpassword===req.user.password){
+            if(pwd!==pwd1){
+                console.log('2');
+                req.flash('modify message','You have different new password input!');
+                res.redirect('modifypage');
+            }
+            else{
+                if(email===''){
+                    email = req.user.email;
+                }
+                else{
+                    req.checkBody('email', 'Email is not valid').isEmail();
+                }
 
-    console.log(pwd);
-    console.log(desc);
-    console.log(email);
+                if(desc==='') {
+                    desc = req.user.description;
+                }
 
-
-    test.update_client(name,email,pwd,desc,function(result){
-        if(result===true) {
-            console.log(result);
-            res.redirect('profile');
+                test.update_client(name,email,pwd,desc,function(result){
+                    if(result===true) {
+                        console.log(result);
+                        res.redirect('signin');
+                    }
+                });
+            }
         }
-    });
+        else{
+            console.log('1');
+            req.flash('modify message','Wrong password!');
+            res.redirect('modifypage');
 
-
-
+        }
+    }
 });
+
 
 /* Check user's authentication, if not logged in, redirect user to log in page */
 function authenticationMiddleware () {
