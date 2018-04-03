@@ -10,8 +10,8 @@ router.get('/', function(req, res, next) {
         test.select_article_comment(decodeURIComponent(req.query.articleId),function(result1,result2){
             //console.log(result1);//the no. of comments in that article;
             //console.log(result2);//all comments -> result2[i].content
-            res.render('exhibitionSec/articlePost', {
-                title: 'articlePost',
+            res.render('ingredientSec/ingredientPost', {
+                title: 'ingredientPost',
                 name: 'Daily Cate',
                 user: req.user,
                 article: article,
@@ -22,18 +22,3 @@ router.get('/', function(req, res, next) {
         //console.log(article);
     });
 });
-/*router.get('/', function(req, res, next) {
-    console.log(decodeURIComponent(req.query.articleId));
-    test.select_article(decodeURIComponent(req.query.articleId), function (article) {
-        res.render('exhibitionSec/articlePost', {
-            title: 'articlePost',
-            name: 'Daily Cate',
-            user: req.user,
-            article: article
-        });
-        console.log(article);
-    });
-});*/
-module.exports = router;
-
-
