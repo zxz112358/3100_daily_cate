@@ -131,6 +131,12 @@
             <li class="nav-item">
                 <a class="nav-link text-dark" href="/askingSec/asking">Asking for Help</a>
             </li>
+        </ul>
+        <ul class="navbar-nav ml-auto" style="float: right;">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" name="search" placeholder="Type in names" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
             <% if (isAuthenticated == false || user == null){ %>
             <li class="nav-item">
                 <a class="nav-link text-dark" href="/personalSec/signin">Sign In</a>
@@ -142,15 +148,7 @@
             <li class="nav-item">
                 <a class="nav-link text-dark" href="/personalSec/signout">Sign out</a>
             </li>
-            <% } %>
         </ul>
-        <div class="topnav">
-            <div class="search-container">
-                <form action="../routes/search.js">
-                    <input type="text" placeholder="Type in names" name="search">
-                    <button type="submit">Search</button>
-                </form>
-            </div>
-        </div>
+        <% } %>
     </div>
 </nav>
