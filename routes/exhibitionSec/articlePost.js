@@ -7,18 +7,18 @@ var test = require('../test');
 router.get('/', function(req, res, next) {
     test.select_article(req.query.articleId, function (article) {
         test.select_article_comment(req.query.articleId,function(result1,result2){
-            res.render('exhibitionSec/articlePost', {
-                title: 'articlePost',
-                name: 'Daily Cate',
-                user: req.user,
-                article: article,
-                comment:result2,
-                liked: false,
-                liked:false
+            test.check_whether_like_article(req.user.username, req.query.articleId, function (liked) {
+                res.render('exhibitionSec/articlePost', {
+                    title: 'articlePost',
+                    name: 'Daily Cate',
+                    user: req.user,
+                    article: article,
+                    comment:result2,
+                    liked:liked
+                });
+                console.log('liked: ', liked);
             });
-            console.log(req.query.articleId);
-            console.log('comments: ', result2);
-        });
+            })
         //console.log(article);
     });
 });
@@ -32,6 +32,7 @@ router.post('/', function(req, res, next) {
             test.insert_comment(commentNum + 1, req.user.username, req.body.comment, req.query.articleId);
         });
     }
+    console.log('like operation: ', like_operation);
     if (like_operation === 'like'){
         test.like_article(req.query.articleId, req.user.username);
     } else if (like_operation === 'unlike'){
