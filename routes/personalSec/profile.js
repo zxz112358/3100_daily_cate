@@ -83,7 +83,7 @@ router.post('/', function (req, res, next) {
             });
 
         })
-        res.redirect('profile');
+        res.redirect('back');
     }else if (req.body.searchname){
         //search handling
         console.log('search: ', req.body.searchname);

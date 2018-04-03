@@ -14,6 +14,13 @@ router.get('/', function(req, res, next) {
             user: req.user
         });
     });
-    });
+});
+
+router.post('/', function (req, res, next) {
+    //search handling
+    console.log(req.body.searchname);
+    var searchname = encodeURIComponent(req.body.searchname);
+    res.redirect('../personalSec/search?searchname=' + searchname);
+});
 
 module.exports = router;

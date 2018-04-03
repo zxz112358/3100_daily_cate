@@ -21,8 +21,15 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function (req, res, next) {
     var result = req.body.result;
-    var postID = encodeURIComponent(result);
-    res.redirect('../exhibitionSec/articlePost?articleId=' + postID);
+    if (result) {
+        var postID = encodeURIComponent(result);
+        res.redirect('../exhibitionSec/articlePost?articleId=' + postID);
+    }else{
+        //search handling
+        console.log(req.body.searchname);
+        var searchname = encodeURIComponent(req.body.searchname);
+        res.redirect('../personalSec/search?searchname=' + searchname);
+    }
 });
 
 

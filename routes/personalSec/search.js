@@ -45,6 +45,13 @@ router.get('/', function(req, res) {
     });
 });
 
+router.post('/', function (req, res, next) {
+    //search handling
+    console.log(req.body.searchname);
+    var searchname = encodeURIComponent(req.body.searchname);
+    res.redirect('../personalSec/search?searchname=' + searchname);
+});
+
 /*router.post('/', function (req, res, next) {
     var result = String(req.body.result).match(/[^\d]+|\d+/g);
     console.log('result: ', result);
