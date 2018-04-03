@@ -25,10 +25,12 @@ router.post('/', function(req, res, next) {
     var like_operation = req.body.operation;
     if (comment || like_operation) {
         if (comment) {
+            //submit comment
             test.count_comment(function (commentNum) {
                 test.insert_comment(commentNum + 1, req.user.username, req.body.comment, req.query.articleId);
             });
         }
+        //like & unlike
         console.log('like operation: ', like_operation);
         if (like_operation === 'like') {
             test.like_article(req.query.articleId, req.user.username);
