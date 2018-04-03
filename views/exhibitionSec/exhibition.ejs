@@ -94,6 +94,7 @@
                             <p class="arttit"><%=main[i].articlename%></p>
                             <p class="arttime"><%=main[i].posttime%></p>
                             <iframe src="<%= '../exhibitionSec/texts/' + main[i].parastart + '.txt' %>" style="border: none" id="<%= "textmain"+i%>"></iframe>
+
                             <p class="author"><%=main[i].authorname%></p>
                         </div>
 
@@ -158,6 +159,15 @@
                         <p class="arttit"><%=dessert[i].articlename%></p>
                         <p class="arttime"><%=dessert[i].posttime%></p>
                         <iframe src="<%= '../exhibitionSec/texts/' + dessert[i].parastart + '.txt' %>" style="border: none" id="<%= "textdessert"+i%>"></iframe>
+                        <script>
+                            var frame = document.getElementById('textframe');
+                            frame.onload = function () {
+                                var body = frame.contentWindow.document.querySelector('body');
+                                body.style.color = 'grey';
+                                body.style.fontSize = '20px';
+                                body.style.lineHeight = '20px';
+                            };
+                        </script>
                         <p class="author"><%=dessert[i].authorname%></p>
                     </div>
                 </div>

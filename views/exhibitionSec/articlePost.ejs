@@ -202,7 +202,7 @@
 </div>
 
 
-<div class="demo" style="min-height:500px">
+<div class="demo" style="min-height:500px;margin-bottom:100px;">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -222,33 +222,37 @@
             </div>
         </div>
     </div>
-    <form method="post" id="likeform">
+    <br><br><br><br><br><br>
+    <form method="post" id="likeform" style="margin-left:80%">
         <input style="display: none" id="likeinput" name="operation">
         <% if (liked){ %>
-            <button id="unlike" onclick="like_operation(this)">Unlike!</button>
+            <button id="unlike" style="background-color: #F5D777" onclick="like_operation(this)">Unlike!</button>
         <% } else{ %>
-            <button id="like" onclick="like_operation(this)">Like!</button>
+            <button id="like" style="background-color: #F5D777" onclick="like_operation(this)">Like!</button>
         <% } %>
     </form>
 </div>
 
 <%if (comment){ %>
     <% for (var i = 0; i < comment.length; i++) { %>
-        <div class="card w-75 mx-auto">
+        <div class="card w-75 mx-auto" style="background-color: #F5D777">
             <div class="card-header">
                 From <a class="font-weight-bold"><%= comment[i].authorname %></a>:
             </div>
             <div class="card-body">
-                <img src="<%= '../profileimgs/'+ comment[i].authorname%>" style="float: left; height: 270px; width: 270px;">
-                <p class="card-text"><%= comment[i].content %></p>
+                <img src="<%= '../profileimgs/'+ comment[i].authorname%>" style="float: left; width: 150px;">
+                <div class="card-text" style="margin-left: 200px">
+                    <p style="color:#773300"><%= comment[i].content %></p>
+                </div>
             </div>
         </div>
+    <br>
     <% }
 }%>
 
-<form class="mx-auto w-75" method="post">
+<form class="mx-auto w-75" style="margin-bottom" method="post">
     <br><label>Leave your comment:</label>
-    <br><textarea type="text" name = "comment" class="mx-auto w-100" style="height: 270px"></textarea>
+    <br><textarea type="text" name = "comment" class="mx-auto w-100" style="height: 100px"></textarea>
     <br><button type="submit" class="btn btn-warning btn-right" style="color:#000000;margin-left:90%;float: right">Submit</button>
 </form>
 

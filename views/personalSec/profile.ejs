@@ -4,6 +4,52 @@
 <head>
     <title><%= name%>-<%= title %></title>
     <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
+    <style>
+        .headtitle{
+            font-family:"Vladimir Script";
+            color:#884400;
+            font-size:50px;
+            font-weight:800;
+            margin-left: 10%;
+        }
+        .setfont{
+            font-family: "Vladimir Script";
+            font-weight:800;
+            font-size:25px;
+            color:#884400;
+        }
+        .arttit{
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:30px;
+            color:#884400;
+        }
+        .arttime{
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:15px;
+            color:#884400;
+        }
+        .artframe{
+            border:none;
+
+        }
+        .author{
+            text-align:right;
+            font-family: "Comic Sans MS";
+            font-weight:800;
+            font-size:20px;
+            color:#884400;
+        }
+        .arttext{
+            font-family:"Comic Sans MS";
+            font-weight:800;
+            font-size:20px;
+            color:#884400;
+            max-width:400px;
+            word-wrap:break-word;
+        }
+    </style>
 </head>
 
 <script>
@@ -54,20 +100,27 @@
                         <% if(result[i].type=='article') { %>
                             <div>
                                 <input style="display: none" id="result" name="result">
-                                <a href="#" id = '<%= result[i].articleID %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#F5D777;margin-top: 10px;height:320px">
-                                    <div class="d-flex w-80 justify-content-between">
+                                <a href="#" id = '<%= result[i].articleID %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#F5D777;min-width:800px;margin-top: 10px;height:320px">
+                                    <div class="d-flex w-80 flex-row" style="min-width:800px">
                                         <img src=<%=coverpic[i]%> style="width:315px;height:270px">
-                                        <h5 class="mb-1"><%=result[i].articlename%></h5>
-                                        <small><%=result[i].posttime%></small>
-                                        <p><%=text[i]%></p>
+                                        <div class="d-flex flex-column" style="margin-left:40px;width:330px;">
+                                            <p class="arttit"><%=result[i].articlename%></p>
+                                            <p class="arttime"><%=result[i].posttime%></p>
+                                            <div class="arttext">
+                                                <p><%=text[i]%></p>
+                                            </div>
+
+                                            <p class="author"><%=result[i].authorname%></p>
+                                        </div>
+
 
                                     </div>
-                                    <p class="mb-1" style="text-align:right"><%=result[i].authorname%></p>
+
                                 </a>
                             </div>
                             <p>
                                 <input style="display:none" id="id" name="id">
-                                <button id="<%= result[i].articleID%>" onclick="getID(this)" type="submit" class="btn btn-small" style="background-color:#FFCC00" type="button">Delete</button>
+                                <button id="<%= result[i].articleID%>" onclick="getID(this)" type="submit" class="btn btn-small" style="background-color:#F5D777" type="button">Delete</button>
                             </p>
                         <% } %>
                         <% } %>

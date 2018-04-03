@@ -9,30 +9,30 @@
 <% include ../header.ejs %>
 
 <body background="../images/background7.jpg" style="background-size:100% 500px">
-<div class="container-fluid" style="padding: 10px; background-color: #ffc107">
-    <img src="../profileimgs/<%=checked_user.username%>" class="img-thumbnail img-circle" style="width: 60px;margin-left: 15.1cm;margin-top:12px">
+<div class="container-fluid" style="padding: 10px; text-align:center; background-image:url('../images/posttop.jpg');background-size:100% 100%;">
+    <img src="../profileimgs/<%=checked_user.username%>" class="img-thumbnail img-circle" style="width: 140px;margin-left:0px;margin-top:12px">
     <p>
     <h5 class="text-center"><%=checked_user.username%><br><small><%=checked_user.description%></small></h5>
     </p>
-    <form id="followform">
-        <input id="followinput" name="follow_operation">
+    <form id="followform" method="post">
+        <input id="followinput" name="follow_operation" style="display:none">
         <% if (followed) {%>
-            <button id="unfollow" onclick="follow_operation(this)">Unfollow</button>
+            <button id="unfollow" onclick="f_author(this)" style="background-color: #F5D777">Unfollow</button>
         <% } else {%>
-            <button id="follow" onclick="follow_operation(this)">Follow</button>
+            <button id="follow" onclick="f_author(this)">Follow</button>
         <% } %>
     </form>
 </div>
-<div class="container-fluid" style="padding: 10px; background-color: #efa2a9">
+<div class="container-fluid" style="padding: 10px;min-height:500px;">
     <div class="row">
         <div class="col-2">
             <p>
-                <a href="./profile" class="btn btn-warning" aria-pressed="true" role="button" style="width:4cm">My Articles</a><br>
-                <a href="./myhelp" class="btn btn-warning" aria-pressed="true" role="button" style="width:4cm">My Helps</a><br>
-                <a href="./mycomment" class="btn btn-warning" aria-pressed="true" role="button" style="width:4cm">My Comments</a><br>
-                <a href="./myfollowing" class="btn btn-warning" aria-pressed="true" role="button" style="width:4cm">My Followings</a><br>
-                <a href="./myfollower" class="btn btn-warning" aria-pressed="true" role="button" style="width:4cm">My Followers</a><br>
-                <a href="./mylike" class="btn btn-warning" aria-pressed="true" role="button" style="width:4cm">My Likes</a>
+                <a href="./profile" class="btn" aria-pressed="true" role="button" style="background-color:#F5D777;color:#773300;width:75%;min-width:3.5cm">My Articles</a><br>
+                <a href="./myhelp" class="btn" aria-pressed="true" role="button" style="background-color:#F5D777;color:#773300;width:75%;min-width:3.5cm">My Helps</a><br>
+                <a href="./mycomment" class="btn" aria-pressed="true" role="button" style="background-color:#F5D777;color:#773300;width:75%;min-width:3.5cm">My Comments</a><br>
+                <a href="./myfollowing" class="btn" aria-pressed="true" role="button" style="background-color:#F5D777;color:#773300;width:75%;min-width:3.5cm">My Followings</a><br>
+                <a href="./myfollower" class="btn" aria-pressed="true" role="button" style="background-color:#F5D777;color:#773300;width:75%;min-width:3.5cm">My Followers</a><br>
+                <a href="./mylike" class="btn" aria-pressed="true" role="button" style="background-color:#F5D777;color:#773300;width:75%;min-width:3.5cm">My Likes</a>
             </p>
         </div>
         <div class="col-10">
@@ -72,7 +72,7 @@
         result.value = article.id;
         document.getElementById('form').submit();
     }
-    function follow_operation(button) {
+    function f_author(button) {
         new Promise(function (resolve, reject) {
             var form = document.getElementById('followform');
             document.getElementById('followinput').value = button.id;
