@@ -62,14 +62,18 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 router.post('/', function (req, res, next) {
     var followinguser = String(req.body.followinguser);//username
     var username = encodeURIComponent(followinguser);
-    if(req.body.unfollow){
-        console.log('ddd ',req.body.unfollow);
+    var id = req.body.id;
+
+    if(id[0]){
+        test.unfollow(req.user.username,id[0]);
+        res.redirect('myfollowing');
+
     }
     else{
-        console.log('sss ',followinguser);
+        res.redirect('./userpostpage?username=' + username);
     }
 
-    res.redirect('./userpostpage?username=' + username);
+
 
 });
 
