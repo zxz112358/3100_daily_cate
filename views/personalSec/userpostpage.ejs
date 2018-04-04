@@ -90,11 +90,11 @@
                         <div>
                             <a href="#" id = '<%=article[i].articleID%>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start"style="background-color:#F5D777;min-width:800px;margin-top: 10px;height:320px">
                                 <div class="d-flex w-100 flex-row" style="min-width:800px">
-                                    <img src="../images/pic.jpg" style="width:315px;height:270px">
+                                    <img src="<%= '../exhibitionSec/pictures/' + (article[i].picturestart + article[i].pictureno - 1) %>" style="width:315px;height:270px">
                                         <div class="d-flex flex-column" style="margin-left:40px;width:330px;">
                                             <p class="arttit"><%=article[i].articlename%></p>
                                             <p class="arttime"><%=article[i].posttime%></p>
-                                            <p class="author">name</p>
+                                            <p class="author"><%=article[i].authorname%></p>
                                         </div>
                                 </div>
 

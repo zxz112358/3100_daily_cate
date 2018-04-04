@@ -75,16 +75,7 @@
                         <div class="d-flex flex-column" style="margin-left:40px;width:330px;">
                             <p class="arttit"><%=allArticle[i].articlename%></p>
                             <p class="arttime"><%=allArticle[i].posttime%></p>
-                            <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" class="artframe" id="textframe"></iframe>
-                            <script>
-                                var frame = document.getElementById('textframe');
-                                frame.onload = function () {
-                                    var body = frame.contentWindow.document.querySelector('body');
-                                    body.style.color = 'grey';
-                                    body.style.fontSize = '20px';
-                                    body.style.lineHeight = '20px';
-                                };
-                            </script>
+                            <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" class="artframe" id="textframe" scrolling="no"></iframe>
                             <p class="author"><%=allArticle[i].authorname%></p>
                         </div>
                     </div>
@@ -104,7 +95,7 @@
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=vegetable[i].articlename%></p>
                         <p class="arttime"><%=vegetable[i].posttime%></p>
-                        <iframe src="<%= '../exhibitionSec/texts/' + vegetable[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + vegetable[i].parastart + '.txt' %>" style="border: none" id="textframe"  scrolling="no"></iframe>
                         <p class="author"><%=vegetable[i].authorname%></p>
                     </div>
 
@@ -126,7 +117,7 @@
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=fruit[i].articlename%></p>
                         <p class="arttime"><%=fruit[i].posttime%></p>
-                        <iframe src="<%= '../ingredientSec/texts/' + fruit[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + fruit[i].parastart + '.txt' %>" style="border: none" id="textframe"  scrolling="no"></iframe>
                         <p class="author"><%=fruit[i].authorname%></p>
                     </div>
 
@@ -140,14 +131,14 @@
         <!--display contents under 'meat' tab-->
         <div class="tab-pane" id="meat">
             <% if (meat){
-            for (var i = 0; i < fruits.length; i++) {%>
+            for (var i = 0; i < meat.length; i++) {%>
             <a href="#" id = '<%= 'meat' + i %>' onclick="enterArticle(this)" class="list-group-item list-group-item-action flex-column align-items-start" style="background-color:#FFEE99;margin-top: 10px;height:320px">
                 <div class="d-flex w-80 flex-row">
                     <img src="<%= '../exhibitionSec/pictures/' + (meat[i].picturestart + meat[i].pictureno - 1) %>" style="width:315px;height:270px">
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=meat[i].articlename%></p>
                         <p class="arttime"><%=meat[i].posttime%></p>
-                        <iframe src="<%= '../ingredientSec/texts/' + meat[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + meat[i].parastart + '.txt' %>" style="border: none" id="textframe" scrolling="no"></iframe>
                         <p class="author"><%=meat[i].authorname%></p>
                     </div>
 
@@ -168,7 +159,7 @@
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=grain[i].articlename%></p>
                         <p class="arttime"><%=grain[i].posttime%></p>
-                        <iframe src="<%= '../ingredientSec/texts/' + grain[i].parastart + '.txt' %>" style="border: none" id="textframe"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + grain[i].parastart + '.txt' %>" style="border: none" id="textframe"  scrolling="no"></iframe>
                         <p class="author"><%=grain[i].authorname%></p>
                     </div>
 

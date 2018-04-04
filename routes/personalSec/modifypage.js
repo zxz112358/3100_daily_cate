@@ -39,7 +39,7 @@ router.post('/', upload.single('profileimg'), function (req,res,next) {
     var pwd = req.body.password1;
     var pwd1 = req.body.password2;
 
-    test.select_user(req.user.username,function(user){
+    test.select_user(req.user.username, function(user){
         if (user===false){
             console.log("no such person");
         }
@@ -116,10 +116,12 @@ router.post('/', upload.single('profileimg'), function (req,res,next) {
     });
     //Form validator
     if (!(email || oldpassword || desc || pwd || pwd1)){
-        //search handling
-        console.log(req.body.searchname);
-        var searchname = encodeURIComponent(req.body.searchname);
-        res.redirect('../personalSec/search?searchname=' + searchname);
+        if(req.body.searchname !== undefined){
+            //search handling
+            console.log(req.body.searchname);
+            var searchname = encodeURIComponent(req.body.searchname);
+            res.redirect('../personalSec/search?searchname=' + searchname);
+        }
     }
 
 });

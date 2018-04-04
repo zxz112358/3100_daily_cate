@@ -65,16 +65,7 @@
                         <div class="d-flex flex-column" style="margin-left:40px;width:330px;">
                             <p class="arttit"><%=results[i].articlename%></p>
                             <p class="arttime"><%=results[i].posttime%></p>
-                            <iframe src="<%= '../exhibitionSec/texts/' + results[i].parastart + '.txt' %>" class="artframe" id="textframe"></iframe>
-                            <script>
-                                var frame = document.getElementById('textframe');
-                                frame.onload = function () {
-                                    var body = frame.contentWindow.document.querySelector('body');
-                                    body.style.color = 'grey';
-                                    body.style.fontSize = '20px';
-                                    body.style.lineHeight = '20px';
-                                };
-                            </script>
+                            <iframe src="<%= '../exhibitionSec/texts/' + results[i].parastart + '.txt' %>" class="artframe" id="textframe" scrolling="no"></iframe>
                             <p class="author"><%=results[i].authorname%></p>
                         </div>
                     </div>

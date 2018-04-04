@@ -44,8 +44,8 @@
             height: 210px;
             border-radius: 50%;
             border: 25px solid transparent;
-            border-top-color: #f44556;
-            border-right-color: #f44556;
+            border-top-color: #f4e277;
+            border-right-color: #f4e277;
             margin: auto;
             position: absolute;
             top: 0;
@@ -66,7 +66,7 @@
             margin: auto;
             font-size: 30px;
             font-weight: bold;
-            color: #f44556;
+            color: #f4e277;
             text-align: center;
             position: absolute;
             top: 0;
@@ -78,7 +78,7 @@
         .main-timeline .timeline-content{
             width: 35%;
             float: right;
-            background: #f44556;
+            background: #f4e277;
             padding: 30px 20px;
             margin: 50px 0;
             z-index: 1;
@@ -88,7 +88,7 @@
             content: "";
             width: 20%;
             height: 15px;
-            background: #f44556;
+            background: #f4e277;
             position: absolute;
             top: 50%;
             left: -20%;
@@ -116,26 +116,26 @@
             right: -20%;
         }
         .main-timeline .timeline:nth-child(2n) .timeline-icon{
-            border-top-color: #e97e2e;
-            border-right-color: #e97e2e;
+            border-top-color: #FFCC00;
+            border-right-color: #FFCC00;
         }
-        .main-timeline .timeline:nth-child(2n) .year{ color: #e97e2e; }
+        .main-timeline .timeline:nth-child(2n) .year{ color: #FFCC00; }
         .main-timeline .timeline:nth-child(2n) .timeline-content,
-        .main-timeline .timeline:nth-child(2n) .timeline-content:before{ background: #e97e2e; }
+        .main-timeline .timeline:nth-child(2n) .timeline-content:before{ background: #FFCC00; }
         .main-timeline .timeline:nth-child(3n) .timeline-icon{
-            border-top-color: #13afae;
-            border-right-color: #13afae;
+            border-top-color: #AFDDAA;
+            border-right-color: #AFDDAA;
         }
-        .main-timeline .timeline:nth-child(3n) .year{ color: #13afae; }
+        .main-timeline .timeline:nth-child(3n) .year{ color: #AFDDAA; }
         .main-timeline .timeline:nth-child(3n) .timeline-content,
-        .main-timeline .timeline:nth-child(3n) .timeline-content:before{ background: #13afae; }
+        .main-timeline .timeline:nth-child(3n) .timeline-content:before{ background: #AFDDAA; }
         .main-timeline .timeline:nth-child(4n) .timeline-icon{
-            border-top-color: #105572;
-            border-right-color: #105572;
+            border-top-color: #55bbee;
+            border-right-color: #55bbee;
         }
-        .main-timeline .timeline:nth-child(4n) .year{ color: #105572; }
+        .main-timeline .timeline:nth-child(4n) .year{ color: #55bbee; }
         .main-timeline .timeline:nth-child(4n) .timeline-content,
-        .main-timeline .timeline:nth-child(4n) .timeline-content:before{ background: #105572; }
+        .main-timeline .timeline:nth-child(4n) .timeline-content:before{ background: #55bbee; }
         @media only screen and (max-width: 1199px){
             .main-timeline .timeline{ margin-top: -103px; }
             .main-timeline .timeline-content:before{ left: -18%; }
@@ -213,7 +213,7 @@
                         <div class="timeline-content" style="text-align:center;">
                             <img src="<%= '../exhibitionSec/pictures/' + (article.parastart + i) %>" style="width:315px;height:270px">
                             <p class="description">
-                                <iframe src="<%= '../exhibitionSec/texts/' + (article.parastart + i) + '.txt' %>" style="border: none" id="textframe"></iframe>
+                                <iframe src="<%= '../exhibitionSec/texts/' + (article.parastart + i) + '.txt' %>" style="border: none" id="<%= 'frame' + i%>"></iframe>
                             </p>
                         </div>
                     </div>

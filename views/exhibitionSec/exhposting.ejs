@@ -25,7 +25,7 @@
         <li class="active"><a href="#exhibition" style="background-color: #FFA500" data-toggle="tab">Exhibition Post</a></li>
         <li><a href="#help" data-toggle="tab" style="background-color: #FFA500">Help Post</a></li>
     </ul>
-    <div class="tab-content">
+    <div class="tab-content" style="padding-bottom:20px;">
         <div class="tab-pane active" id="exhibition">
             <form method="post" id = "inputForm" enctype="multipart/form-data"class="mx-auto w-75">
                 <input style="display: none" name="type" value="article">
@@ -57,15 +57,14 @@
 
 
 
-
-                <br><button id = "end_input_btn" type="submit" class="btn btn-warning btn-right" style="color:#000000;margin-left:90%">End input</button>
-
                 <br><button id = "next_btn" class="btn btn-warning" style="color:#000000;margin-bottom:50px;">Next</button>
+                <button id = "end_input_btn" type="submit" class="btn btn-warning btn-right" style="color:#000000;margin-left:90%">End input</button>
+
                 <script>
                     document.getElementById("next_btn").addEventListener("click", nextPara_arti);
                     function nextPara_arti() {
                         var form = document.getElementById("inputForm");
-                        var submit = document.getElementById("end_input_btn");
+                        var submit = document.getElementById("next_btn");
 
                         var newpara = document.createElement("textarea");
                         newpara.rows=2;
@@ -122,13 +121,13 @@
                 <br><label id = "formchild3" >Picture:</label>
                 <input id = "formchild4" type="file" name = "picture" class="w-75" required>
 
-                <br><button id = "end_input_btn_help" type="submit" class="btn btn-warning" style="color:#000000;margin-left:90%">End input</button>
-                <br><button id = "next_btn_help" class="btn btn-warning" style="color: #000000;margin-bottom:50px">Next</button>
+                <br><button id = "next_btn_help" class="btn btn-warning" style="color: #000000;margin-bottom: 50px" >Next</button>
+                <button id = "end_input_btn_help" type="submit" class="btn btn-warning" style="color:#000000;margin-left:90%">End input</button>
                 <script>
                     document.getElementById("next_btn_help").addEventListener("click", nextPara_help);
                     function nextPara_help() {
                         var form = document.getElementById("helpForm");
-                        var submit = document.getElementById("end_input_btn_help");
+                        var submit = document.getElementById("next_btn_help");
 
                         var newpara = document.createElement("textarea");
                         newpara.rows=2;

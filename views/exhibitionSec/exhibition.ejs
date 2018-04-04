@@ -72,7 +72,7 @@
                         <div class="d-flex flex-column" style="margin-left:40px;width:330px;">
                             <p class="arttit"><%=allArticle[i].articlename%></p>
                             <p class="arttime"><%=allArticle[i].posttime%></p>
-                            <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" class="artframe" id="<%= "textall"+i%>"></iframe>
+                            <iframe src="<%= '../exhibitionSec/texts/' + allArticle[i].parastart + '.txt' %>" class="artframe" id="<%= "textall"+i%>"  scrolling="no"></iframe>
                             <p class="author"><%=allArticle[i].authorname%></p>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                         <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                             <p class="arttit"><%=main[i].articlename%></p>
                             <p class="arttime"><%=main[i].posttime%></p>
-                            <iframe src="<%= '../exhibitionSec/texts/' + main[i].parastart + '.txt' %>" style="border: none" id="<%= "textmain"+i%>"></iframe>
+                            <iframe src="<%= '../exhibitionSec/texts/' + main[i].parastart + '.txt' %>" style="border: none" id="<%= "textmain"+i%>"  scrolling="no"></iframe>
 
                             <p class="author"><%=main[i].authorname%></p>
                         </div>
@@ -117,7 +117,7 @@
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=dish[i].articlename%></p>
                         <p class="arttime"><%=dish[i].posttime%></p>
-                        <iframe src="<%= '../exhibitionSec/texts/' + dish[i].parastart + '.txt' %>" style="border: none" id="<%= "textdish"+i%>"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + dish[i].parastart + '.txt' %>" style="border: none" id="<%= "textdish"+i%>"  scrolling="no"></iframe>
                         <p class="author"><%=dish[i].authorname%></p>
                     </div>
                 </div>
@@ -137,7 +137,7 @@
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=soup[i].articlename%></p>
                         <p class="arttime"><%=soup[i].posttime%></p>
-                        <iframe src="<%= '../exhibitionSec/texts/' + soup[i].parastart + '.txt' %>" style="border: none" id="<%= "textsoup"+i%>"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + soup[i].parastart + '.txt' %>" style="border: none" id="<%= "textsoup"+i%>"  scrolling="no"></iframe>
                         <p class="author"><%=soup[i].authorname%></p>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                     <div class="d-flex flex-column" style="margin-left:40px;width:600px;">
                         <p class="arttit"><%=dessert[i].articlename%></p>
                         <p class="arttime"><%=dessert[i].posttime%></p>
-                        <iframe src="<%= '../exhibitionSec/texts/' + dessert[i].parastart + '.txt' %>" style="border: none" id="<%= "textdessert"+i%>"></iframe>
+                        <iframe src="<%= '../exhibitionSec/texts/' + dessert[i].parastart + '.txt' %>" style="border: none" id="<%= "textdessert"+i%>" scrolling="no"></iframe>
                         <script>
                             var frame = document.getElementById('textframe');
                             frame.onload = function () {
