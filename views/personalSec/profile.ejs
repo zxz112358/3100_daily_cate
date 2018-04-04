@@ -96,6 +96,13 @@
             <div class="container-fluid" style="padding:10px">
                 <div class="list-group mx-auto w-75">
                     <form method="post" id = 'form'>
+                        <% if(articleno==0){%>
+                        <div style="color:#773300;font-size:25px;padding-top:20px;font-weight:600;font-family:'Comic Sans MS'">
+                            <p>You have no article! Click the button below to post your first article!</p>
+                            <button onclick="window.location.href='/exhibitionSec/exhposting'" class="btn btn-small" style="margin-left:31%;background-color:#F5D777" type="button">New post</button>
+                        </div>
+
+                        <%}%>
                         <% for (var i = 0; i < articleno; i++) { %>
                         <% if(result[i].type=='article') { %>
                             <div>

@@ -7,18 +7,22 @@ var test = require('../test');
 router.get('/', function(req, res, next) {
     test.select_article(req.query.articleId, function (article) {
         test.select_article_comment(req.query.articleId,function(result1,result2){
-            test.check_whether_like_article(req.user.username, req.query.articleId, function (liked) {
-                res.render('exhibitionSec/articlePost', {
-                    title: 'articlePost',
-                    name: 'Daily Cate',
-                    user: req.user,
-                    article: article,
-                    comment:result2,
-                    liked:liked
+            if(req.user) {
+                test.check_whether_like_article(req.user.username, req.query.articleId, function (liked) {
+                    res.render('exhibitionSec/articlePost', {
+                        title: 'articlePost',
+                        name: 'Daily Cate',
+                        user: req.user,
+                        article: article,
+                        comment: result2,
+                        liked: liked
+                    });
+                    console.log('liked: ', liked);
                 });
-                console.log('liked: ', liked);
+            }else {
+                res.redirect('/');
+            }
             });
-            })
         //console.log(article);
     });
 });
