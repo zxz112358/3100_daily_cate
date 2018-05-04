@@ -1,3 +1,4 @@
+<!--This is the part for each article showing in the exhibition session-->
 <!DOCTYPE html>
 <html>
 
@@ -13,6 +14,7 @@
 
     <link rel="stylesheet" type="text/css" href="/stylesheets/demo.css">
     <style type="text/css">
+        /*below is the template used for showing each picture and paragrapgh*/
         .main-timeline{
             overflow: hidden;
             position: relative;
@@ -233,6 +235,7 @@
     </form>
 </div>
 
+<!--a dynamic number of paragraphs is used here for a flexible display-->
 <%if (comment){ %>
     <% for (var i = 0; i < comment.length; i++) { %>
         <div class="card w-75 mx-auto" style="background-color: #F5D777">
