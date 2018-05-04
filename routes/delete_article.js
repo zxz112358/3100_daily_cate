@@ -75,7 +75,6 @@ function delete_paragraph(id){
         console.log(results);
     });
 }
-<<<<<<< HEAD
 
 /*
 var test = require('../delete_article');
@@ -110,8 +109,6 @@ test.select_article(1,function(article){
     });
 
 })*/
-=======
->>>>>>> a8cf8e071502927eeaa7e96ffcb6f8b8582862da
 
 //exports the functions
 module.exports={
