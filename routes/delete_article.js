@@ -1,3 +1,6 @@
+//this file provides the needed functions for article deletion
+
+//set up connection to local Database
 var mysql = require("mysql");
 var connection = mysql.createConnection({
     "host": "localhost",
@@ -7,6 +10,7 @@ var connection = mysql.createConnection({
     "database": "csci3100"
 });
 
+//delete all comments of an article given articleID
 function delete_article_comment(arID,callback){
     var de_article_comment="delete from comments where articleID="+arID;
     connection.query(de_article_comment, function(error, results) {
@@ -16,6 +20,8 @@ function delete_article_comment(arID,callback){
         return callback(true);
     });
 }
+
+//delete all likes of the article given articleID
 function delete_followarticle(arID,callback){
     var de_followarticle="delete from followarticle where article="+arID;
     connection.query(de_followarticle, function(error, results) {
@@ -25,6 +31,7 @@ function delete_followarticle(arID,callback){
         return callback(true);
     });
 }
+
 //delete an article with the given articleID
 function delete_article(arID,callback){
     var de_article="delete from articles where articleID="+arID;
@@ -35,6 +42,8 @@ function delete_article(arID,callback){
         return callback(true);
     });
 }
+
+//select article information about an article given articleID
 function select_article(arID,callback){
     var sel_article="select articlename,authorname,parastart,parano,picturestart,pictureno from articles where articleID="+arID;
     connection.query(sel_article, function(error, results) {
@@ -43,12 +52,9 @@ function select_article(arID,callback){
         }
         return callback(results[0]);
     });
-
-    //return all the picture and paragraph files stored before for this article
-    //for loop to open the files
-    //how to get the variables parastart, parano,picstart,picno
-    //return all pictures, paragrahs and comments of this article
 }
+
+//delete all pictures of this article
 function delete_picture(id){
     var de_picture="delete from pictures where pictureID="+id;
     connection.query(de_picture, function(error, results) {
@@ -58,6 +64,8 @@ function delete_picture(id){
         console.log(results);
     });
 }
+
+//delete all paragraphs of this article
 function delete_paragraph(id){
     var de_paragraph="delete from paragraphs where paraID="+id;
     connection.query(de_paragraph, function(error, results) {
@@ -67,6 +75,8 @@ function delete_paragraph(id){
         console.log(results);
     });
 }
+<<<<<<< HEAD
+
 /*
 var test = require('../delete_article');
 test.select_article(1,function(article){
@@ -100,7 +110,10 @@ test.select_article(1,function(article){
     });
 
 })*/
+=======
+>>>>>>> a8cf8e071502927eeaa7e96ffcb6f8b8582862da
 
+//exports the functions
 module.exports={
     connection:connection,
     delete_article:delete_article,
