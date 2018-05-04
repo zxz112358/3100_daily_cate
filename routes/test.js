@@ -2,6 +2,7 @@
 mysql statement such as insert, delete, update, select etc for the use of front end when users
 have different requests.*/
 
+//set up connection to local databse
 var mysql = require("mysql");
 var connection = mysql.createConnection({
     "host": "localhost",
@@ -23,12 +24,8 @@ function insert_client(name,email,pwd,desc){
 }
 
 
-
+//update clients' personal information
 function update_client(name,email,pwd,desc,callback){
-    //name.replace(/'/,'\'');
-    //email.replace(/'/,'\'');
-    //pwd.replace(/'/,'\'');
-    //desc.replace(/'/,'\'');
     var up_client = "update client set email="+'\''+email.replace(/'/,"\\\'")+'\''+",password="+'\''+pwd.replace(/'/,"\\\'")+'\''+",description="+'\''+desc.replace(/'/,"\\\'")+'\''+"where username="+'\''+name.replace(/'/,"\\\'")+'\'';
     connection.query(up_client, function(error, results) {
         if (error) {
@@ -37,20 +34,12 @@ function update_client(name,email,pwd,desc,callback){
         else{
             return callback(true);
         }
-        //console.log(results);
     });
 }
-/*test.update_client('1','11@gmail.com','1','I like eating',function(result){
-    if(result==true){
-        console.log(result);
-    }
-});*/
 
 //insert new article records into database
 function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,parastart,type){
     //pictures for this article will be stored before and pass the startID and picture numbers
-    //arname.replace(/'/,'\'');
-    //auname.replace(/'/,'\'');
     for(var i=0;i<picNo;i++){
         var index=picstart+i;
         var in_picture = "insert into pictures values ("+index+")";
@@ -80,15 +69,12 @@ function insert_article(arID,arname,auname,tag,posttime,picNo,picstart,paraNo,pa
         }
         console.log(results);
     });
-    //return T or F
 }
 
 
 
 //insert a new comment
 function insert_comment(coID,auname,content,arID){
-    //auname.replace(/'/,'\'');
-    //content.replace(/'/,'\'');
     var in_comment = "insert into comments values ("+coID+","+'\''+auname.replace(/'/,"\\\'")+'\''+","+'\''+content.replace(/'/,"\\\'")+'\''+","+arID+")";
     connection.query(in_comment, function(error, results) {
         if (error) {
@@ -107,7 +93,6 @@ function delete_comment(coID){
         }
         console.log(results);
     });
-    //return T or F
 }
 
 
@@ -121,28 +106,20 @@ function select_article(arID,callback){
         return callback(results[0]);
     });
 }
-/*test.select_article(1,function(result){
-    console.log(result.articlename);
-});*/
 
-
+//select all comments of a particular article given the articleID
 function select_article_comment(arID,callback){
     var sel_article_comment="select * from comments where articleID="+arID;
     connection.query(sel_article_comment, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        //console.log(results);
         return callback(Object.keys(results).length,results);
 
     });
 }
-/*test.select_article_comment(<articleid>,function(result1,result2){
-    console.log(result1);//the no. of comments in that article;
-    console.log(result2);//all comments -> result2[i].content
-});*/
 
-
+//count the number of comment of a particular article given the articleID
 function count_comment_no(arID,callback){
     var co_comment_no="select distinct count(*) as count from comments where articleID="+arID+" group by articleID";
     connection.query(co_comment_no, function(error, results) {
@@ -156,12 +133,9 @@ function count_comment_no(arID,callback){
         });
     });
 }
-/*test.count_comment_no(<articleID>,function(result){
-    console.log(result.count);
-});
-*/
+
+//select all articles of a client given the username
 function select_all_client_article(name,callback){
-    //name.replace(/'/,"\'");
     var sel_client_article="select * from articles where authorname="+'\''+name.replace(/'/,"\\\'")+'\'';
     connection.query(sel_client_article, function(error, results) {
         if (error) {
@@ -171,58 +145,29 @@ function select_all_client_article(name,callback){
     });
 }
 
+//select all articles of a type of a client given the username and type
 function select_client_article(name,type,callback){
-    //name.replace(/'/,"\'");
     var sel_client_article="select * from articles where authorname="+'\''+name.replace(/'/,"\\\'")+'\''+"and type =" +'\''+type+'\'';
     connection.query(sel_client_article, function(error, results) {
         if (error) {
             return console.error(error);
         }
         return callback(Object.keys(results).length,results);
-        /*Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
-
-        });*/
     });
 }
+
+//select all comments of a client given username
 function select_client_comment(name,callback){
-    //name.replace(/'/,"\'");
     var sel_client_comment="select c.commentID, c.authorname as commentname, c.content, c.articleID,a.articlename, a.authorname,a.tag,a.posttime,a.pictureno,a.picturestart,a.parano,a.parastart   from comments c, articles a where c.authorname="+'\''+name.replace(/'/,"\\\'")+'\''+" and c.articleID=a.articleID";
     connection.query(sel_client_comment, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        //console.log(results);
         return callback(Object.keys(results).length,results);
     });
 }
-/*test.select_client_article('1',function(result1,result2){
-    if(result1==0){
-        console.log("you do not have article");
-    }
-    else{
-        var string=[];
-        for(var i=0;i<result1;i++){
-            string.push(result2[i].picturestart+result2[i].pictureno-1);
-        }
-        for(var i=0,i<result1,i++){
-            string[i]=string[i]
-        }
-        console.log(result2);
-        console.log(string);
-    }
-});*/
-/*test.select_client_comment(<username>,function(result1,result2){
-    if(result1==0){
-        console.log("you do not have any comment");
-    }
-    else{
-        console.log(result2);
-    }
-});*/
 
-//select a list of article names based on the given tag for user to choose
+//select all articles of a type and a tag given type and tag
 function select_article_list(tag,type,callback){
     var sel_article_list="select * from articles where tag="+'\''+tag+'\''+"and type = "+ '\''+type+'\'';
     connection.query(sel_article_list, function(error, results) {
@@ -231,20 +176,10 @@ function select_article_list(tag,type,callback){
         }
         return callback(Object.keys(results).length,results);
     });
-    //return the list of articles with articlenames and authornames
 
 }
-/*test.select_article_list(<tag_name>,function(result1,result2){
-    if(result1==0){
-        console.log("no results found.");
-    }
-    else{
-        console.log(result2);
-    }
 
-});*/
-
-
+//select all articles of a type given type
 function select_all_article(type,callback){
     var sel_all_article="select * from articles where type = "+'\''+type+'\'';
     connection.query(sel_all_article, function(error, results) {
@@ -257,15 +192,7 @@ function select_all_article(type,callback){
 
 }
 
-/*test.select_all_article(function(result1,result2){
-    if(result1==0){
-        console.log("no results found.");
-    }
-    else{
-        console.log(result2);
-    }
-
-});*/
+//select user information of a user given username
 function select_user(name,callback){
     var sel_username="select username,email,password,description from client where username="+'\''+name.replace(/'/,"\\\'")+'\'';
     connection.query(sel_username, function(error, results) {
@@ -281,19 +208,7 @@ function select_user(name,callback){
     });
 }
 
-/*test.select_user('i',function(user){
-
-    if (user==false){
-        console.log("no such person");
-    }
-    else{
-        console.log(user.description);
-
-    }
-
-});*/
-
-
+//user1 follow user2
 function follow(user1,user2) {
     //user1.replace(/'/,"\'");
     //user2.replace(/'/,"\'");
@@ -306,6 +221,7 @@ function follow(user1,user2) {
     });
 }
 
+//user like an article given username and articleID
 function like_article(articleid,user) {
     //user.replace(/'/,"\'");
     var li_article = "insert into followarticle(article,user) values ("+articleid+',\''+user.replace(/'/,"\\\'")+'\')';
@@ -316,6 +232,8 @@ function like_article(articleid,user) {
         console.log(results);
     });
 }
+
+//count the number of people who follow user2, given user2
 function check_followers(name, callback) {
     //name.replace(/'/,"\'");
     var ch_followers = "select count(user2) as count from follow where user2 = "+'\''+name.replace(/'/,"\\\'")+'\'';
@@ -326,13 +244,8 @@ function check_followers(name, callback) {
         return callback(results[0]);
     });
 }
-/*
-test.check_followers(<username>,function(result){
-        console.log(result.count);//how many people follow person <username>
 
-});*/
-
-
+//select user2's followers given user2
 function select_my_followers(name,callback){
     //name.replace(/'/,"\'");
     var se_my_followers= "select * from follow f, client c where f.user2= "+'\''+name.replace(/'/,"\\\'")+'\''+" and f.user1=c.username";
@@ -343,18 +256,8 @@ function select_my_followers(name,callback){
         return callback(Object.keys(results).length,results);
     });
 }
-/*test.select_my_followers(<username>,function(result1,result2){
-    //print the table includes all user2
-    if(result1==0){
-        console.log("no followers");
-    }
-    else{
-        console.log(result2);
-    }
 
-});*/
-
-
+//select user1's followings given user1
 function select_my_followings(name, callback) {
     //name.replace(/'/,"\'");
     var se_my_followings= "select * from follow f, client c where f.user1= "+'\''+name.replace(/'/,"\\\'")+'\''+" and f.user2=c.username";
@@ -365,20 +268,9 @@ function select_my_followings(name, callback) {
         return callback(Object.keys(results).length,results);
     });
 }
-/*test.select_my_followers(<username>,function(result1,result2){
-    //print the table includes all user2
-    if(result1==0){
-        console.log("no followings");
-    }
-    else{
-        console.log(result2);
-    }
 
-});*/
-
-
+//count the number of people user1 is following
 function check_my_follow(name, callback) {
-    //name.replace(/'/,"\'");
     var ch_my_follow = "select count(user1) as count from follow where user1 ="+'\''+name.replace(/'/,"\\\'")+'\'';
     connection.query(ch_my_follow,function (error, results) {
         if (error){
@@ -388,6 +280,7 @@ function check_my_follow(name, callback) {
     });
 }
 
+//count the number of likes an article received given articleID
 function article_like(articleid,callback) {
     var ar_like = "select count(article) as count from followarticle where article ="+articleid;
     connection.query(ar_like,function (error, results) {
@@ -398,33 +291,19 @@ function article_like(articleid,callback) {
     });
 }
 
+//select all articles a client like given username
 function select_article_like(username,callback) {
-    //name.replace(/'/,"\'");
     var se_article_like = "select * from followarticle f, articles a where f.user ="+'\''+username.replace(/'/,"\\\'")+'\''+" and f.article=a.articleid";
     connection.query(se_article_like, function(error, results) {
         if (error) {
             return console.error(error);
         }
-        /*if (Object.keys(results).length === 0) {
-            return callback(null);
-        }*/
         return callback(Object.keys(results).length,results);
     });
 }
 
-/*test.select_article_like('1',function(result1,result2){
-    //print the table includes all user2
-    if(result1==0){
-        console.log("no like articles");
-    }
-    else{
-        console.log(result2);
-    }
-
-});*/
-
+//search function given search name
 function search(name,callback){
-    //name.replace(/'/,"\'");
     var an="select * from articles where authorname like "+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\''+"or articlename like"+'\''+"%"+name.replace(/'/,"\\\'")+"%"+'\'';
     connection.query(an, function(error, results) {
         if (error) {
@@ -434,20 +313,7 @@ function search(name,callback){
             return callback(results);
         }
     });
-    //return T or F
 }
-/*test.search(<search_key>,function(result){
-    if(result==false){
-    	console.log("no result found");
-    }
-    else{
-        console.log(result.articlename);
-        console.log(result.authorname);
-    }
-
-});*/
-
-
 
 
 //select the articleid with kth largest number of likes
@@ -464,14 +330,8 @@ function select_k(callback){
 
     });
 }
-/*test.select_k(function(result){
-    var k_articles=[];
-    //console.log(result);
-    for(var i=0;i<5;i++){
-        k_articles.push(result[i]);
-    }
-    console.log(k_articles);
-});*/
+
+//user1 unfollow user2 given user1 and user2
 function unfollow(user1,user2) {
     var unfo = "delete from follow where user1="+'\''+user1+'\''+" and user2 ="+'\''+user2+'\'';
     connection.query(unfo,function (error,results) {
@@ -481,6 +341,8 @@ function unfollow(user1,user2) {
         console.log(results);
     });
 }
+
+//user unlike the article given username and articleID
 function unlike(username,articleid) {
     var unfo = "delete from followarticle where user="+'\''+username+'\''+" and article ="+articleid;
     connection.query(unfo,function (error,results) {
@@ -490,6 +352,8 @@ function unlike(username,articleid) {
         console.log(results);
     });
 }
+
+//select article and comments of an article given articleID
 function select_article_and_comment(arID,callback){
     var sel_article_and_comment="select * from comments c, articles a where c.articleID="+arID+" and a.articleID="+arID;
     connection.query(sel_article_and_comment, function(error, results) {
@@ -497,15 +361,10 @@ function select_article_and_comment(arID,callback){
             return console.error(error);
         }
         return callback(Object.keys(results).length,results);
-        /*Object.keys(results).forEach(function(key){
-            var row=results[key];
-            return callback(row);
-
-        });*/
     });
 }
 
-
+//delete all comments of an article given articleID
 function delete_article_comment(arID,callback){
     var de_article_comment="delete from comments where articleID="+arID;
     connection.query(de_article_comment, function(error, results) {
@@ -515,6 +374,8 @@ function delete_article_comment(arID,callback){
         return callback(true);
     });
 }
+
+//delete the likes of an article given articleID
 function delete_followarticle(arID,callback){
     var de_followarticle="delete from followarticle where article="+arID;
     connection.query(de_followarticle, function(error, results) {
@@ -524,6 +385,7 @@ function delete_followarticle(arID,callback){
         return callback(true);
     });
 }
+
 //delete an article with the given articleID
 function delete_article(arID,callback){
     var de_article="delete from articles where articleID="+arID;
@@ -534,6 +396,8 @@ function delete_article(arID,callback){
         return callback(true);
     });
 }
+
+//count the number of articles
 function count_article_no(callback){
     var count_article="select * from articles";
     connection.query(count_article, function(error, results) {
@@ -551,6 +415,8 @@ function count_article_no(callback){
     });
 
 }
+
+//count the number of total paragraphs of all articles
 function count_paragraph_no(callback){
     var count_paragraph="select * from paragraphs";
     connection.query(count_paragraph, function(error, results) {
@@ -568,6 +434,8 @@ function count_paragraph_no(callback){
     });
 
 }
+
+//count the number of total pictures of all articles
 function count_picture_no(callback){
     var count_picture="select * from pictures";
     connection.query(count_picture, function(error, results) {
@@ -585,6 +453,8 @@ function count_picture_no(callback){
     });
 
 }
+
+//count the number of total comments of all articles
 function count_comment(callback){
     var co_comment_no="select * from comments";
     connection.query(co_comment_no, function(error, results) {
@@ -601,6 +471,7 @@ function count_comment(callback){
     });
 }
 
+//check whether a client like the article given the username and articleID
 function check_whether_like_article(username,arid,callback) {
     var che_whether_like_article = "select * from followarticle where user ="+'\''+username.replace(/'/,"\\\'")+'\''+" and article="+arid;
     connection.query(che_whether_like_article, function(error, results) {
@@ -613,9 +484,9 @@ function check_whether_like_article(username,arid,callback) {
         return callback(true);
     });
 
-}/*test.check_whether_like_article('1',4,function(result){
-    console.log(result);
-});*/
+}
+
+//check whether user1 follow user2 given user1 and user2
 function check_whether_follow(user1,user2,callback) {
     var che_whether_follow = "select * from follow where user1 ="+'\''+user1+'\''+" and user2="+'\''+user2.replace(/'/,"\\\'")+'\'';
     connection.query(che_whether_follow, function(error, results) {
@@ -630,9 +501,8 @@ function check_whether_follow(user1,user2,callback) {
     });
 
 }
-/*test.check_whether_follow('1','2',function(result){
-    console.log(result);
-});*/
+
+//exports the functions
 module.exports={
     connection:connection,
     insert_client:insert_client,
