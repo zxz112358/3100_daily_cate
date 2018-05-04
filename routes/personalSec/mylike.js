@@ -22,14 +22,12 @@ var connection = test.connection;
 /* GET user profile page. */
 router.get('/', authenticationMiddleware(), function(req, res) {
     test.select_article_like(req.user.username,function(result1,result2){
-        //print the table includes all user2
-        var string=[];
+        //result1: article number, result2: article list
+        var string=[];//picture location list
         for(var i=0;i<result1;i++){
             string.push(result2[i].picturestart+result2[i].pictureno-1);
             string[i]='../exhibitionSec/pictures/'+string[i];
         }
-
-
         if(result1===0){
             res.render('personalSec/mylike', {
                 title: 'Mylike',
@@ -56,8 +54,10 @@ router.get('/', authenticationMiddleware(), function(req, res) {
     });
 });
 
+/* Handle POST requests: enter clicked article; search */
 router.post('/', function (req, res, next) {
     if (req.body.result) {
+        //enter article
         var result = req.body.result;
         console.log('result: ', result);
 

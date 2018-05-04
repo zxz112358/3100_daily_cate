@@ -12,9 +12,10 @@ var fs=require("fs");
 router.get('/', authenticationMiddleware(), function(req, res, next) {
 
     test.select_all_client_article(req.user.username,function(result1,result2){
-            var string1=[];
-            var string2=[];
-            var string3=[];
+        //result1: article number, result2: article list
+            var string1=[];//picture location list
+            var string2=[];//text location list
+            var string3=[];//text list
 
             for(var i=0;i<result1;i++){
                 string1.push(result2[i].picturestart+result2[i].pictureno-1);
@@ -27,6 +28,7 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 string3.push(data.toString());
             }
 
+            //render page
             if(result1===0){
                 res.render('personalSec/profile', {
                     title: 'Profile',
@@ -53,12 +55,14 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
     );
 });
 
+/* Handle POST requests: delete article; enter clicked article; search */
 router.post('/', function (req, res, next) {
     var id = req.body.id;
     if(id)
         var valid = (typeof (id) === "string")? id: id[0];
 
     if (valid) {
+        //delete article
         console.log('id: ', req.body.id);
         console.log('valid: ',valid);
         delete_article.select_article(valid,function(article){
@@ -91,6 +95,7 @@ router.post('/', function (req, res, next) {
         var searchname = encodeURIComponent(req.body.searchname);
         res.redirect('../personalSec/search?searchname=' + searchname);
     } else if (req.body.result){
+        //enter clicked article
         console.log('result: ', req.body.result);
         var result = (typeof(req.body.result)==="string")? req.body.result:req.body.result[0];
         new Promise(

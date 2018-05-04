@@ -10,11 +10,12 @@ var fs=require("fs");
 
 /* GET user profile page. */
 router.get('/', authenticationMiddleware(), function(req, res, next) {
-
+    /* get all help posts posted by the user */
     test.select_all_client_article(req.user.username, function (result1, result2) {
-        var string1 = [];
-        var string2 = [];
-        var string3 = [];
+        //result1: article number; result2: article list
+        var string1 = [];//picture location list
+        var string2 = [];//text location list
+        var string3 = [];//text list
 
         for (var i = 0; i < result1; i++) {
             string1.push(result2[i].picturestart + result2[i].pictureno - 1);
@@ -26,8 +27,6 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
             var data = fs.readFileSync(string2[i]);
             string3.push(data.toString());
         }
-
-
         if (result1 === 0) {
             res.render('personalSec/myhelp', {
                 title: 'Profile',
@@ -36,7 +35,6 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 imgpath: '../profileimgs/' + req.user.username,
                 articleno: result1
             });
-
         }
         else {
             res.render('personalSec/myhelp', {
@@ -52,20 +50,19 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 
             });
         }
-
-
     });
-
 });
 
+/* Handle POST requests: delete help posts; enter selected article; search */
 router.post('/', function (req, res, next) {
     var id = req.body.id;
-    var valid = (typeof (id) === "string")? id: id[0];
+    var valid = (typeof (id) === "string")? id: id[0];//valid id
 
     if (valid) {
         console.log('valid: ',valid);
         console.log('id: ', id);
 
+        //delete help posts from database
         delete_article.select_article(valid,function(article){
             var parastart=article.parastart;
             var parano=article.parano;
@@ -94,6 +91,7 @@ router.post('/', function (req, res, next) {
         var searchname = encodeURIComponent(req.body.searchname);
         res.redirect('../personalSec/search?searchname=' + searchname);
     }else if (req.body.result){
+        //redirect to clicked article page
         console.log('result: ', result);
         var result = (typeof (req.body.result) === "string")? req.body.result: req.body.result[0];
         new Promise(

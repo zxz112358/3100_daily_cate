@@ -1,16 +1,3 @@
-// var express = require('express');
-// var router = express.Router();
-//
-// /* GET home page. */
-// router.get('/', function(req, res, next) {
-//     res.render('personalSec/mycomment', {
-//         title: 'Home',
-//         name:'Daily Cate'
-//     });
-// });
-//
-// module.exports = router;
-// console.log("this is the comment page!");
 var express = require('express');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -22,6 +9,7 @@ var connection = test.connection;
 /* GET user profile page. */
 router.get('/', authenticationMiddleware(), function(req, res, next) {
     test.select_client_comment(req.user.username,function(result1,result2){
+        /* result1: comment number, result2: comment list */
         if(result1===0){
             res.render('personalSec/mycomment', {
                 title: 'MyComment',
@@ -30,7 +18,6 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 imgpath: '../profileimgs/' + req.user.username,
                 commentno:result1
             });
-            console.log("you do not have any comment");
         }
         else{
             var string=[];
@@ -56,11 +43,12 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
 
 });
 
+/* Handle POST requests: enter clicked article; search */
 router.post('/', function (req, res, next) {
     var result = req.body.result;
-    console.log('result: ', result);
 
     if (result !== '' && result !== undefined) {
+        /* enter clicked article */
         new Promise(
             function (resolve, reject) {
                 resolve(encodeURIComponent(result[0]));

@@ -19,18 +19,15 @@ var router = express.Router();
 var test = require('../test');
 var connection = test.connection;
 
-/* GET user profile page. */
+/* GET follower page. */
 router.get('/', authenticationMiddleware(), function(req, res, next) {
     test.select_my_followers(req.user.username,function(result1,result2){
+        //result1: follower number, result2: follower list
         //print the table includes all user2
         var string=[];
-        console.log(result1);
-        console.log(result2);
         for(var i=0;i<result1;i++){
             string[i] ='../profileimgs/'+(result2[i].user1).toString();
         }
-
-
 
         if(result1===0){
             res.render('personalSec/myfollower', {
@@ -43,7 +40,6 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
             console.log("no followers");
         }
         else{
-
             res.render('personalSec/myfollower', {
                 title: 'Profile',
                 name: 'Daily Cate',
@@ -53,17 +49,14 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 follower:result2,
                 followerimg:string
             });
-
-
         }
-
     });
-
-
 });
 
-router.post('/', function (req, res, next) {
 
+/* Handle POST requests: enter clicked user page; search */
+router.post('/', function (req, res, next) {
+    //enter follower's page
     if (req.body.follower) {
         var follower = String(req.body.follower);//username
         var username = encodeURIComponent(follower);

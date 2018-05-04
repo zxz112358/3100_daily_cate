@@ -30,6 +30,8 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
             });
 
 });
+
+/* Handle POST requests: modify email, modify password, modify description; search */
 router.post('/', upload.single('profileimg'), function (req,res,next) {
 
     //store in database

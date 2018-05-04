@@ -22,14 +22,13 @@ var connection = test.connection;
 /* GET user profile page. */
 router.get('/', authenticationMiddleware(), function(req, res, next) {
     test.select_my_followings(req.user.username,function(result1,result2){
+        //result1: follower number, result2: follower list
         //print the table includes all user2
         var string=[];
         for(var i=0;i<result1;i++){
             string[i] ='../profileimgs/'+(result2[i].user2).toString();
             console.log(string[i]);
         }
-
-
         if(result1===0){
             res.render('personalSec/myfollowing', {
                 title: 'Profile',
@@ -50,28 +49,23 @@ router.get('/', authenticationMiddleware(), function(req, res, next) {
                 following:result2,
                 followingimg:string
             });
-
         }
-
     });
-
-
-
-
 });
+
+/* handle POST requests: enter clicked user page; search */
 router.post('/', function (req, res, next) {
     var followinguser = req.body.followinguser;//username
     var username = encodeURIComponent(followinguser);
     if (req.body.id !== undefined) {
         var id = (typeof (req.body.id) === "string") ? req.body.id : req.body.id[0];
     }
-    //console.log('ssss ',followinguser);
-    //console.log(typeof (req.body.id));
+
     if (req.body.followinguser || id) {
+        //enter following user's page
         if (id) {
             test.unfollow(req.user.username, id);
             res.redirect('myfollowing');
-
         }
         else {
             console.log('fdsdf');

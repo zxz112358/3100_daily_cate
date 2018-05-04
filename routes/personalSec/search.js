@@ -27,10 +27,12 @@ router.get('/', function(req, res) {
     });
 });
 
+/* Handle POST requests: enter searched article; search */
 router.post('/', function (req, res, next) {
     var result = req.body.results;
 
     if (result){
+        //enter article page
         res.redirect('../exhibitionSec/articlePost?articleId=' + encodeURIComponent(result));
     }else {
         //search handling

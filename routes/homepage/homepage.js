@@ -4,12 +4,14 @@ var fs=require("fs");
 
 var test = require('../test');
 var connection = test.connection;
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
+    /* find the most popular articles in db */
     test.select_k(function(result){
         var k_articles=[];
         var string1=[];
-
 
         for(var i=0;i<5;i++){
             console.log(result[i]);
@@ -17,6 +19,7 @@ router.get('/', function(req, res, next) {
             string1[i]='../exhibitionSec/pictures/'+string1[i];
             k_articles.push(result[i]);
         }
+        //render page
         res.render('homepage/homepage', {
             title: 'Daily Cate',
             name:'Daily Cate',
@@ -29,6 +32,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
+/* Handle POST requests: enter page of an article; search */
 router.post('/', function (req, res, next) {
     var result = String(req.body.result).match(/[^\d]+|\d+/g);
     console.log('result: ', result);
@@ -38,6 +42,7 @@ router.post('/', function (req, res, next) {
         console.log('click result not null')
         new Promise(
             function (resolve, reject) {
+                //find the clicked article in db
                 test.select_k(function (articleList) {
                     console.log(articleList);
                     console.log('articleID: ', articleList[result[0]].articleID);
@@ -46,6 +51,7 @@ router.post('/', function (req, res, next) {
                 });
             }
         ).then(function (article) {
+            //redirect to the article page
             var type = article.type;
             var id = article.articleID;
             console.log(type, ',', id);
@@ -54,7 +60,6 @@ router.post('/', function (req, res, next) {
             } else if (type === 'help') {
                 res.redirect('../askingSec/helpPost?articleId=' + id);
             } else if (type === 'ingredient') {
-                //TO DO: ingredient post page
                 res.send('ingredient post page is not completed yet.');
             }
         });

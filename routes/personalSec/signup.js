@@ -25,11 +25,11 @@ router.get('/', function(req, res, next) {
     });
 });
 
+/* Handle POST requests: submit sign up form */
 router.post('/', upload.single('profileimg'), function (req,res,next) {
-
     //store in database
-    var name = req.body.name;
-    var email = req.body.email;
+    var name = req.body.name;;
+    var email = req.body.email
     var password = req.body.password;
     var description = req.body.description;
 

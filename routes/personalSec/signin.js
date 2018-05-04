@@ -28,12 +28,14 @@ function authenticationMiddleware () {
     }
 }
 
+/* Handle POST requests: submit sign in form */
 router.post('/', passport.authenticate('local', {
     successRedirect: 'profile',
     failureRedirect: '/personalSec/signin',
     failureFlash : true
 }));
 
+/* Passport.js: Authentication strategy */
 passport.use(new LocalStrategy(
     function(username, password, done) {
         test.select_user(username,function(result){

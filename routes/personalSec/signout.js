@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
+/* Handle POST requests: search */
 router.post('/', function (req, res, next) {
     //search handling
     console.log(req.body.searchname);

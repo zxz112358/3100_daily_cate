@@ -67,39 +67,6 @@ function delete_paragraph(id){
         console.log(results);
     });
 }
-/*
-var test = require('../delete_article');
-test.select_article(1,function(article){
-    console.log(article);
-    var parastart=article.parastart;
-    var parano=article.parano;
-    console.log(parastart);
-    console.log(parano);
-    //var picturestart=article.picturestart;
-    //var pictureno=article.pictureno;
-    test.delete_article_comment(1,function(result1){
-        if(result1==true){
-            console.log("1: ",result1);
-            test.delete_followarticle(1,function(result2){
-                if(result2==true){
-                    console.log("2: ",result2);
-                    test.delete_article(1,function(result3){
-                        if(result3==true){
-                            console.log("3: ", result3);
-                            for(var i=0;i<parano;i++){
-                                var id=parano+i;
-                                test.delete_paragraph(id);
-                                test.delete_picture(id);
-                            }
-
-                        }
-                    });
-                }
-            });
-        }
-    });
-
-})*/
 
 module.exports={
     connection:connection,

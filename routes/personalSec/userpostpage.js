@@ -23,6 +23,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
+/* Handle POST requests: follow & unfollow user; enter clicked article; search */
 router.post('/', function (req, res, next) {
     var result = req.body.result;
     var fo_operation = req.body.follow_operation;
@@ -30,6 +31,7 @@ router.post('/', function (req, res, next) {
     console.log('fo: ', fo_operation);
 
     if (fo_operation){
+        //follow operation
         if (fo_operation === 'follow'){
             test.follow(req.user.username, req.query.username);
             res.redirect('back');
@@ -38,6 +40,7 @@ router.post('/', function (req, res, next) {
             res.redirect('back');
         }
     }else if (result) {
+        //enter article
         var postID = encodeURIComponent(result);
         res.redirect('../exhibitionSec/articlePost?articleId=' + postID);
     }else{

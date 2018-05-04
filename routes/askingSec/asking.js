@@ -12,6 +12,7 @@ var fs=require("fs");
 
 /* GET exhibition page. */
 router.get('/', function(req, res, next) {
+    /* Obtain data in help section */
     test.select_all_article('help', function(result1,result2){
         if(result1===0){
             var all = undefined;
@@ -19,34 +20,35 @@ router.get('/', function(req, res, next) {
         else{
             var all = result2;
         }
-
+        /* Obtain articles with "main" tag in help section */
         test.select_article_list('main', 'help', function (num, mainlist) {
             if (num === 0){
                 var main = undefined;
             } else {
                 var main = mainlist;
             }
-
+            /* Obtain articles with "dish" tag in help section */
             test.select_article_list('dish', 'help', function (num, dishlist) {
                 if (num === 0){
                     var dish = undefined;
                 } else {
                     var dish = dishlist;
                 }
-
+                /* Obtain articles with "soup" tag in help section */
                 test.select_article_list('soup', 'help', function (num, souplist) {
                     if (num === 0) {
                         var soup = undefined;
                     } else {
                         var soup = souplist;
                     }
-
+                    /* Obtain articles with "dessert" tag in help section */
                     test.select_article_list('dessert', 'help', function (num, dessertlist) {
                         if (num === 0) {
                             var dessert = undefined;
                         } else {
                             var dessert = dessertlist;
                         }
+                        /* Obtain articles with "ingredient" tag in help section */
                         test.select_article_list('ingredient', 'help', function (num, ingredientlist) {
                             if (num === 0) {
                                 var ingredient = undefined;
@@ -72,13 +74,15 @@ router.get('/', function(req, res, next) {
     });
 });
 
+/* Handle POST requests */
 router.post('/', function (req, res, next) {
-    var result = String(req.body.result).match(/[^\d]+|\d+/g);//result[0] is tag, result[1] is index
+    var result = String(req.body.result).match(/[^\d]+|\d+/g);//result[0] is article tag, result[1] is index of article list
     console.log('result: ', result);
 
     if (result[0] !== '' && result[0] !== 'undefined') {
         new Promise(
             function (resolve, reject) {
+                /* get displayed article list, find requested articleId */
                 if (result[0] === 'all') {
                     test.select_all_article('help', function (num, articleList) {
                         resolve(encodeURIComponent(articleList[result[1]].articleID));
